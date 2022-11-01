@@ -52,15 +52,27 @@
                         <i class="input-icon uil uil-user"></i>
                       </div>
                       <div class="form-group mt-2">
+                        <input type="date" name="logpass" class="form-style" placeholder="Check-In Date" id="logpass"
+                          autocomplete="off">
+                        <i class="input-icon uil uil-calender"></i>
+                      </div>
+                      <div class="form-group mt-2">
+                        <input type="date" name="logpass" class="form-style" placeholder="Check-Out Date" id="logpass"
+                          autocomplete="off">
+                        <i class="input-icon uil uil-calendar-slash"></i>
+                      </div>
+                      <div class="form-group mt-2">
                         <input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail"
                           autocomplete="off">
                         <i class="input-icon uil uil-at"></i>
                       </div>
+
                       <div class="form-group mt-2">
                         <input type="password" name="logpass" class="form-style" placeholder="Your Password"
                           id="logpass" autocomplete="off">
                         <i class="input-icon uil uil-lock-alt"></i>
                       </div>
+
                       <a href="#" class="btn mt-4">submit</a>
                     </div>
                   </div>
