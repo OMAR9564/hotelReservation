@@ -3,6 +3,7 @@
     Created on : Nov 8, 2022, 11:19:35 AM
     Author     : omerfaruk
 --%>
+<%@page import="com.omar.hotelreservation.tags"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.omar.hotelreservation.getInfo"%>
 <%@page import="com.omar.hotelreservation.mySql"%>
@@ -19,26 +20,24 @@
             String pass = request.getParameter("logpass");
             out.println(email);
             mySql mysql = new mySql();
-            String sqlQuery = "SELECT * FROM `omar_lab`";
+            String sqlQuery = "SELECT * FROM `omar_lab` WHERE `email` = '"+email+"' AND `sifre` = '"+pass+"'";
 
             ArrayList<getInfo> info = mysql.sqlCon(sqlQuery);
 
-            for (int i = 0; i < info.size(); i++) {
-                out.println(info.size());
-                if (info.get(i).getEmail().equals(email)) {
-                    out.println("omerererere");
-        %>
-        <jsp:include page="userPage.jsp" flush="true"/>
-        <%
-            break;
-        } 
-        else {
-            out.println("123123");
+            if(info.size() == 1){
+                tags.setLoginTag("Log Out");
+                tags.setLgnUserName(info.get(0).getIsim_Soyisim());
+                response.sendRedirect("index.jsp");
+                
 
-        %>
-        <jsp:include page="login.html" flush="true"/>
-        <%                }
             }
+          
+         
+        else {
+            response.sendRedirect("login.html");
+                       
+            }
+            
 
         %>
     </body>
