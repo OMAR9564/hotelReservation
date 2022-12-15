@@ -18,6 +18,7 @@
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/flaticon.css">
+  <link href='https://css.gg/user.css' rel='stylesheet'>
   
   <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -919,7 +920,7 @@
   <script>eval(mod_pagespeed_IK4QGLcbLS);</script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script>eval(mod_pagespeed_2UQNrhl3o6);</script>
-  <script>eval(mod_pagespeed_R227twyO_u);</script>
+<script>eval(mod_pagespeed_R227twyO_u);</script>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
     

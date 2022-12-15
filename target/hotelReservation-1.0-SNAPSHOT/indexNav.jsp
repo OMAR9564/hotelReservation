@@ -13,8 +13,12 @@
         String loginTag = tags.getLoginTag();
         
         String lgnUserName = tags.getLgnUserName();
+        
+        String lgnUserNameCss = tags.getLgnUserNameCss();
 
     %>
+    <!--For Cookie-->
+    <%--<jsp:include page="checkPage.jsp" />--%> 
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
@@ -30,12 +34,15 @@
           <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
           <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
           <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link <%%>"></a><%out.println(lgnUserName);%></li>
-          <li class="nav-item"><a href="login.html" class="nav-link btn-login" id="btn-login"><%out.println(loginTag);%></a></li>
+          <li class="nav-item"><a href="contact.html" id="omer"class="nav-link">Contact</a></li>
+          <li class="nav-item <%out.println(lgnUserNameCss);%>"><a href="" class="nav-link " >
+                  <i class="gg-user"></i><%out.println(lgnUserName);%></a></li>
+                  <button class="nav-item" onclick="my()"><a href="login.jsp" class="nav-link btn-login" id="btn-login"  ><%out.println(loginTag);%></a></button>
+          
         </ul>
       </div>
     </div>
   </nav>
     </body>
+    
 </html>
