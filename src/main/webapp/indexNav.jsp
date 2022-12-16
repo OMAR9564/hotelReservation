@@ -17,6 +17,7 @@
         String lgnUserNameCss = tags.getLgnUserNameCss();
 
     %>
+    <link rel="stylesheet" href="css/main.css"/>
     <!--For Cookie-->
     <%--<jsp:include page="checkPage.jsp" />--%> 
     <body>
@@ -34,8 +35,8 @@
           <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
           <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
           <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="contact.html" id="omer"class="nav-link">Contact</a></li>
-          <li class="nav-item <%out.println(lgnUserNameCss);%>"><a href="" class="nav-link " >
+          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+          <li class="nav-item <%out.println(lgnUserNameCss);%>"><a href="userPage.jsp" class="nav-link " >
                   <i class="gg-user"></i><%out.println(lgnUserName);%></a></li>
                   <button class="nav-item" onclick="my()"><a href="login.jsp" class="nav-link btn-login" id="btn-login"  ><%out.println(loginTag);%></a></button>
           
