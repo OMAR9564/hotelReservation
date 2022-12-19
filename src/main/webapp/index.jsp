@@ -49,15 +49,15 @@
         <iconify-icon icon="bi:play-circle" width="90" height="90"></iconify-icon>
       </a>
     </div>
-    <section class="home-slider owl-carousel">
+    <section class="home-slider owl-carousel" id="home-section">
       <div class="slider-item" style="background-image:url(img/xbg_1.jpg.pagespeed.ic.AclQK41gjJ.webp)">
         <div class="overlay"></div>
         <div class="container">
           <div class="row no-gutters slider-text align-items-center">
             <div class="col-md-8 ftco-animate">
               <div class="text mb-5 pb-5">
-                <h1 class="mb-3">Rihana</h1>
-                <h2>More than a hotel... an experience</h2>
+                <h1 class="mb-3">Prestij</h1>
+                <h2>Bir Otelden Daha Fazlası</h2>
               </div>
             </div>
           </div>
@@ -69,8 +69,8 @@
           <div class="row no-gutters slider-text align-items-center">
             <div class="col-md-8 ftco-animate">
               <div class="text mb-5 pb-5">
-                <h1 class="mb-3">Experience Epic Beauty</h1>
-                <h2>Rihana Hotel &amp; Resort</h2>
+                <h1 class="mb-3">Mükemmel Bir Deneyim</h1>
+                <h2>Prestij Otel &amp; Tatil Yeri</h2>
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@
               <div class="col-md d-flex py-md-4">
                 <div class="form-group align-self-stretch d-flex align-items-end">
                   <div class="flex-wrap bg-white align-self-stretch py-3 px-4">
-                    <label for="#">Check-in Date</label>
+                    <label for="#">Giriş Tarihi</label>
                     <input type="text" class="form-control checkin_date" placeholder="Check-in date">
                   </div>
                 </div>
@@ -112,7 +112,7 @@
               <div class="col-md d-flex py-md-4">
                 <div class="form-group align-self-stretch d-flex align-items-end">
                   <div class="flex-wrap bg-white align-self-stretch py-3 px-4">
-                    <label for="#">Check-out Date</label>
+                    <label for="#">Çıkış Tarihi</label>
                     <input type="text" class="form-control checkout_date" placeholder="Check-out date">
                   </div>
                 </div>
@@ -120,19 +120,18 @@
               <div class="col-md d-flex py-md-4">
                 <div class="form-group align-self-stretch d-flex align-items-end">
                   <div class="wrap bg-white align-self-stretch py-3 px-4">
-                    <label for="#">Room</label>
+                    <label for="#">Oda</label>
                     <div class="form-field">
                       <div class="select-wrap">
                         <div class="icon">
                           <iconify-icon icon="bi:chevron-compact-down" width="20" height="20"></iconify-icon>
                         </div>
                         <select name="" id="" class="form-control">
-                          <option value="">Suite</option>
-                          <option value="">Family Room</option>
-                          <option value="">Deluxe Room</option>
-                          <option value="">Classic Room</option>
-                          <option value="">Superior Room</option>
-                          <option value="">Luxury Room</option>
+                          <option value="">Süit</option>
+                          <option value="">Aile Odası</option>
+                          <option value="">Lüx Oda</option>
+                          <option value="">Klasik Oda</option>
+                         
                         </select>
                       </div>
                     </div>
@@ -142,19 +141,19 @@
               <div class="col-md d-flex py-md-4">
                 <div class="form-group align-self-stretch d-flex align-items-end">
                   <div class="wrap bg-white align-self-stretch py-3 px-4">
-                    <label for="#">Guests</label>
+                    <label for="#">Misafir</label>
                     <div class="form-field">
                       <div class="select-wrap">
                         <div class="icon">
                           <iconify-icon icon="bi:chevron-compact-down" width="20" height="20"></iconify-icon>
                         </div>
                         <select name="" id="" class="form-control">
-                          <option value="">1 Adult</option>
-                          <option value="">2 Adult</option>
-                          <option value="">3 Adult</option>
-                          <option value="">4 Adult</option>
-                          <option value="">5 Adult</option>
-                          <option value="">6 Adult</option>
+                          <option value="">1 Kişi</option>
+                          <option value="">2 Kişi</option>
+                          <option value="">3 Kişi</option>
+                          <option value="">4 Kişi</option>
+                          <option value="">5 Kişi</option>
+                          <option value="">6 Kişi</option>
                         </select>
                       </div>
                     </div>
@@ -163,8 +162,8 @@
               </div>
               <div class="col-md d-flex">
                 <div class="form-group d-flex align-self-stretch">
-                  <a href="#" class="btn btn-black py-5 py-md-3 px-4 align-self-stretch d-block"><span>Check
-                      Availability <small>Best Price Guaranteed!</small></span></a>
+                  <a href="#" class="btn btn-black py-5 py-md-3 px-4 align-self-stretch d-block"><span>
+                          Kontrol Et<small>En İyi Fiyat Garantisi!</small></span></a>
                 </div>
               </div>
             </div>
@@ -297,8 +296,8 @@
       </div>
     </div>
   </section>
-  <section class="ftco-section bg-light ftco-room">
-    <div class="container-fluid px-0">
+  <section class="ftco-section bg-light ftco-room" id="rooms-section">
+    <div class="container-fluid px-0" >
       <div class="row no-gutters justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
           <span class="subheading">Rihana Rooms</span>
@@ -400,7 +399,7 @@
       </div>
     </div>
   </section>
-  <section class="ftco-section testimony-section bg-light">
+  <section class="ftco-section testimony-section bg-light" id="about-section">
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
@@ -543,7 +542,7 @@
     </div>
   </section>
   <section class="ftco-section ftco-menu"
-    style="background-image:url(img/xrestaurant-pattern.jpg.pagespeed.ic.LbTPrbPHNM.webp)">
+    style="background-image:url(img/xrestaurant-pattern.jpg.pagespeed.ic.LbTPrbPHNM.webp)" id="restaurant-section">
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
@@ -659,10 +658,10 @@
       </div>
     </div>
   </section>
-  <section class="ftco-section">
+  <section class="ftco-section" id="blog-section">
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
-        <div class="col-md-7 heading-section text-center ftco-animate">
+        <div class="col-md-7 heading-section text-center ftco-animate" >
           <span class="subheading">Read Blog</span>
           <h2>Recent Blog</h2>
         </div>
@@ -824,7 +823,7 @@
       </div>
     </div>
   </section>
-  <footer class="ftco-footer ftco-bg-dark ftco-section">
+  <footer class="ftco-footer ftco-bg-dark ftco-section" id="contact-section">
     <div class="container">
       <div class="row mb-5">
         <div class="col-md">
