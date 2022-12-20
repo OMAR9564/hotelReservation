@@ -444,7 +444,7 @@
                       <p class="star"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                           class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                           class="ion-ios-star"></span></p>
-                      <p class="mb-4">CSS in amk:</p>
+                      <p class="mb-4">CSS :(((</p>
                       <p class="name">Ömer Faruk</p>
                       <span class="position">Misafir</span>
                     </div>

@@ -7,7 +7,7 @@
 <%@page import="com.omar.hotelreservation.tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="checkPage.jsp" flush="false"/>
-<%if(!tags.getLoginTag().equals("Log Out")){ System.out.println(tags.getLoginTag()+"ooooooooo");%>
+<%if(!tags.getLoginTag().equals("Log Out")){ System.out.println(tags.getLoginTag()+"ooooooooo"); %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +37,7 @@
                   <div class="center-wrap">
                     <div class="section text-center">
                       <h4 class="mb-4 pb-3">Log In</h4>
+                      <p class="wrong-pass" <%out.println(tags.getLoginIsValid());%>>‼️ ️Giriş başarısız ‼️</p>
                       <form action="checkPage.jsp" method="POST" id="loginform">
                         <div class="form-group">
                           <input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail"
@@ -85,7 +86,7 @@
                           id="logpass" autocomplete="off">
                         <i class="input-icon uil uil-lock-alt"></i>
                       </div>
-
+                      <%tags.setHowsLogin("userLogin");%>
                       <a href="#" class="btn mt-4">submit</a>
                     </div>
                   </div>

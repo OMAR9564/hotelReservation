@@ -2711,6 +2711,10 @@
   display: none
 }
 
+.disable-link {
+    display:none; visibility:hidden;
+}
+
 .owl-carousel.owl-loaded {
   display: block
 }

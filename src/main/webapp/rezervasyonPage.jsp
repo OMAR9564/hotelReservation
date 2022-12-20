@@ -14,6 +14,7 @@
 </head>
 <body>
     <div class="container">
+        <section class="card">
   <div class="title">Rezervasyon Kayıt</div>
   <form action="#">
     <div class="user__details">
@@ -45,15 +46,15 @@
         <span class="details">Şifre</span>
         <input type="password" placeholder="********" required>
       </div>
-      <div class="input__box">
-        <span class="details">choose a car:</span>
-  <select id="oda" name="oda">
-    <option value="suit">Süit oda</option>
-    <option value="aile">Aile Oda</option>
-    <option value="lux">Lüx Oda</option>
-    <option value="luxury">Lüxery Oda</option>
-      <option value="superior">Superior Oda</option>
-  </select>
+      <div class="select__box">
+        <span class="details">choose a room:</span>
+        <select name="oda">
+            <option value="suit">Süit oda</option>
+            <option value="aile">Aile Oda</option>
+            <option value="lux">Lüx Oda</option>
+            <option value="luxury">Lüxery Oda</option>
+            <option value="superior">Superior Oda</option>
+        </select>
       </div>
 
     </div>
@@ -81,6 +82,7 @@
       <input type="submit" value="Kaydet">
     </div>
   </form>
+  </section>
 </div>
 </body>
 </html>

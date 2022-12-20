@@ -39,6 +39,13 @@ h4 {
   font-weight: 600;
 }
 
+.wrong-pass {
+    color:crimson;
+      font-weight: 500;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
 h6 span {
   padding: 0 20px;
   text-transform: uppercase;
@@ -219,7 +226,15 @@ h6 span {
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
 }
+input[type=email]:invalid {
+    border: 2px solid red;
+    background-image: url("../img/icon-error.png");
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+    background-size: 2rem;
+  }
 
+ 
 .form-group input::-moz-placeholder {
   color: #c4c3ca;
   opacity: 0.7;

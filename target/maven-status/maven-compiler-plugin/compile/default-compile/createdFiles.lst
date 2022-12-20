@@ -1,3 +1,5 @@
+com/omar/hotelreservation/getRezevasyonInfo.class
+com/omar/hotelreservation/checkRezervasyon.class
 com/omar/hotelreservation/getInfo.class
 com/omar/hotelreservation/checkLogin.class
 com/omar/hotelreservation/mySql.class

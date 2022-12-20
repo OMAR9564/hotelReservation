@@ -130,7 +130,8 @@
                           <option value="">Süit</option>
                           <option value="">Aile Odası</option>
                           <option value="">Lüx Oda</option>
-                          <option value="">Klasik Oda</option>
+                          <option value="">Luxury Oda</option>
+                          <option value="">Superior Oda</option>
                          
                         </select>
                       </div>
@@ -162,7 +163,7 @@
               </div>
               <div class="col-md d-flex">
                 <div class="form-group d-flex align-self-stretch">
-                  <a href="#" class="btn btn-black py-5 py-md-3 px-4 align-self-stretch d-block"><span>
+                  <a href="rezervasyonPage.jsp" class="btn btn-black py-5 py-md-3 px-4 align-self-stretch d-block"><span>
                           Kontrol Et<small>En İyi Fiyat Garantisi!</small></span></a>
                 </div>
               </div>
@@ -179,7 +180,7 @@
           <a href="#" class="services-wrap img align-items-end d-flex"
             style="background-image:url(img/xroom-3.jpg.pagespeed.ic.-BqmSKjZKz.webp)">
             <div class="text text-center pb-2">
-              <h3>Special Rooms</h3>
+              <h3>Özel Odalar</h3>
             </div>
           </a>
         </div>
@@ -187,7 +188,7 @@
           <a href="#" class="services-wrap img align-items-end d-flex"
             style="background-image:url(img/xswimming-pool.jpg.pagespeed.ic.mC5qZptYus.webp)">
             <div class="text text-center pb-2">
-              <h3>Swimming Pool</h3>
+              <h3>Yüzme havuzu</h3>
             </div>
           </a>
         </div>
@@ -195,7 +196,7 @@
           <a href="#" class="services-wrap img align-items-end d-flex"
             style="background-image:url(img/xresto.jpg.pagespeed.ic._SJIzCyCO0.webp)">
             <div class="text text-center pb-2">
-              <h3>Restaurant</h3>
+              <h3>Restoran</h3>
             </div>
           </a>
         </div>
@@ -203,8 +204,8 @@
           <div class="services-wrap services-overlay img align-items-center d-flex"
             style="background-image:url(img/xsleep.jpg.pagespeed.ic.KJn3VNUaWY.webp)">
             <div class="text text-center pb-2">
-              <h3 class="mb-0">Suites &amp; Rooms</h3>
-              <span>Special Rooms</span>
+              <h3 class="mb-0">Suit &amp; Oda</h3>
+              <span>özel odalar</span>
               <div class="d-flex mt-2 justify-content-center">
                 <div class="icon">
                   <div class="mt-1">
@@ -226,8 +227,8 @@
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
-          <span class="subheading">Welcome to Rihana Hotel</span>
-          <h2 class="mb-4">A New Vision of Luxury Hotel</h2>
+          <span class="subheading">Prestij Otel'e Hoş Geldiniz</span>
+          <h2 class="mb-4">Yeni Bir Lüks Otel Vizyonu</h2>
         </div>
       </div>
       <div class="row d-flex">
@@ -239,7 +240,7 @@
               </div>
             </div>
             <div class="media-body">
-              <h3 class="heading mb-3">Friendly Service</h3>
+              <h3 class="heading mb-3">Güler Yüzlü Hizmet</h3>
             </div>
           </div>
         </div>
@@ -251,7 +252,7 @@
               </div>
             </div>
             <div class="media-body">
-              <h3 class="heading mb-3">Get Breakfast</h3>
+              <h3 class="heading mb-3">Kahvaltı</h3>
             </div>
           </div>
         </div>
@@ -263,7 +264,7 @@
               </div>
             </div>
             <div class="media-body">
-              <h3 class="heading mb-3">Transfer Services</h3>
+              <h3 class="heading mb-3">Transfer Hizmetleri</h3>
             </div>
           </div>
         </div>
@@ -275,7 +276,7 @@
               </div>
             </div>
             <div class="media-body">
-              <h3 class="heading mb-3">Suits &amp; SPA</h3>
+              <h3 class="heading mb-3">Suit &amp; SPA</h3>
             </div>
           </div>
         </div>
@@ -289,7 +290,7 @@
               </div>
             </div>
             <div class="media-body">
-              <h3 class="heading mb-3">Cozy Rooms</h3>
+              <h3 class="heading mb-3">Rahat Odalar</h3>
             </div>
           </div>
         </div>
@@ -300,8 +301,8 @@
     <div class="container-fluid px-0" >
       <div class="row no-gutters justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
-          <span class="subheading">Rihana Rooms</span>
-          <h2 class="mb-4">Hotel Master's Rooms</h2>
+          <span class="subheading">Prestij Odaları</span>
+          <h2 class="mb-4">Size Uygun Oda Çeşitleri</h2>
         </div>
       </div>
       <div class="row no-gutters">
@@ -310,8 +311,8 @@
             <div class="img d-flex align-items-center"
               style="background-image:url(img/xbg_3.jpg.pagespeed.ic.JAfb0DsHvt.webp)">
               <div class="text text-center px-4 py-4">
-                <h2>Welcome to <a href="index.html">Rihana</a> Hotel</h2>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                <h2>Hoş Geldiniz <a href="index.html">Prestij</a> Otel</h2>
+                <p>5 Yıldızlı Otel Deneyimini Yaşayın.</p>
               </div>
             </div>
           </div>
@@ -325,9 +326,9 @@
                   <span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                     class="ion-ios-star"></span><span class="ion-ios-star"></span>
                 </p>
-                <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p>
-                <h3 class="mb-3"><a href="rooms.html">Suite Room</a></h3>
-                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">View Room Details
+                <p class="mb-0"><span class="price mr-1">₺3200.00</span> <span class="per">Tek Gecelik</span></p>
+                <h3 class="mb-3"><a href="rooms.html">Süit Odalar</a></h3>
+                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">Oda Detaylarını Görüntüle
                     <span class="icon-long-arrow-right"></span>
                   </a></p>
               </div>
@@ -342,9 +343,9 @@
               <div class="text p-4 p-xl-5 text-center">
                 <p class="star mb-0"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                     class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
-                <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p>
-                <h3 class="mb-3"><a href="rooms.html">Family Room</a></h3>
-                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">View Room Details <span
+                <p class="mb-0"><span class="price mr-1">₺9300.00</span> <span class="per">Tek Gecelik</span></p>
+                <h3 class="mb-3"><a href="rooms.html">Aile Odaları</a></h3>
+                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">Oda Detaylarını Görüntüle <span
                       class="icon-long-arrow-right"></span></a></p>
               </div>
             </div>
@@ -358,9 +359,9 @@
               <div class="text p-4 p-xl-5 text-center">
                 <p class="star mb-0"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                     class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
-                <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p>
-                <h3 class="mb-3"><a href="rooms.html">Deluxe Room</a></h3>
-                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">View Room Details <span
+                <p class="mb-0"><span class="price mr-1">₺5300.00</span> <span class="per">Tek Gecelik</span></p>
+                <h3 class="mb-3"><a href="rooms.html">Lüx Odalar</a></h3>
+                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">Oda Detaylarını Görüntüle <span
                       class="icon-long-arrow-right"></span></a></p>
               </div>
             </div>
@@ -373,9 +374,9 @@
               <div class="text p-4 p-xl-5 text-center">
                 <p class="star mb-0"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                     class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
-                <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p>
+                <p class="mb-0"><span class="price mr-1">₺6250.00</span> <span class="per">Tek Gecelik</span></p>
                 <h3 class="mb-3"><a href="rooms.html">Luxury Room</a></h3>
-                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">View Room Details <span
+                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">Oda Detaylarını Görüntüle <span
                       class="icon-long-arrow-right"></span></a></p>
               </div>
             </div>
@@ -388,9 +389,9 @@
               <div class="text p-4 p-xl-5 text-center">
                 <p class="star mb-0"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                     class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
-                <p class="mb-0"><span class="price mr-1">$120.00</span> <span class="per">per night</span></p>
+                <p class="mb-0"><span class="price mr-1">₺10200.00</span> <span class="per">Tek Gecelik</span></p>
                 <h3 class="mb-3"><a href="rooms.html">Superior Room</a></h3>
-                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">View Room Details <span
+                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">Oda Detaylarını Görüntüle <span
                       class="icon-long-arrow-right"></span></a></p>
               </div>
             </div>
@@ -403,8 +404,8 @@
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
-          <span class="subheading">Testimony</span>
-          <h2 class="mb-4">Our Happy Guest Says</h2>
+          <span class="subheading">Yorumlar</span>
+          <h2 class="mb-4">Mutlu Misafir Yorumları</h2>
         </div>
       </div>
       <div class="row justify-content-center">
@@ -424,11 +425,10 @@
                       <p class="star"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                           class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                           class="ion-ios-star"></span></p>
-                      <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary
-                        regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your
-                        mouth.</p>
-                      <p class="name">Nathan Smith</p>
-                      <span class="position">Guests</span>
+                      <p class="mb-4">Mükemmel Bir Deneyimdi. Cennet Böyle Bir Yer Olmalı.
+                        </p>
+                      <p class="name">Hakkı Mert Peyk</p>
+                      <span class="position">Misafir</span>
                     </div>
                   </div>
                 </div>
@@ -444,11 +444,9 @@
                       <p class="star"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                           class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                           class="ion-ios-star"></span></p>
-                      <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary
-                        regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your
-                        mouth.</p>
-                      <p class="name">Nathan Smith</p>
-                      <span class="position">Guests</span>
+                      <p class="mb-4">CSS :(((</p>
+                      <p class="name">Ömer Faruk</p>
+                      <span class="position">Misafir</span>
                     </div>
                   </div>
                 </div>
@@ -531,7 +529,7 @@
               <div class="row justify-content-start d-flex align-items-end height-text ">
                 <div class="col-md-8">
                   <div class="text">
-                    <h1>We're Most Recommended Hotel</h1>
+                    <h1>En Çok Tavsiye Edilen Oteliz</h1>
                   </div>
                 </div>
               </div>
@@ -546,8 +544,8 @@
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
-          <span class="subheading">Restaurant</span>
-          <h2>Restaurant</h2>
+          <span class="subheading">Restorant</span>
+          <h2>Restorant</h2>
         </div>
       </div>
       <div class="row">
@@ -557,8 +555,8 @@
             </div>
             <div class="desc pr-3 text-md-right">
               <div class="d-md-flex text align-items-center">
-                <h3 class="order-md-last heading-left"><span>Grilled Crab with Onion</span></h3>
-                <span class="price price-left">$20.00</span>
+                <h3 class="order-md-last heading-left"><span>Havyarlı Pasta</span></h3>
+                <span class="price price-left">₺120.00</span>
               </div>
               <div class="d-block">
                 <p>A small river named Duden flows by their place and supplies</p>
@@ -570,8 +568,8 @@
             </div>
             <div class="desc pr-3 text-md-right">
               <div class="d-md-flex text align-items-center">
-                <h3 class="order-md-last heading-left"><span>Grilled Beef with potatoes</span></h3>
-                <span class="price price-left">$29.00</span>
+                <h3 class="order-md-last heading-left"><span>Meyveli Pasta</span></h3>
+                <span class="price price-left">₺90.00</span>
               </div>
               <div class="d-block">
                 <p>A small river named Duden flows by their place and supplies</p>
@@ -583,8 +581,8 @@
             </div>
             <div class="desc pr-3 text-md-right">
               <div class="d-md-flex text align-items-center">
-                <h3 class="order-md-last heading-left"><span>Grilled Beef with potatoes</span></h3>
-                <span class="price price-left">$20.00</span>
+                <h3 class="order-md-last heading-left"><span>Meyveli Krep</span></h3>
+                <span class="price price-left">₺100.00</span>
               </div>
               <div class="d-block">
                 <p>A small river named Duden flows by their place and supplies</p>
@@ -596,8 +594,8 @@
             </div>
             <div class="desc pr-3 text-md-right">
               <div class="d-md-flex text align-items-center">
-                <h3 class="order-md-last heading-left"><span>Grilled Beef with potatoes</span></h3>
-                <span class="price price-left">$20.00</span>
+                <h3 class="order-md-last heading-left"><span>Dana Bonfile</span></h3>
+                <span class="price price-left">₺400.00</span>
               </div>
               <div class="d-block">
                 <p>A small river named Duden flows by their place and supplies</p>
@@ -610,8 +608,8 @@
             <div class="img" style="background-image:url(img/xmenu-5.jpg.pagespeed.ic.AjEzQKSqtq.webp)"></div>
             <div class="desc pl-3">
               <div class="d-md-flex text align-items-center">
-                <h3><span>Grilled Beef with potatoes</span></h3>
-                <span class="price">$49.91</span>
+                <h3><span>Izgara Tavuk</span></h3>
+                <span class="price">₺120.00</span>
               </div>
               <div class="d-block">
                 <p>A small river named Duden flows by their place and supplies</p>
@@ -622,8 +620,8 @@
             <div class="img" style="background-image:url(img/xmenu-6.jpg.pagespeed.ic.SSID_aLKfC.webp)"></div>
             <div class="desc pl-3">
               <div class="d-md-flex text align-items-center">
-                <h3><span>Ultimate Overload</span></h3>
-                <span class="price">$20.00</span>
+                <h3><span>Tavuk Sote</span></h3>
+                <span class="price">₺180.00</span>
               </div>
               <div class="d-block">
                 <p>A small river named Duden flows by their place and supplies</p>
@@ -634,8 +632,8 @@
             <div class="img" style="background-image:url(img/xmenu-7.jpg.pagespeed.ic.E5AmxrGlDY.webp)"></div>
             <div class="desc pl-3">
               <div class="d-md-flex text align-items-center">
-                <h3><span>Grilled Beef with potatoes</span></h3>
-                <span class="price">$20.00</span>
+                  <h3><span>Alkollü İçecekler</span></h3>
+                <span class="price">₺200.00</span>
               </div>
               <div class="d-block">
                 <p>A small river named Duden flows by their place and supplies</p>
@@ -646,8 +644,8 @@
             <div class="img" style="background-image:url(img/xmenu-8.jpg.pagespeed.ic.qnCVD_wbaQ.webp)"></div>
             <div class="desc pl-3">
               <div class="d-md-flex text align-items-center">
-                <h3><span>Ham &amp; Pineapple</span></h3>
-                <span class="price">$20.00</span>
+                <h3><span>Milkshake &amp; Soğuk Kahve</span></h3>
+                <span class="price">₺80.00</span>
               </div>
               <div class="d-block">
                 <p>A small river named Duden flows by their place and supplies</p>
@@ -662,8 +660,8 @@
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate" >
-          <span class="subheading">Read Blog</span>
-          <h2>Recent Blog</h2>
+          <span class="subheading">Blog Oku</span>
+          <h2>Blog</h2>
         </div>
       </div>
       <div class="row d-flex">
@@ -674,13 +672,13 @@
             </a>
             <div class="text mt-3 text-center">
               <div class="meta mb-2">
-                <div><a href="#">July 03, 2019</a></div>
+                <div><a href="#">Ocak 03, 2019</a></div>
                 <div><a href="#">Admin</a></div>
                 <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
               </div>
               <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a>
               </h3>
-              <p><a href="#" class="btn-custom">Read more</a></p>
+              <p><a href="#" class="btn-custom">Devamını Oku</a></p>
             </div>
           </div>
         </div>
@@ -691,13 +689,13 @@
             </a>
             <div class="text mt-3 text-center">
               <div class="meta mb-2">
-                <div><a href="#">July 03, 2019</a></div>
+                <div><a href="#">Mart 03, 2019</a></div>
                 <div><a href="#">Admin</a></div>
                 <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
               </div>
               <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a>
               </h3>
-              <p><a href="#" class="btn-custom">Read more</a></p>
+              <p><a href="#" class="btn-custom">Devamını Oku</a></p>
             </div>
           </div>
         </div>
@@ -708,13 +706,13 @@
             </a>
             <div class="text mt-3 text-center">
               <div class="meta mb-2">
-                <div><a href="#">July 03, 2019</a></div>
+                <div><a href="#">Şubat 03, 2019</a></div>
                 <div><a href="#">Admin</a></div>
                 <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
               </div>
               <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a>
               </h3>
-              <p><a href="#" class="btn-custom">Read more</a></p>
+              <p><a href="#" class="btn-custom">Devamını Oku</a></p>
             </div>
           </div>
         </div>
@@ -725,7 +723,7 @@
     <div class="container-fluid">
       <div class="row no-gutters justify-content-center pb-5">
         <div class="col-md-7 text-center heading-section ftco-animate">
-          <span class="subheading">Photos</span>
+          <span class="subheading">Fotoğraflar</span>
           <h2><span>Instagram</span></h2>
         </div>
       </div>
@@ -828,9 +826,8 @@
       <div class="row mb-5">
         <div class="col-md">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Rihana</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-              blind texts.</p>
+            <h2 class="ftco-heading-2">Prestij</h2>
+            <p>Otelcilikte Yılların Tecrübesiyle Mutlu ve Sağlıklı Bir yaşam</p>
             <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
               <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
               <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -840,34 +837,31 @@
         </div>
         <div class="col-md">
           <div class="ftco-footer-widget mb-4 ml-md-5">
-            <h2 class="ftco-heading-2">Useful Links</h2>
+            <h2 class="ftco-heading-2">Bilgilendirme</h2>
             <ul class="list-unstyled">
               <li><a href="#" class="py-2 d-block">Blog</a></li>
-              <li><a href="#" class="py-2 d-block">Rooms</a></li>
-              <li><a href="#" class="py-2 d-block">Amenities</a></li>
-              <li><a href="#" class="py-2 d-block">Gift Card</a></li>
+              <li><a href="#" class="py-2 d-block">Odalar</a></li>
+        
             </ul>
           </div>
         </div>
         <div class="col-md">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Privacy</h2>
+            <h2 class="ftco-heading-2">Bize Ulaşın</h2>
             <ul class="list-unstyled">
-              <li><a href="#" class="py-2 d-block">Career</a></li>
-              <li><a href="#" class="py-2 d-block">About Us</a></li>
-              <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-              <li><a href="#" class="py-2 d-block">Services</a></li>
+              <li><a href="#" class="py-2 d-block">Hakkında</a></li>
+              <li><a href="#" class="py-2 d-block">İletişim</a></li>
+      
             </ul>
           </div>
         </div>
         <div class="col-md">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Have a Questions?</h2>
+            <h2 class="ftco-heading-2">Sorularınız mı var?</h2>
             <div class="block-23 mb-3">
               <ul>
-                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San
-                    Francisco, California, USA</span></li>
-                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                <li><span class="icon icon-map-marker"></span><span class="text">Şirinyalı, Lara Cd. No:28, 07100 Muratpaşa/Antalya</span></li>
+                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+90 542 894 5757</span></a></li>
                 <li><a href="#"><span class="icon icon-envelope"></span><span class="text"><span class="__cf_email__"
                         data-cfemail="abc2c5cdc4ebd2c4ded9cfc4c6cac2c585c8c4c6">[email&#160;protected]</span></span></a>
                 </li>

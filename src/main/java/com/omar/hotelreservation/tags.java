@@ -11,15 +11,25 @@ package com.omar.hotelreservation;
 public class tags {
     private static String loginTag = "Login";
     private static String lgnUserName = "";
-    private static String lgnUserNameCss = "hidden";
+    private static String lgnUserNameCss = "disable-link";
     private static Boolean isLogOut = false;
     private static Boolean isLogin = false;
+    private static String loginIsValid = "hidden";
+    private static String howsLogin = "";
+    private static String isAdmin = "0";
+    private static String adminName = "";
     
     
     public static void resetLoginTags(){
         loginTag = "Login";
         lgnUserName = "";
-        lgnUserNameCss = "hidden";
+        lgnUserNameCss = "disable-link";
+        isLogOut = false;
+        isLogin = false;
+        loginIsValid = "hidden";
+        howsLogin = "";
+        isAdmin = "0";
+        adminName = "";
 
     }
     public static void setLoginTag(String _loginTag){
@@ -60,6 +70,33 @@ public class tags {
     public static Boolean getIsLogin(){
         return isLogin;
     }
+    
+    public static void setLoginIsValid(String _loginIsValid){
+        loginIsValid = _loginIsValid;
+    }
+    public static String getLoginIsValid(){
+        return loginIsValid;
+    }
+    public static void setHowsLogin(String _howsLogin){
+        howsLogin = _howsLogin;
+    }
+    public static String getHowsLogin(){
+        return howsLogin;
+    }
+    public static void setIsAdmin(String _isAdmin){
+        isAdmin = _isAdmin;
+    }
+    public static String getIsAdmin(){
+        return isAdmin;
+    }
+     
+    public static void setAdminName(String _adminName){
+        adminName = _adminName;
+    }
+    public static String getAdminName(){
+        return adminName;
+    }
+     
 
     
     

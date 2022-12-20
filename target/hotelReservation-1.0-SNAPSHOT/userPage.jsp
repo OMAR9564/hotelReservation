@@ -1,3 +1,6 @@
+<%@page import="com.omar.hotelreservation.tags"%>
+
+<%if((tags.getLgnUserName().length() > 1)){ System.out.println(tags.getLoginTag()+"ooooooooo"); %>
 
 <head>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
@@ -145,3 +148,10 @@
     </div>
   </footer>
 </body>
+<%}
+else{
+
+    response.sendRedirect("index.jsp");
+
+}
+%>

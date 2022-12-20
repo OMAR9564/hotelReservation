@@ -12,6 +12,7 @@ public class getInfo {
     String isim_soyisim;
     String email;
     String sifre;
+    String isAdmin;
     
     public void setId(int id){
         this.id = id;
@@ -39,5 +40,11 @@ public class getInfo {
     }
     public String getSifre(){
         return sifre;
+    }
+    public void setIsAdmin(String isAdmin){
+        this.isAdmin = isAdmin;
+    }
+    public String getIsAdmin(){
+        return isAdmin;
     }
 }

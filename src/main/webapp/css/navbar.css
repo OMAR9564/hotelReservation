@@ -12,6 +12,9 @@ body{
   margin-bottom: 0;
   list-style: none
 }
+.disable-link {
+    display:none; visibility:hidden;
+}
 
 .nav-link {
   display: block;

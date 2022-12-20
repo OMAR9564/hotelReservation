@@ -29,15 +29,17 @@
       </button>
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="#home-section" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="#rooms-section" class="nav-link">Rooms</a></li>
-          <li class="nav-item"><a href="#restaurant-section" class="nav-link">Restaurant</a></li>
-          <li class="nav-item"><a href="#about-section" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="#blog-section"" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="#contact-section" class="nav-link">Contact</a></li>
-          <li class="nav-item <%out.println(lgnUserNameCss);%>"><a href="userPage.jsp" class="nav-link " >
-                  <i class="gg-user"></i><%out.println(lgnUserName);%></a></li>
-                  <button class="nav-item" onclick="my()"><a href="login.jsp" class="nav-link btn-login" id="btn-login"  ><%out.println(loginTag);%></a></button>
+            <li class="nav-item active"><a href="#home-section" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="#rooms-section" class="nav-link">Rooms</a></li>
+            <li class="nav-item"><a href="#restaurant-section" class="nav-link">Restaurant</a></li>
+            <li class="nav-item"><a href="#about-section" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#blog-section"" class="nav-link">Blog</a></li>
+            <li class="nav-item"><a href="#contact-section" class="nav-link">Contact</a></li>
+            <li class="nav-item <%out.println(lgnUserNameCss);%>"><a href="userPage.jsp" class="nav-link " >
+                    <i class="gg-user <%out.println(lgnUserNameCss);%>">
+                    </i><%out.println(lgnUserName);%></a>
+            </li>
+        <button class="nav-item" onclick="my()"><a href="login.jsp" class="nav-link btn-login" id="btn-login"  ><%out.println(loginTag);%></a></button>
           
         </ul>
       </div>
