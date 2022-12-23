@@ -14,21 +14,7 @@ import java.util.ArrayList;
  *
  */
 public class mySql {
-    public void sqlInsert(String sqlQuery) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
-            Statement stmt = con.createStatement();
 
-            stmt.execute(sqlQuery);
-            con.close();
-
-        } catch (Exception e) {
-
-            System.out.println(e);
-        }
-
-    }
 
     public ArrayList<getInfo> sqlCon(String sqlQuery) {
 
@@ -58,4 +44,112 @@ public class mySql {
         }
         return sqlInfo;
     }
+    public ArrayList<getInfo> readReversaionData(String sqlQuery) {
+
+        ArrayList<getInfo> sqlInfo = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            ResultSet rls = stmt.executeQuery(sqlQuery);
+
+            while (rls.next()) {
+                getInfo temp = new getInfo();
+                temp.setReverasyonId(rls.getInt("id"));
+                temp.setCustName(rls.getString("musteriAdi"));
+                temp.setCustCount(rls.getInt("kisiSayisi"));
+                temp.setGirisTarihi(rls.getString("girisTarihi"));
+                temp.setCikisTarihi(rls.getString("cikisTarihi"));
+                temp.setCustMail(rls.getString("email"));
+                temp.setCustPhone(rls.getString("telefon"));
+                temp.setRoomName(rls.getString("odaAdi"));
+                temp.setDurum(rls.getString("durum"));
+                sqlInfo.add(temp);
+
+            }
+            con.close();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+        return sqlInfo;
+    }
+    public ArrayList<getInfo> readRoomsData(String sqlQuery) {
+
+        ArrayList<getInfo> sqlInfo = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            ResultSet rls = stmt.executeQuery(sqlQuery);
+
+            while (rls.next()) {
+                getInfo temp = new getInfo();
+                temp.setRoomId(rls.getInt("id"));
+                temp.setRoomName(rls.getString("name"));
+                temp.setRoomPrice(rls.getInt("price"));
+                temp.setRoomImg(rls.getString("image"));
+                temp.setRoomSoldCount(rls.getInt("soldCount"));
+                sqlInfo.add(temp);
+
+            }
+            con.close();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+        return sqlInfo;
+    }
+    public ArrayList<getInfo> readCustomersData(String sqlQuery) {
+
+        ArrayList<getInfo> sqlInfo = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            ResultSet rls = stmt.executeQuery(sqlQuery);
+
+            while (rls.next()) {
+                getInfo temp = new getInfo();
+                temp.setCustId(rls.getInt("id"));
+                temp.setCustName(rls.getString("name"));
+                temp.setCustMail(rls.getString("mail"));
+                temp.setCustPhone(rls.getString("phone"));
+                sqlInfo.add(temp);
+
+            }
+            con.close();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+        return sqlInfo;
+    }
+    
+    public void editData(String sqlQuery) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            stmt.execute(sqlQuery);
+            con.close();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+
+    }
+    
+
 }

@@ -98,10 +98,11 @@
                     
                     if(info.size() == 1 && info.get(0).getIsAdmin().equals("1")){
                     tags.setAdminName(info.get(0).getIsim_Soyisim());
+                    tags.setAdminMail(info.get(0).getEmail());
                     tags.setIsAdmin(info.get(0).getIsAdmin());
                                         System.out.println("xx222xxxxxx11111");
 
-                        response.sendRedirect("adminPage.jsp");
+                        response.sendRedirect("AdminPages/index.jsp");
                     }
                     else{
                         response.sendRedirect("adminLoginPage.jsp");

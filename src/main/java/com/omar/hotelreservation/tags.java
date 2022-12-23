@@ -18,6 +18,8 @@ public class tags {
     private static String howsLogin = "";
     private static String isAdmin = "0";
     private static String adminName = "";
+    private static String adminMail = "";
+    
     
     
     public static void resetLoginTags(){
@@ -30,6 +32,7 @@ public class tags {
         howsLogin = "";
         isAdmin = "0";
         adminName = "";
+        adminMail = "";
 
     }
     public static void setLoginTag(String _loginTag){
@@ -95,6 +98,12 @@ public class tags {
     }
     public static String getAdminName(){
         return adminName;
+    }
+    public static void setAdminMail(String _adminMail){
+        adminMail = _adminMail;
+    }
+    public static String getAdminMail(){
+        return adminMail;
     }
      
 

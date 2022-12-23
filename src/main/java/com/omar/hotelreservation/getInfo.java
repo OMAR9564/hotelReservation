@@ -4,6 +4,8 @@
  */
 package com.omar.hotelreservation;
 
+import javax.persistence.Convert;
+
 /**
  *
  */
@@ -13,6 +15,29 @@ public class getInfo {
     String email;
     String sifre;
     String isAdmin;
+    String kisiSayisi;
+    String girisTarihi;
+    String cikisTarihi;
+    String telefon;
+    String odaAdi;
+    int totalOdaSayisi;
+    String durum;
+    String reverasyonSayisi;
+    int reverasyonId;
+    
+    int roomId = 0;
+    String roomName = "";
+    int roomPrice = 0;
+    String roomImg = "";
+    int roomSoldCount = 0;
+    int roomCount = 0;
+    
+    int custID = 0;
+    String custName = "";
+    String custMail = "";
+    String custPhone = "";
+    int custCount = 0;
+
     
     public void setId(int id){
         this.id = id;
@@ -46,5 +71,125 @@ public class getInfo {
     }
     public String getIsAdmin(){
         return isAdmin;
+    }
+    public void setKisiSayisi(String kisiSayisi){
+        this.kisiSayisi = kisiSayisi;
+    }
+    public String getKisiSayisi(){
+        return kisiSayisi;
+    }
+    public void setGirisTarihi(String girisTarihi){
+        this.girisTarihi = girisTarihi;
+    }
+    public String getGirisTarihi(){
+        return girisTarihi;
+    }
+    public void setCikisTarihi(String cikisTarihi){
+        this.cikisTarihi = cikisTarihi;
+    }
+    public String getCikisTarihi(){
+        return cikisTarihi;
+    }
+    public void setTelefon(String telefon){
+        this.telefon = telefon;
+    }
+    public String getTelefon(){
+        return telefon;
+    }
+    public void setOdaAdi(String odaAdi){
+        this.odaAdi = odaAdi;
+    }
+    public String getOdaAdi(){
+        return odaAdi;
+    }
+    public void setTotalOdaSayisi(int totalOdaSayisi){
+        this.totalOdaSayisi = totalOdaSayisi;
+    }
+    public int getTotalOdaSayisi(){
+        return totalOdaSayisi;
+    }
+    public void setDurum(String durum){
+        this.durum = durum;
+    }
+    public String getDurum(){
+        return durum;
+    }
+    public void setReverasyonSayisi(String reverasyonSayisi){
+        this.reverasyonSayisi = reverasyonSayisi;
+    }
+    public String getReverasyonSayisi(){
+        return reverasyonSayisi;
+    }
+    public void setReverasyonId(int reverasyonId){
+        this.reverasyonId = (reverasyonId);
+    }
+    public int getReverasyonId(){
+        return reverasyonId;
+    }
+    public void setRoomId(int roomId){
+        this.roomId = roomId;
+    }
+    public int getRoomId(){
+        return roomId;
+    }
+    public void setRoomName(String roomName){
+        this.roomName = roomName;
+    }
+    public String getRoomName(){
+        return roomName;
+    }
+    public void setRoomPrice(int roomPrice){
+        this.roomPrice = roomPrice;
+    }
+    public int getRoomPrice(){
+        return roomPrice;
+    }
+    public void setRoomImg(String roomImg){
+        this.roomImg = roomImg;
+    }
+    public String getRoomImg(){
+        return roomImg;
+    }
+    public void setRoomSoldCount(int roomSoldCount){
+        this.roomSoldCount = roomSoldCount;
+    }
+    public int getRoomSoldCount(){
+        return roomSoldCount;
+    }
+    public void setRoomCount(int roomCount){
+        this.roomCount = roomCount;
+    }
+    public int getRoomCount(){
+        return roomCount;
+    }
+    public void setCustId(int custID){
+        this.custID = custID;
+    }
+    public int getCustId(){
+        return custID;
+    }
+    public void setCustName(String custName){
+        this.custName = custName;
+    }
+    public String getCustName(){
+        return custName;
+    }
+    public void setCustMail(String custMail){
+        this.custMail = custMail;
+    }
+    public String getCustMail(){
+        return custMail;
+    }
+    public void setCustPhone(String custPhone){
+        this.custPhone = custPhone;
+    }
+    public String getCustPhone(){
+        return custPhone;
+    }
+    public void setCustCount(int custCount){
+        this.custCount = custCount;
+    }
+    public int getCustCount(){
+        return custCount;
     }
 }
