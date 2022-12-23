@@ -28,9 +28,12 @@ public class getInfo {
     int roomId = 0;
     String roomName = "";
     int roomPrice = 0;
+    int roomSalePrice = 0;
+    int roomSaleActive = 0;
     String roomImg = "";
     int roomSoldCount = 0;
     int roomCount = 0;
+    int roomAvablive = 0;
     
     int custID = 0;
     String custName = "";
@@ -38,6 +41,10 @@ public class getInfo {
     String custPhone = "";
     int custCount = 0;
     String gander = "";
+    
+    int settingId = 0;
+    String hotelName = "";
+    
 
     
     public void setId(int id){
@@ -198,5 +205,35 @@ public class getInfo {
     }
     public String getGander(){
         return gander;
+    }
+    public void setRoomSalePrice(int roomSalePrice){
+        this.roomSalePrice = roomSalePrice;
+    }
+    public int getRoomSalePrice(){
+        return roomSalePrice;
+    }
+    public void setRoomAvabilve(int roomAvablive){
+        this.roomAvablive = roomAvablive;
+    }
+    public int getRoomAvabilve(){
+        return roomAvablive;
+    }
+    public void setSettingId(int settingId){
+        this.settingId = settingId;
+    }
+    public int getSettingId(){
+        return settingId;
+    }
+    public void setHotelName(String hotelName){
+        this.hotelName = hotelName;
+    }
+    public String getHotelName(){
+        return hotelName;
+    }
+    public void setRoomSaleActive(int roomSaleActive){
+        this.roomSaleActive = roomSaleActive;
+    }
+    public int getRoomSaleActive(){
+        return roomSaleActive;
     }
 }

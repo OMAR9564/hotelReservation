@@ -4,10 +4,25 @@
     Author     : omerfaruk
 --%>
 
+<%@page import="com.omar.hotelreservation.hotelData"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.omar.hotelreservation.getInfo"%>
+<%@page import="com.omar.hotelreservation.mySql"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+<%
+ArrayList<getInfo> info;
+ArrayList<getInfo> roomInfo;
+mySql mysql = new mySql();
+String sqlQuery = "SELECT * FROM `hotelSettings`";
+info = mysql.readHotelSettings(sqlQuery);
+hotelData.setHotelName(info.get(0).getHotelName());
 
+String sqlQueryRoom = "SELECT * FROM `room`";
+roomInfo = mysql.readRoomsData(sqlQueryRoom);
+hotelData.setRoomTotalCount(roomInfo.size());
+%>
 <head>
   <title>Rihana</title>
   <meta charset="utf-8">
@@ -56,7 +71,7 @@
           <div class="row no-gutters slider-text align-items-center">
             <div class="col-md-8 ftco-animate">
               <div class="text mb-5 pb-5">
-                <h1 class="mb-3">Prestij</h1>
+                <h1 class="mb-3"><%out.println(hotelData.getHotelName());%></h1>
                 <h2>Bir Otelden Daha Fazlası</h2>
               </div>
             </div>
@@ -70,7 +85,7 @@
             <div class="col-md-8 ftco-animate">
               <div class="text mb-5 pb-5">
                 <h1 class="mb-3">Mükemmel Bir Deneyim</h1>
-                <h2>Prestij Otel &amp; Tatil Yeri</h2>
+                <h2><%out.println(hotelData.getHotelName());%> Otel &amp; Tatil Yeri</h2>
               </div>
             </div>
           </div>
@@ -227,7 +242,7 @@
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
-          <span class="subheading">Prestij Otel'e Hoş Geldiniz</span>
+          <span class="subheading"><%out.println(hotelData.getHotelName());%> Otel'e Hoş Geldiniz</span>
           <h2 class="mb-4">Yeni Bir Lüks Otel Vizyonu</h2>
         </div>
       </div>
@@ -301,7 +316,7 @@
     <div class="container-fluid px-0" >
       <div class="row no-gutters justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
-          <span class="subheading">Prestij Odaları</span>
+          <span class="subheading"><%out.println(hotelData.getHotelName());%> Odaları</span>
           <h2 class="mb-4">Size Uygun Oda Çeşitleri</h2>
         </div>
       </div>
@@ -311,23 +326,84 @@
             <div class="img d-flex align-items-center"
               style="background-image:url(img/xbg_3.jpg.pagespeed.ic.JAfb0DsHvt.webp)">
               <div class="text text-center px-4 py-4">
-                <h2>Hoş Geldiniz <a href="index.html">Prestij</a> Otel</h2>
+                <h2>Hoş Geldiniz <a href="index.jsp"><%out.println(hotelData.getHotelName());%></a> Otel</h2>
                 <p>5 Yıldızlı Otel Deneyimini Yaşayın.</p>
               </div>
             </div>
           </div>
         </div>
+                
+        <%
+            int queue = 1;
+            int setQue= 0;
+            String strSale = "";
+            String strSaleArrow = "";
+            for(int i = 0; i < hotelData.getRoomTotalCount(); i++){
+            hotelData.setRoomAvabilve(roomInfo.get(i).getRoomAvabilve());
+            hotelData.setRoomName(roomInfo.get(i).getRoomName());
+            hotelData.setRoomImg(roomInfo.get(i).getRoomImg());
+            hotelData.setRoomPrice(roomInfo.get(i).getRoomPrice());
+            hotelData.setRoomSaleActive(roomInfo.get(i).getRoomSaleActive());
+            hotelData.setRoomSalePrice(roomInfo.get(i).getRoomSalePrice());
+            String location = "";
+            String arrowDirection = "";
+            
+            if(hotelData.getRoomAvabilve() == 1){
+                if(hotelData.isWeekend()){
+                    strSale = "!! Hafta Sonu İndirimi !!";
+                    strSaleArrow = "↓↓";
+                    hotelData.setRoomPrice(hotelData.getRoomSalePrice());
+                }
+                
+                if(queue > 5){
+                    setQue++;
+                    if(setQue == 5) setQue = 0;
+                    queue = setQue + 1;
+                }
+                
+                switch (queue) {
+                        case 1:
+                            location = "img";
+                            arrowDirection = "left-arrow";
+                            
+                            break;
+                        case 2:
+                            location = "img order-md-last";
+                            arrowDirection = "right-arrow";
+                            break;
+                        case 3:
+                            location = "img order-md-last";
+                            arrowDirection = "right-arrow";
+
+                            break;
+                        case 4:
+                            location = "img";
+                            arrowDirection = "left-arrow";
+                           
+                            break;
+                        case 5:
+                            location = "img";
+                            arrowDirection = "left-arrow";
+                            break;
+                        
+                    }
+                    
+                System.out.println( i +"-"+ location + "-" + queue + "aaaaaa");
+            
+        %>
         <div class="col-lg-6">
           <div class="room-wrap d-md-flex">
-            <a href="#" class="img" style="background-image:url(img/xroom-1.jpg.pagespeed.ic.0q4Bp6Qeo7.webp)"></a>
-            <div class="half left-arrow d-flex align-items-center">
+            <a href="#" class="<%out.println(location);%>" 
+               style="background-image: url(<%out.println(hotelData.getRoomImg().substring(3));%>);"></a>
+            <div class="half <%out.println(arrowDirection);%> d-flex align-items-center">
               <div class="text p-4 p-xl-5 text-center">
                 <p class="star mb-0">
+                <p style="color:red;"><%out.println(strSale);%></p>
                   <span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                     class="ion-ios-star"></span><span class="ion-ios-star"></span>
                 </p>
-                <p class="mb-0"><span class="price mr-1">₺3200.00</span> <span class="per">Tek Gecelik</span></p>
-                <h3 class="mb-3"><a href="rooms.html">Süit Odalar</a></h3>
+                <p class="mb-0"><span class="price mr-1">₺<%out.println(hotelData.getRoomPrice());%><span style="color:red;"><%out.println(strSaleArrow);%></span></span> <span class="per">Tek Gecelik</span></p>
+                <h3 class="mb-3"><a href="rooms.jsp"><%out.println(hotelData.getRoomName());%></a></h3>
                 <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">Oda Detaylarını Görüntüle
                     <span class="icon-long-arrow-right"></span>
                   </a></p>
@@ -335,68 +411,18 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6">
-          <div class="room-wrap d-md-flex">
-            <a href="#" class="img order-md-last"
-              style="background-image:url(img/xroom-2.jpg.pagespeed.ic.qQEQzEZcIj.webp)"></a>
-            <div class="half right-arrow d-flex align-items-center">
-              <div class="text p-4 p-xl-5 text-center">
-                <p class="star mb-0"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
-                    class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
-                <p class="mb-0"><span class="price mr-1">₺9300.00</span> <span class="per">Tek Gecelik</span></p>
-                <h3 class="mb-3"><a href="rooms.html">Aile Odaları</a></h3>
-                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">Oda Detaylarını Görüntüle <span
-                      class="icon-long-arrow-right"></span></a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="room-wrap d-md-flex">
-            <a href="#" class="img order-md-last"
-              style="background-image:url(img/xroom-3.jpg.pagespeed.ic.-BqmSKjZKz.webp)"></a>
-            <div class="half right-arrow d-flex align-items-center">
-              <div class="text p-4 p-xl-5 text-center">
-                <p class="star mb-0"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
-                    class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
-                <p class="mb-0"><span class="price mr-1">₺5300.00</span> <span class="per">Tek Gecelik</span></p>
-                <h3 class="mb-3"><a href="rooms.html">Lüx Odalar</a></h3>
-                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">Oda Detaylarını Görüntüle <span
-                      class="icon-long-arrow-right"></span></a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="room-wrap d-md-flex">
-            <a href="#" class="img" style="background-image:url(img/xroom-4.jpg.pagespeed.ic.5v9gH2L7pP.webp)"></a>
-            <div class="half left-arrow d-flex align-items-center">
-              <div class="text p-4 p-xl-5 text-center">
-                <p class="star mb-0"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
-                    class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
-                <p class="mb-0"><span class="price mr-1">₺6250.00</span> <span class="per">Tek Gecelik</span></p>
-                <h3 class="mb-3"><a href="rooms.html">Luxury Room</a></h3>
-                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">Oda Detaylarını Görüntüle <span
-                      class="icon-long-arrow-right"></span></a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="room-wrap d-md-flex">
-            <a href="#" class="img" style="background-image:url(img/xroom-6.jpg.pagespeed.ic.jmpfruk5EA.webp)"></a>
-            <div class="half left-arrow d-flex align-items-center">
-              <div class="text p-4 p-xl-5 text-center">
-                <p class="star mb-0"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
-                    class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
-                <p class="mb-0"><span class="price mr-1">₺10200.00</span> <span class="per">Tek Gecelik</span></p>
-                <h3 class="mb-3"><a href="rooms.html">Superior Room</a></h3>
-                <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">Oda Detaylarını Görüntüle <span
-                      class="icon-long-arrow-right"></span></a></p>
-              </div>
-            </div>
-          </div>
-        </div>
+        
+        
+        
+        
+        <%
+        queue++;
+
+        
+            }
+}%>
+
+
       </div>
     </div>
   </section>
@@ -444,7 +470,7 @@
                       <p class="star"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                           class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                           class="ion-ios-star"></span></p>
-                      <p class="mb-4">CSS :(((</p>
+                      <p class="mb-4">İçecekler Harika</p>
                       <p class="name">Ömer Faruk</p>
                       <span class="position">Misafir</span>
                     </div>
@@ -826,7 +852,7 @@
       <div class="row mb-5">
         <div class="col-md">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Prestij</h2>
+            <h2 class="ftco-heading-2"><%out.println(hotelData.getHotelName());%></h2>
             <p>Otelcilikte Yılların Tecrübesiyle Mutlu ve Sağlıklı Bir yaşam</p>
             <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
               <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>

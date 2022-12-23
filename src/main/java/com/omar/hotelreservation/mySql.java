@@ -96,9 +96,12 @@ public class mySql {
                 temp.setRoomId(rls.getInt("id"));
                 temp.setRoomName(rls.getString("name"));
                 temp.setRoomPrice(rls.getInt("price"));
+                temp.setRoomSalePrice(rls.getInt("salePrice"));
+                temp.setRoomSaleActive(rls.getInt("saleActive"));
                 temp.setRoomImg(rls.getString("image"));
                 temp.setRoomSoldCount(rls.getInt("soldCount"));
                 temp.setRoomCount(rls.getInt("maxRoomCount"));
+                temp.setRoomAvabilve(rls.getInt("avabilve"));
                 sqlInfo.add(temp);
 
             }
@@ -153,6 +156,33 @@ public class mySql {
             System.out.println(e);
         }
 
+    }
+    public ArrayList<getInfo> readHotelSettings(String sqlQuery) {
+
+        ArrayList<getInfo> sqlInfo = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            ResultSet rls = stmt.executeQuery(sqlQuery);
+
+            while (rls.next()) {
+                getInfo temp = new getInfo();
+                temp.setSettingId(rls.getInt("id"));
+                temp.setHotelName(rls.getString("hotelName"));
+
+                sqlInfo.add(temp);
+
+            }
+            con.close();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+        return sqlInfo;
     }
     
 

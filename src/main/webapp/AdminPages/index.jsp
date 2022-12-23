@@ -250,7 +250,7 @@
                             hotelData.setCustomerName(infoRev.get(i).getCustName());
                             hotelData.setRoomName(infoRev.get(i).getRoomName());
                             hotelData.setReversayonStatus(infoRev.get(i).getDurum());
-                            hotelData.setTotalRoomCount(infoRev.get(i).getTotalOdaSayisi());
+                            hotelData.setRoomTotalCount(infoRev.get(i).getTotalOdaSayisi());
                         %>
                       <tr>
                         <th scope="row"><a href="#">#<%out.println(i + 1);%></a></th>

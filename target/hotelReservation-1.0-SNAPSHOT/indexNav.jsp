@@ -4,6 +4,10 @@
     Author     : omerfaruk
 --%>
 
+<%@page import="com.omar.hotelreservation.hotelData"%>
+<%@page import="com.omar.hotelreservation.mySql"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.omar.hotelreservation.getInfo"%>
 <%@page import="com.omar.hotelreservation.tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,6 +19,14 @@
         String lgnUserName = tags.getLgnUserName();
         
         String lgnUserNameCss = tags.getLgnUserNameCss();
+        
+
+ArrayList<getInfo> info;
+mySql mysql = new mySql();
+String sqlQuery = "SELECT * FROM `hotelSettings`";
+info = mysql.readHotelSettings(sqlQuery);
+hotelData.setHotelName(info.get(0).getHotelName());
+
 
     %>
     <!--For Cookie-->
@@ -22,7 +34,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html">Rihana</a>
+      <a class="navbar-brand" href="index.html"><%out.println(hotelData.getHotelName());%></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
         aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu

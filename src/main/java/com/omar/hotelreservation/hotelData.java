@@ -4,13 +4,16 @@
  */
 package com.omar.hotelreservation;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+
 /**
  *
  * @author omerfaruk
  */
 public class hotelData {
     private static int reverasionCount = 0;
-    private static int totalRoomCount = 0;
     private static int reverasyonId = 0;
     private static String customerName = "";
     private static String roomName = "";
@@ -20,9 +23,13 @@ public class hotelData {
     
     private static int roomId = 0;
     private static int roomPrice = 0;
+    private static int roomSalePrice = 0;
+    private static int roomSaleActive = 0;
     private static String roomImg = "";
     private static int roomSoldCount = 0;
     private static int roomCount = 0;
+    private static int roomAvabilve = 0;
+    private static int roomTotalCount = 0;
     
     private static int custID = 0;
     private static String custName = "";
@@ -34,8 +41,11 @@ public class hotelData {
     private static String adminName = "";
     private static String adminMail = "";
 
+    private static int settingId  = 0;
+    private static String hotelName  = "";
     
 
+    
     
     public static void setReverasionCount(int _reverasionCount){
         reverasionCount = _reverasionCount;
@@ -43,11 +53,11 @@ public class hotelData {
     public static int getReverasionCount(){
         return reverasionCount;
     }
-    public static void setTotalRoomCount(int _totalRoomCount){
-        totalRoomCount = _totalRoomCount;
+    public static void setRoomTotalCount(int _roomTotalCount){
+        roomTotalCount = _roomTotalCount;
     }
-    public static int getTotalRoomCount(){
-        return totalRoomCount;
+    public static int getRoomTotalCount(){
+        return roomTotalCount;
     }
 
     public static void setReverasyonId(int _reverasyonId){
@@ -86,6 +96,12 @@ public class hotelData {
     public static int getRoomPrice(){
         return roomPrice;
     }
+    public static void setRoomSalePrice(int _roomSalePrice){
+        roomSalePrice = _roomSalePrice;
+    }
+    public static int getRoomSalePrice(){
+        return roomSalePrice;
+    }
     public static void setRoomImg(String _roomImg){
         roomImg = _roomImg;
     }
@@ -103,6 +119,12 @@ public class hotelData {
     }
     public static int getRoomCount(){
         return roomCount;
+    }
+    public static void setRoomAvabilve(int _roomAvabilve){
+        roomAvabilve = _roomAvabilve;
+    }
+    public static int getRoomAvabilve(){
+        return roomAvabilve;
     }
     public static void setCustId(int _custID){
         custID = _custID;
@@ -152,21 +174,34 @@ public class hotelData {
     public static String getGander(){
         return gander;
     }
-    public static void setAdminName(String _adminName){
-        adminName = _adminName;
+    public static void setSettingId(int _settingId){
+        settingId = _settingId;
     }
-    public static String getAdminName(){
-        return adminName;
+    public static int getSettingId(){
+        return settingId;
     }
-    public static void setAdminMail(String _adminMail){
-        adminMail = _adminMail;
+    public static void setHotelName(String _hotelName){
+        hotelName = _hotelName;
     }
-    public static String getAdminMail(){
-        return adminMail;
+    public static String getHotelName(){
+        return hotelName;
+    }
+    public static void setRoomSaleActive(int _roomSaleActive){
+        roomSaleActive = _roomSaleActive;
+    }
+    public static int getRoomSaleActive(){
+        return roomSaleActive;
     }
 
 
 
+    public static boolean isWeekend()
+    {
+        LocalDate today = LocalDate.now();
+        DayOfWeek day = DayOfWeek.of(today.get(ChronoField.DAY_OF_WEEK));
+        return day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY;
+    }
+}
     
     
     
