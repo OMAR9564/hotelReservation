@@ -5,38 +5,29 @@
 <%@page import="com.omar.hotelreservation.tags"%>
 <%if((tags.getAdminName().length() > 1)){ System.out.println(tags.getLoginTag()+"ooooooooo"); 
     
-
-    ArrayList<getInfo> info;
+//    reversaion data
+    ArrayList<getInfo> infoRev;
     mySql mysql = new mySql();
     String sqlQuery = "SELECT * FROM `reverasyonlar`";
 
-    info = mysql.readReversaionData(sqlQuery);
-    System.out.println(info.get(0).getReverasyonId() + "--------------------");
-    
-    hotelData.setReverasionCount(info.size());
-    hotelData.setReverasyonId(info.get(0).getReverasyonId());
-    hotelData.setCustomerName(info.get(0).getIsim_Soyisim());
-    hotelData.setRoomName(info.get(0).getOdaAdi());
-    hotelData.setReversayonStatus(info.get(0).getDurum());
-    hotelData.setTotalRoomCount(info.get(0).getTotalOdaSayisi());
+    infoRev = mysql.readReversaionData(sqlQuery);
+    hotelData.setReverasionCount(infoRev.size());
+
     
 //    rooms data
     sqlQuery = "SELECT * FROM `room`";
 
-    info = mysql.readRoomsData(sqlQuery);
+    ArrayList<getInfo> infoRoom = mysql.readRoomsData(sqlQuery);
     
-    hotelData.setRoomId(info.get(0).getRoomId());
-    hotelData.setRoomPrice(info.get(0).getRoomPrice());
-    hotelData.setRoomImg(info.get(0).getRoomImg());
-    hotelData.setRoomSoldCount(info.get(0).getRoomSoldCount());
-    hotelData.setRoomCount(info.size());
+
+    hotelData.setRoomCount(infoRoom.size());
     
 //    customers data
     sqlQuery = "SELECT * FROM `customer`";
 
-    info = mysql.readCustomersData(sqlQuery);
+    ArrayList<getInfo> infoCust = mysql.readCustomersData(sqlQuery);
     
-    hotelData.setCustCount(info.size());
+    hotelData.setCustCount(infoCust.size());
 
        
  %>
@@ -255,9 +246,14 @@
                     <tbody>
                         <%
                             for(int i = 0; i < hotelData.getReverasionCount(); i++){
+                            hotelData.setReverasyonId(infoRev.get(i).getReverasyonId());
+                            hotelData.setCustomerName(infoRev.get(i).getCustName());
+                            hotelData.setRoomName(infoRev.get(i).getRoomName());
+                            hotelData.setReversayonStatus(infoRev.get(i).getDurum());
+                            hotelData.setTotalRoomCount(infoRev.get(i).getTotalOdaSayisi());
                         %>
                       <tr>
-                        <th scope="row"><a href="#">#<%out.println(hotelData.getReverasyonId());%></a></th>
+                        <th scope="row"><a href="#">#<%out.println(i + 1);%></a></th>
                         <td><%out.println(hotelData.getCustomerName());%></td>
                         <td><a href="#" class="text-primary"><%out.println(hotelData.getRoomName());%></a></td>
                         <td><span class="badge bg-success"><%out.println(hotelData.getReversayonStatus());%></span></td>
@@ -302,7 +298,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                        <%for(int i = 0; i < hotelData.getRoomCount(); i++){%>
+                        <%for(int i = 0; i < hotelData.getRoomCount(); i++){
+                            hotelData.setRoomId(infoRoom.get(i).getRoomId());
+                            hotelData.setRoomName(infoRoom.get(i).getRoomName());
+                            hotelData.setRoomPrice(infoRoom.get(i).getRoomPrice());
+                            hotelData.setRoomImg(infoRoom.get(i).getRoomImg());
+                            hotelData.setRoomSoldCount(infoRoom.get(i).getRoomSoldCount());
+                        %>
                       <tr>
                         <th scope="row"><a href="#"><img src="<%out.println(hotelData.getRoomImg());%>" alt=""></a></th>
                         <td><a href="#" class="text-primary fw-bold"><%out.println(hotelData.getRoomName());%></a></td>

@@ -19,6 +19,7 @@ public class tags {
     private static String isAdmin = "0";
     private static String adminName = "";
     private static String adminMail = "";
+    private static String whosePage = "";
     
     
     
@@ -33,6 +34,7 @@ public class tags {
         isAdmin = "0";
         adminName = "";
         adminMail = "";
+        whosePage = "";
 
     }
     public static void setLoginTag(String _loginTag){
@@ -105,7 +107,12 @@ public class tags {
     public static String getAdminMail(){
         return adminMail;
     }
-     
+    public static void setWhosePage(String _whosePage){
+        whosePage = _whosePage;
+    }
+    public static String getWhosePage(){
+        return whosePage;
+    } 
 
     
     

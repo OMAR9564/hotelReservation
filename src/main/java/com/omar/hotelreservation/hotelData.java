@@ -29,6 +29,10 @@ public class hotelData {
     private static String custMail = "";
     private static String custPhone = "";
     private static int custCount = 0;
+    private static String gander = "";
+    
+    private static String adminName = "";
+    private static String adminMail = "";
 
     
 
@@ -141,6 +145,24 @@ public class hotelData {
     }
     public static String getCikisTarihi(){
         return cikisTarihi;
+    }
+    public static void setGander(String _gander){
+        gander = _gander;
+    }
+    public static String getGander(){
+        return gander;
+    }
+    public static void setAdminName(String _adminName){
+        adminName = _adminName;
+    }
+    public static String getAdminName(){
+        return adminName;
+    }
+    public static void setAdminMail(String _adminMail){
+        adminMail = _adminMail;
+    }
+    public static String getAdminMail(){
+        return adminMail;
     }
 
 

@@ -115,6 +115,29 @@
                 System.out.println(e);
             }
             }
+            
+            if(tags.getWhosePage().equals("revPage")){
+                try{
+                        email = request.getParameter("mail");
+                        String name = request.getParameter("name");
+                        int custCount = Integer.parseInt(request.getParameter("custCount"));
+                        String gTarihi = request.getParameter("gTarihi");
+                        String cTarihi = request.getParameter("cTarihi");
+                        String phone = request.getParameter("phone");
+                        int room = Integer.parseInt(request.getParameter("room"));
+                        String gander = request.getParameter("gander");
+                        
+                        mySql mysql = new mySql();
+                        String sqlQuery = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`) VALUES ('"+name+"','"+custCount+"','"+gTarihi+"','"+cTarihi+"','"+email+"','"+phone+"', '"+room+"','"+gander+"')";
+
+                        mysql.editInsertData(sqlQuery);
+                        
+                        
+                        
+            }catch(Exception e){
+                System.out.println(e);
+            }
+            }
 
         
 

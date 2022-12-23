@@ -66,6 +66,9 @@ public class mySql {
                 temp.setCustPhone(rls.getString("telefon"));
                 temp.setRoomName(rls.getString("odaAdi"));
                 temp.setDurum(rls.getString("durum"));
+                temp.setGander(rls.getString("cinsiyet"));
+                            System.out.println(temp.getGander()+ "123123123");
+
                 sqlInfo.add(temp);
 
             }
@@ -95,6 +98,7 @@ public class mySql {
                 temp.setRoomPrice(rls.getInt("price"));
                 temp.setRoomImg(rls.getString("image"));
                 temp.setRoomSoldCount(rls.getInt("soldCount"));
+                temp.setRoomCount(rls.getInt("maxRoomCount"));
                 sqlInfo.add(temp);
 
             }
@@ -135,7 +139,7 @@ public class mySql {
         return sqlInfo;
     }
     
-    public void editData(String sqlQuery) {
+    public void editInsertData(String sqlQuery) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");

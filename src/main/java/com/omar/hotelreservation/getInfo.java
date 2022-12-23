@@ -37,6 +37,7 @@ public class getInfo {
     String custMail = "";
     String custPhone = "";
     int custCount = 0;
+    String gander = "";
 
     
     public void setId(int id){
@@ -191,5 +192,11 @@ public class getInfo {
     }
     public int getCustCount(){
         return custCount;
+    }
+    public void setGander(String custCount){
+        this.gander = gander;
+    }
+    public String getGander(){
+        return gander;
     }
 }

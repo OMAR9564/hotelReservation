@@ -1,6 +1,18 @@
+<%@page import="com.omar.hotelreservation.getInfo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.omar.hotelreservation.mySql"%>
+<%@page import="com.omar.hotelreservation.hotelData"%>
 <%@page import="com.omar.hotelreservation.tags"%>
 
-<%if((tags.getLgnUserName().length() > 1)){ System.out.println(tags.getLoginTag()+"ooooooooo"); %>
+<%if((tags.getLgnUserName().length() > 1)){ System.out.println(tags.getLoginTag()+"ooooooooo"); String loginTag = "Log Out";
+    ArrayList<getInfo> info;
+    mySql mysql = new mySql();
+    String sqlQuery = "SELECT * FROM `customer`";
+    info = mysql.readCustomersData(sqlQuery);
+    hotelData.setCustName(info.get(0).getCustName());
+    hotelData.setCustMail(info.get(0).getCustMail());
+    hotelData.setCustPhone(info.get(0).getCustPhone());
+%>
 
 <head>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
@@ -21,7 +33,7 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                  <span class="mb-0 text-sm  font-weight-bold"><%out.println(hotelData.getCustName());%></span>
                 </div>
               </div>
             </a>
@@ -37,11 +49,11 @@
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Hello Jesse</h1>
+              <h1 class="display-2 text-white">Hello <%out.println(hotelData.getCustName().substring(0, hotelData.getCustName().indexOf(" ")));%></h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
             <a href="#!" class="btn btn-success">Reverasyonlarim</a>
-            <a href="#!" class="btn btn-info">Edit profile</a>
-            <a href="#!" class="btn btn-danger">Log Out</a>
+            <a href="#!" class="btn btn-info">Profilimi Düzenle</a>
+            <a href="login.jsp" class="btn btn-danger">Log Out</a>
           </div>
         </div>
       </div>
@@ -55,44 +67,40 @@
             <div class="card-header bg-white border-0">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">My account</h3>
+                  <h3 class="mb-0">Profilim</h3>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+                  <a href="#!" class="btn btn-sm btn-primary">Düzenle</a>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <form>
-                <h6 class="heading-small text-muted mb-4">User information</h6>
+                <h6 class="heading-small text-muted mb-4">Kullanici Bilgileri</h6>
                 <div class="pl-lg-4">
                   <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse">
-                      </div>
-                    </div>
+                    
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
+                        <label class="form-control-label" for="input-email">Email adresi</label>
+                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="bya@example.com" value="<%out.println(hotelData.getCustMail());%>">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group focused">
-                        <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="Lucky">
+                        <label class="form-control-label" for="input-first-name">Name</label>
+                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Name" value="<%out.println(hotelData.getCustName());%>">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group focused">
-                        <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Jesse">
+                        <label class="form-control-label" for="input-first-name">Phone</label>
+                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Phone" value="<%out.println(hotelData.getCustPhone());%>">
                       </div>
                     </div>
+
                   </div>
                 </div>
                 <hr class="my-4">

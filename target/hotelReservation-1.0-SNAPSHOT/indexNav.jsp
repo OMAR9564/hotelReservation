@@ -39,7 +39,7 @@
                     <i class="gg-user <%out.println(lgnUserNameCss);%>">
                     </i><%out.println(lgnUserName);%></a>
             </li>
-        <button class="nav-item" onclick="my()"><a href="login.jsp" class="nav-link btn-login" id="btn-login"  ><%out.println(loginTag);%></a></button>
+        <button class="nav-item"><a href="login.jsp" class="nav-link btn-login" id="btn-login"  ><%out.println(loginTag);%></a></button>
           
         </ul>
       </div>

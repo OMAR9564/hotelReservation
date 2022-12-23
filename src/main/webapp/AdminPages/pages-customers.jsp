@@ -18,6 +18,7 @@
 
     info = mysql.readCustomersData(sqlQuery);
     
+    hotelData.setCustCount(info.size());
 
 
 %>
@@ -133,7 +134,7 @@
                                 System.out.println(hotelData.getCustMail()+ "omeroemreormeormmr8 ");
                         %>
                       <tr>
-                        <th scope="row"><a href="#">#<%out.println(hotelData.getCustId());%></a></th>
+                        <th scope="row"><a href="#">#<%out.println(i + 1);%></a></th>
                         <td><%out.println(hotelData.getCustName());%></td>
                         <td><a href="#" class="text-primary"><%out.println(hotelData.getCustMail());%></a></td>
                         <td><span class="badge" style="color:black; font-size: 12px;"><%out.println(hotelData.getCustPhone());%></span></td>
