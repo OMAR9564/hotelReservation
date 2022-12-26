@@ -2,16 +2,19 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.omar.hotelreservation.mySql"%>
 <%@page import="com.omar.hotelreservation.hotelData"%>
-<%@page import="com.omar.hotelreservation.tags"%>
+<%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 
-<%if((tags.getLgnUserName().length() > 1)){ System.out.println(tags.getLoginTag()+"ooooooooo"); String loginTag = "Log Out";
+<%if((((String)session.getAttribute("lgnUserName")).length() > 1)){ String loginTag = "Log Out";
     ArrayList<getInfo> info;
     mySql mysql = new mySql();
     String sqlQuery = "SELECT * FROM `customer`";
     info = mysql.readCustomersData(sqlQuery);
-    hotelData.setCustName(info.get(0).getCustName());
-    hotelData.setCustMail(info.get(0).getCustMail());
-    hotelData.setCustPhone(info.get(0).getCustPhone());
+    session.setAttribute("CustName", info.get(0).getCustName());
+    session.setAttribute("CustMail", info.get(0).getCustMail());
+    session.setAttribute("CustPhone", info.get(0).getCustPhone());
+    
+    String custName = "";
+    custName = (String)session.getAttribute("CustName");
 %>
 
 <head>
@@ -33,7 +36,7 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold"><%out.println(hotelData.getCustName());%></span>
+                    <span class="mb-0 text-sm  font-weight-bold"><%out.println((String)session.getAttribute("CustName"));%></span>
                 </div>
               </div>
             </a>
@@ -49,11 +52,11 @@
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-              <h1 class="display-2 text-white">Hello <%out.println(hotelData.getCustName().substring(0, hotelData.getCustName().indexOf(" ")));%></h1>
+              <h1 class="display-2 text-white">Hello <%out.println(custName.substring(0, custName.indexOf(" ")));%></h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
             <a href="#!" class="btn btn-success">Reverasyonlarim</a>
             <a href="#!" class="btn btn-info">Profilimi Düzenle</a>
-            <a href="login.jsp" class="btn btn-danger">Log Out</a>
+            <a href="index.jsp" class="btn btn-danger">Log Out</a>
           </div>
         </div>
       </div>
@@ -83,7 +86,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email adresi</label>
-                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="bya@example.com" value="<%out.println(hotelData.getCustMail());%>">
+                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="bya@example.com" value="<%out.println((String)session.getAttribute("CustMail"));%>">
                       </div>
                     </div>
                   </div>
@@ -91,13 +94,13 @@
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-first-name">Name</label>
-                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Name" value="<%out.println(hotelData.getCustName());%>">
+                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Name" value="<%out.println((String)session.getAttribute("CustName"));%>">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-first-name">Phone</label>
-                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Phone" value="<%out.println(hotelData.getCustPhone());%>">
+                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Phone" value="<%out.println((String)session.getAttribute("CustPhone"));%>">
                       </div>
                     </div>
 

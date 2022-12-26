@@ -4,10 +4,18 @@
     Author     : omerfaruk
 --%>
 
-<%@page import="com.omar.hotelreservation.tags"%>
+<%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="checkPage.jsp" flush="false"/>
-<%if(!tags.getLoginTag().equals("Log Out")){ System.out.println(tags.getLoginTag()+"ooooooooo"); %>
+<%if((String)session.getAttribute("loginTag") != "Log Out"){ 
+//if((String)session.getAttribute("loginIsValid") == null) session.setAttribute("loginIsValid", "hidden");
+String revCustMail = "";
+if((String)session.getAttribute("revCustMail") != null){
+    revCustMail = (String)session.getAttribute("revCustMail");
+    
+    }
+    System.out.println((String)session.getAttribute("loginTag"));
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,16 +45,16 @@
                   <div class="center-wrap">
                     <div class="section text-center">
                       <h4 class="mb-4 pb-3">Log In</h4>
-                      <p class="wrong-pass" <%out.println(tags.getLoginIsValid());%>>‼️ ️Giriş başarısız ‼️</p>
+                      <p class="wrong-pass" <%out.println((String)session.getAttribute("loginIsValid"));%>>‼️ ️Giriş başarısız ‼️</p>
                       <form action="checkPage.jsp" method="POST" id="loginform">
                         <div class="form-group">
                           <input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail"
-                            autocomplete="off">
+                                 autocomplete="off" required value = <%out.println(revCustMail);%>>
                           <i class="input-icon uil uil-at"></i>
                         </div>
                         <div class="form-group mt-2">
                           <input type="password" name="logpass" class="form-style" placeholder="Your Password"
-                            id="logpass" autocomplete="off">
+                            id="logpass" autocomplete="off" required>
                           <i class="input-icon uil uil-lock-alt"></i>
                         </div>
                         <a href="#" class="btn mt-4" onclick="document.getElementById('loginform').submit();">Login</a>
@@ -86,7 +94,7 @@
                           id="logpass" autocomplete="off">
                         <i class="input-icon uil uil-lock-alt"></i>
                       </div>
-                      <%tags.setHowsLogin("userLogin");%>
+                      <%session.setAttribute("whosePage", "userLogin");%>
                       <a href="#" class="btn mt-4">submit</a>
                     </div>
                   </div>
@@ -103,7 +111,8 @@
 </html>
 <%}
 else{
-    tags.resetLoginTags();
+    session.invalidate();
+    
 
     response.sendRedirect("index.jsp");
 

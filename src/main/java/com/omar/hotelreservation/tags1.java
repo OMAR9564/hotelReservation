@@ -8,7 +8,7 @@ package com.omar.hotelreservation;
  *
  * @author omerfaruk
  */
-public class tags {
+public class tags1 {
     private static String loginTag = "Login";
     private static String lgnUserName = "";
     private static String lgnUserNameCss = "disable-link";
@@ -20,7 +20,6 @@ public class tags {
     private static String adminName = "";
     private static String adminMail = "";
     private static String whosePage = "";
-    
     
     
     public static void resetLoginTags(){

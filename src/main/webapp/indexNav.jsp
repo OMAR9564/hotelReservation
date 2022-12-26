@@ -8,17 +8,44 @@
 <%@page import="com.omar.hotelreservation.mySql"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.omar.hotelreservation.getInfo"%>
-<%@page import="com.omar.hotelreservation.tags"%>
+<%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <%
+                        System.out.println((String)session.getAttribute("readDefaultSessions")+"omeroemroemr4");
 
-        String loginTag = tags.getLoginTag();
+        if((String)session.getAttribute("readDefaultSessions") == null){
+    session.setAttribute("loginTag", "Login");
+    session.setAttribute("lgnUserName", "");
+    session.setAttribute("lgnUserNameCss", "disable-link");
+    session.setAttribute("isLogOut", "false");
+    session.setAttribute("isLogin", "false");
+    session.setAttribute("loginIsValid", "hidden");
+    session.setAttribute("howsLogin", "");
+    session.setAttribute("isAdmin", "0");
+    session.setAttribute("adminName", "");
+    session.setAttribute("adminMail", "");
+    session.setAttribute("whosePage", "");
+    session.setAttribute("readDefaultSessions", "1");
+
+        }
+                System.out.println((String)session.getAttribute("readDefaultSessions")+"omeroemroemr3");
+
+        String loginTag = "";
+        loginTag = (String)session.getAttribute("loginTag");
         
-        String lgnUserName = tags.getLgnUserName();
+        String lgnUserName = "";
+        lgnUserName=(String)session.getAttribute("lgnUserName");
         
-        String lgnUserNameCss = tags.getLgnUserNameCss();
+        String lgnUserNameCss = "";
+        lgnUserNameCss=(String)session.getAttribute("lgnUserNameCss");
+        
+        if(loginTag == null){
+            session.setAttribute("loginTag", "Login");
+            session.setAttribute("lgnUserName", "");
+            session.setAttribute("lgnUserNameCss", "disable-link");
+        }
         
 
 ArrayList<getInfo> info;

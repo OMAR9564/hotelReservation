@@ -1,9 +1,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.omar.hotelreservation.getInfo"%>
 <%@page import="com.omar.hotelreservation.mySql"%>
-<%@page import="com.omar.hotelreservation.hotelData"%>
-<%@page import="com.omar.hotelreservation.tags"%>
-<%if((tags.getAdminName().length() > 1)){ System.out.println(tags.getLoginTag()+"ooooooooo"); 
+<%--<%@page import="com.omar.hotelreservation.hotelData"%>--%>
+<%--<%@page import="com.omar.hotelreservation.tags"%>--%>
+<%if((((String)session.getAttribute("adminName")).length() > 1)){ 
     
 //    reversaion data
     ArrayList<getInfo> infoRev;
@@ -11,7 +11,7 @@
     String sqlQuery = "SELECT * FROM `reverasyonlar`";
 
     infoRev = mysql.readReversaionData(sqlQuery);
-    hotelData.setReverasionCount(infoRev.size());
+    session.setAttribute("ReverasionCount", Integer.toString(infoRev.size()));
 
     
 //    rooms data
@@ -19,15 +19,15 @@
 
     ArrayList<getInfo> infoRoom = mysql.readRoomsData(sqlQuery);
     
+    session.setAttribute("RoomCount", Integer.toString(infoRoom.size()));
 
-    hotelData.setRoomCount(infoRoom.size());
     
 //    customers data
     sqlQuery = "SELECT * FROM `customer`";
 
     ArrayList<getInfo> infoCust = mysql.readCustomersData(sqlQuery);
+    session.setAttribute("CustCount", Integer.toString(infoCust.size()));
     
-    hotelData.setCustCount(infoCust.size());
 
        
  %>
@@ -116,7 +116,7 @@
                       <i class="bi bi-cart"></i>
                     </div>
                     <div class="ps-3">
-                        <h6><%out.println(hotelData.getReverasionCount());%></h6>
+                        <h6><%out.println(((String)session.getAttribute("ReverasionCount")));%></h6>
 
                     </div>
                   </div>
@@ -150,7 +150,7 @@
                       <i class="bi bi-currency-dollar"></i>
                     </div>
                     <div class="ps-3">
-                      <h6><%out.println(hotelData.getRoomCount());%></h6>
+                      <h6><%out.println((String)session.getAttribute("RoomCount"));%></h6>
 
                     </div>
                   </div>
@@ -185,7 +185,7 @@
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6><%out.println(hotelData.getCustCount());%></h6>
+                      <h6><%out.println((String)session.getAttribute("CustCount"));%></h6>
 
                     </div>
                   </div>
@@ -245,18 +245,19 @@
                     </thead>
                     <tbody>
                         <%
-                            for(int i = 0; i < hotelData.getReverasionCount(); i++){
-                            hotelData.setReverasyonId(infoRev.get(i).getReverasyonId());
-                            hotelData.setCustomerName(infoRev.get(i).getCustName());
-                            hotelData.setRoomName(infoRev.get(i).getRoomName());
-                            hotelData.setReversayonStatus(infoRev.get(i).getDurum());
-                            hotelData.setRoomTotalCount(infoRev.get(i).getTotalOdaSayisi());
+                            for(int i = 0; i < Integer.parseInt(((String)session.getAttribute("ReverasionCount"))); i++){
+                            session.setAttribute("ReverasyonId", Integer.toString(infoRev.get(i).getReverasyonId()));
+                            session.setAttribute("CustomerName", infoRev.get(i).getCustName());
+                            session.setAttribute("RoomName", infoRev.get(i).getRoomName());
+                            session.setAttribute("ReversayonStatus", infoRev.get(i).getDurum());
+                            session.setAttribute("RoomTotalCount", Integer.toString(infoRev.get(i).getTotalOdaSayisi()));
+                            
                         %>
                       <tr>
                         <th scope="row"><a href="#">#<%out.println(i + 1);%></a></th>
-                        <td><%out.println(hotelData.getCustomerName());%></td>
-                        <td><a href="#" class="text-primary"><%out.println(hotelData.getRoomName());%></a></td>
-                        <td><span class="badge bg-success"><%out.println(hotelData.getReversayonStatus());%></span></td>
+                        <td><%out.println((String)session.getAttribute("CustomerName"));%></td>
+                        <td><a href="#" class="text-primary"><%out.println((String)session.getAttribute("RoomName"));%></a></td>
+                        <td><span class="badge bg-success"><%out.println((String)session.getAttribute("ReversayonStatus"));%></span></td>
                       </tr>
                       <%}%>
                     </tbody>
@@ -298,19 +299,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                        <%for(int i = 0; i < hotelData.getRoomCount(); i++){
-                            hotelData.setRoomId(infoRoom.get(i).getRoomId());
-                            hotelData.setRoomName(infoRoom.get(i).getRoomName());
-                            hotelData.setRoomPrice(infoRoom.get(i).getRoomPrice());
-                            hotelData.setRoomImg(infoRoom.get(i).getRoomImg());
-                            hotelData.setRoomSoldCount(infoRoom.get(i).getRoomSoldCount());
+                        <%for(int i = 0; i < Integer.parseInt(((String)session.getAttribute("RoomCount"))); i++){
+                            session.setAttribute("RoomId", Integer.toString(infoRoom.get(i).getRoomId()));
+                            session.setAttribute("RoomName", infoRoom.get(i).getRoomName());
+                            session.setAttribute("RoomPrice", Integer.toString(infoRoom.get(i).getRoomPrice()));
+                            session.setAttribute("RoomImg", infoRoom.get(i).getRoomImg());
+                            session.setAttribute("RoomSoldCount", Integer.toString(infoRoom.get(i).getRoomSoldCount()));
+
                         %>
                       <tr>
-                        <th scope="row"><a href="#"><img src="<%out.println(hotelData.getRoomImg());%>" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold"><%out.println(hotelData.getRoomName());%></a></td>
-                        <td><%out.println(hotelData.getRoomPrice());%></td>
-                        <td class="fw-bold"><%out.println(hotelData.getRoomSoldCount());%></td>
-                        <td><%out.println(hotelData.getRoomSoldCount() * hotelData.getRoomPrice());%></td>
+                        <th scope="row"><a href="#"><img src="<%out.println((String)session.getAttribute("RoomImg"));%>" alt=""></a></th>
+                        <td><a href="#" class="text-primary fw-bold"><%out.println((String)session.getAttribute("RoomName"));%></a></td>
+                        <td><%out.println((String)session.getAttribute("RoomPrice"));%></td>
+                        <td class="fw-bold"><%out.println((String)session.getAttribute("RoomSoldCount"));%></td>
+                        <td><%out.println(Integer.parseInt((String)session.getAttribute("RoomSoldCount")) * Integer.parseInt((String)session.getAttribute("RoomPrice")));%></td>
                       </tr>
                       <%}%>
                     </tbody>

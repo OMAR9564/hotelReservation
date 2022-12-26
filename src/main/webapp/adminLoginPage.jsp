@@ -4,7 +4,7 @@
     Author     : omerfaruk
 --%>
 
-<%@page import="com.omar.hotelreservation.tags"%>
+<%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
     <body>
     <div class="container">
         <h1>Please Login</h1>
-        <p class="wrong-pass" <%out.println(tags.getLoginIsValid());%>>‼️ ️Giriş başarısız ‼️</p>
+        <p class="wrong-pass" <%out.println((String)session.getAttribute("loginIsValid"));%>>‼️ ️Giriş başarısız ‼️</p>
 
         <form method="POST" action="checkPage.jsp">
             <div class="form-control">
@@ -25,7 +25,8 @@
             <div class="form-control">
                 <input type="password" name = "logpass" required> <label>Password</label>
             </div> 
-            <%tags.setHowsLogin("adminLogin");%>
+            <%session.setAttribute("whosePage", "adminLogin");%>
+
             <button class="btn">Login</button>
             <p></p>
         </form>

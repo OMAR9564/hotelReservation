@@ -44,6 +44,34 @@ public class mySql {
         }
         return sqlInfo;
     }
+    public ArrayList<getInfo> sqlConCust(String sqlQuery) {
+
+        ArrayList<getInfo> sqlInfo = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            ResultSet rls = stmt.executeQuery(sqlQuery);
+
+            while (rls.next()) {
+                getInfo temp = new getInfo();
+                temp.setId(rls.getInt("id"));
+                temp.setIsim_Soyisim(rls.getString("name"));
+                temp.setEmail(rls.getString("mail"));
+                temp.setIsAdmin(rls.getString("is_admin"));
+                sqlInfo.add(temp);
+
+            }
+            con.close();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+        return sqlInfo;
+    }
     public ArrayList<getInfo> readReversaionData(String sqlQuery) {
 
         ArrayList<getInfo> sqlInfo = new ArrayList<>();

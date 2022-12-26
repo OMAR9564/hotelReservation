@@ -3,7 +3,7 @@
     Created on : Nov 8, 2022, 11:19:35 AM
     Author     : omerfaruk
 --%>
-<%@page import="com.omar.hotelreservation.tags"%>
+<%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.omar.hotelreservation.getInfo"%>
 <%@page import="com.omar.hotelreservation.mySql"%>
@@ -12,27 +12,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title></title>
     </head>
     <body>
         <%
-            System.out.println("chech-------------------");      
-        System.out.println(tags.getIsLogOut() + "----" + tags.getIsLogin());
-        System.out.println("-------------------check");
-            System.out.println(tags.getIsLogin());
+            
             String email = "";
             String pass = "";
             ArrayList<getInfo> info;
-                                System.out.println(tags.getHowsLogin());
 
-            if(tags.getHowsLogin().equals("userLogin")){
-                if(tags.getIsLogin().equals(true)){
+            if((String)session.getAttribute("whosePage") == "userLogin"){
+            if((String)session.getAttribute("isLogin") == "true" && (String)session.getAttribute("isLogOut") == "true"){
                 try{
                       email = "";
                       pass = "";
                       info = null;
                       System.out.println("bu lanet yerdeyim");
-                      tags.setIsLogin(false);
+                      session.setAttribute("isLogin", "false");
 
                 }
                 catch(Exception e){
@@ -41,46 +37,42 @@
             }
 
                 try{
-                if(tags.getIsLogin().equals(false)){
+                if((String)session.getAttribute("isLogin") == "false" && (String)session.getAttribute("isLogOut") == "false"){
+                System.out.println("detectice");
                 email = request.getParameter("logemail");
                 pass = request.getParameter("logpass");
-                if((email.equals("") || pass.equals(""))){
-                    response.sendRedirect("login.jsp");
-                }else{
-                out.println(email);
+                
                 mySql mysql = new mySql();
                 String sqlQuery = "SELECT * FROM `users` WHERE `email` = '"+email+"' AND `password` = '"+pass+"'";
 
                 info = mysql.sqlCon(sqlQuery);
-                        System.out.println("xx222xxxxxx");
 
                 if(info.size() == 1 && info.get(0).getIsAdmin().equals("0")){
-                    tags.setLoginTag("Log Out");
-                    tags.setLgnUserName(info.get(0).getIsim_Soyisim());
+                    session.setAttribute("loginTag", "Log Out");
+                    session.setAttribute("lgnUserName", info.get(0).getIsim_Soyisim());
+                    session.setAttribute("lgnUserNameCss", "login-user-name");
                     
-                    tags.setLgnUserNameCss("login-user-name");
                     response.sendRedirect("index.jsp");
-
-                    tags.setLoginIsValid("hidden");
+                    
+                    session.setAttribute("loginIsValid", "hidden");
                 }
 
                 else {
                     response.sendRedirect("login.jsp");
-                    tags.setLoginIsValid("");
+                    session.setAttribute("loginIsValid", "");
 
                     }
+                    
+                    session.setAttribute("isLogin", "true");
+                    session.setAttribute("isLogOut", "true");
 
-                    tags.setIsLogin(true);
-
-                }
+                
                 }
             }
             catch(Exception e){
-                System.out.println(e);
             }
         }
-        if(tags.getHowsLogin().equals("adminLogin")){
-            System.out.println("xxxxxxxx");
+        if((String)session.getAttribute("whosePage") == "adminLogin"){
         try{
                 
                     email = request.getParameter("logemail");
@@ -93,20 +85,18 @@
                     String sqlQuery = "SELECT * FROM `users` WHERE `email` = '"+email+"' AND `password` = '"+pass+"'";
 
                     info = mysql.sqlCon(sqlQuery);
-                    System.out.println("xx222xxxxxx");
 
                     
                     if(info.size() == 1 && info.get(0).getIsAdmin().equals("1")){
-                    tags.setAdminName(info.get(0).getIsim_Soyisim());
-                    tags.setAdminMail(info.get(0).getEmail());
-                    tags.setIsAdmin(info.get(0).getIsAdmin());
-                                        System.out.println("xx222xxxxxx11111");
+                    session.setAttribute("adminName", info.get(0).getIsim_Soyisim());
+                    session.setAttribute("adminMail", info.get(0).getEmail());
+                    session.setAttribute("isAdmin", info.get(0).getIsAdmin());
 
                         response.sendRedirect("AdminPages/index.jsp");
                     }
                     else{
                         response.sendRedirect("adminLoginPage.jsp");
-                        tags.setLoginIsValid("");
+                        session.setAttribute("loginIsValid", "");
 
                     }
                     }
@@ -116,24 +106,49 @@
             }
             }
             
-            if(tags.getWhosePage().equals("revPage")){
+            if((String)session.getAttribute("whosePage") == "revPage"){
                 try{
-                        email = request.getParameter("mail");
-                        String name = request.getParameter("name");
-                        int custCount = Integer.parseInt(request.getParameter("custCount"));
-                        String gTarihi = request.getParameter("gTarihi");
-                        String cTarihi = request.getParameter("cTarihi");
-                        String phone = request.getParameter("phone");
-                        int room = Integer.parseInt(request.getParameter("room"));
-                        String gander = request.getParameter("gander");
-                        
+                        session.setAttribute("revCustMail", request.getParameter("mail")); 
+                        session.setAttribute("revCustPass", request.getParameter("pass")); 
+                        ArrayList<getInfo> mailCheckCust;
                         mySql mysql = new mySql();
-                        String sqlQuery = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`) VALUES ('"+name+"','"+custCount+"','"+gTarihi+"','"+cTarihi+"','"+email+"','"+phone+"', '"+room+"','"+gander+"')";
+                        String sqlQuery = "SELECT * FROM `customer` WHERE `mail` = '"+(String)session.getAttribute("revCustMail")+"' AND `Pass` = '"+(String)session.getAttribute("revCustPass")+"'";
+                        mailCheckCust = mysql.sqlConCust(sqlQuery);
+                        if(mailCheckCust.size() == 1){
+
+                        session.setAttribute("revCustName", request.getParameter("name")); 
+                        session.setAttribute("revCustGTarihi", request.getParameter("gTarihi")); 
+                        session.setAttribute("revCustCTarihi", request.getParameter("cTarihi")); 
+                        session.setAttribute("revCustCount", request.getParameter("custCount")); 
+                        session.setAttribute("revCustPhone", request.getParameter("phone")); 
+                        session.setAttribute("revCustRoomId", request.getParameter("room")); 
+                        session.setAttribute("revCustGander", request.getParameter("gander")); 
+                        session.setAttribute("loginIsValid", "hidden");
+
+                        sqlQuery = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`) VALUES ('"+(String)session.getAttribute("revCustName")+"','"+Integer.parseInt((String)session.getAttribute("revCustCount"))+"','"+(String)session.getAttribute("revCustGTarihi")+"','"+(String)session.getAttribute("revCustCTarihi")+"','"+(String)session.getAttribute("revCustMail")+"','"+(String)session.getAttribute("revCustPhone")+"', '"+(String)session.getAttribute("revCustRoomId")+"','"+(String)session.getAttribute("revCustGander")+"')";
 
                         mysql.editInsertData(sqlQuery);
                         
+                        response.sendRedirect("index.jsp");
                         
                         
+            }else{
+                        session.setAttribute("revCustName", request.getParameter("name")); 
+                        session.setAttribute("revCustGTarihi", request.getParameter("gTarihi")); 
+                        session.setAttribute("revCustCTarihi", request.getParameter("cTarihi")); 
+                        session.setAttribute("revCustCount", request.getParameter("custCount")); 
+                        session.setAttribute("revCustPhone", request.getParameter("phone")); 
+                        session.setAttribute("revCustRoomId", request.getParameter("room")); 
+                        session.setAttribute("revCustGander", request.getParameter("gander"));   
+                        sqlQuery = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`) VALUES ('"+(String)session.getAttribute("revCustName")+"','"+Integer.parseInt((String)session.getAttribute("revCustCount"))+"','"+(String)session.getAttribute("revCustGTarihi")+"','"+(String)session.getAttribute("revCustCTarihi")+"','"+(String)session.getAttribute("revCustMail")+"','"+(String)session.getAttribute("revCustPhone")+"', '"+(String)session.getAttribute("revCustRoomId")+"','"+(String)session.getAttribute("revCustGander")+"')";
+                        String newCust = "INSERT INTO `customer`(`name`, `mail`, `phone`, `Pass`) VALUES ('"+(String)session.getAttribute("revCustName")+"','"+(String)session.getAttribute("revCustMail")+"','"+(String)session.getAttribute("revCustPhone")+"','"+(String)session.getAttribute("revCustPass")+"')";
+                        mysql.editInsertData(newCust);
+                        mysql.editInsertData(sqlQuery);
+                        
+                        response.sendRedirect("index.jsp");
+                        
+            }
+            
             }catch(Exception e){
                 System.out.println(e);
             }

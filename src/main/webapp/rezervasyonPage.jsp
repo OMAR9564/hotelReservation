@@ -4,7 +4,13 @@
     Author     : hakkimertpeyk
 --%>
 
-<%@page import="com.omar.hotelreservation.tags"%>
+<%--<%@page import="com.omar.hotelreservation.tags"%>--%>
+<%
+String passInputs = "";
+if((String)session.getAttribute("isLogOut") == "true"){
+    passInputs = "hidden";
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,33 +18,38 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/rezervasyonPageCss.css"/>
     <title>JSP Page</title>
+    <<script src="js/main.js"></script>
 </head>
 <body>
     <div class="container">
         <section class="card">
   <div class="title">Rezervasyon Kayıt</div>
   <form action="checkPage.jsp" method="post">
-      <%tags.setWhosePage("revPage");%>
+      <%  session.setAttribute("whosePage", "revPage");%>
     <div class="user__details">
       <div class="input__box">
         <span class="details">İsim Soyisim</span>
-        <input type="text" placeholder="Mert Peyk" required name="name">
+        <input type="text" placeholder="Mert Peyk" required name="name" id="name">
       </div>
       <div class="input__box">
         <span class="details">Misafir Sayısı</span>
-        <input type="number" placeholder="3" min="1" max="6" required name="custCount">
+        <input type="number" placeholder="3" min="1" max="6" required name="custCount" id="custCount">
       </div>
          <div class="input__box">
         <span class="details">Giriş Tarihi</span>
-        <input type="date" placeholder="14.11.2022" required name="gTarihi">
+        <input type="date" placeholder="14.11.2022" required name="gTarihi" id="gTarihi">
       </div>
          <div class="input__box">
         <span class="details">Çıkış Tarihi</span>
-        <input type="date" placeholder="18.11.2022" required name="cTarihi">
+        <input type="date" placeholder="18.11.2022" required name="cTarihi" id="cTarihi">
       </div>
-      <div class="input__box">
+      <div class="input__box" <%out.println(passInputs);%>>
         <span class="details">Email</span>
         <input type="email" placeholder="mert@hotmail.com" required name="mail">
+      </div>
+      <div class="input__box" <%out.println(passInputs);%>>
+        <span class="details">Password</span>
+        <input type="password" placeholder="**********" required name="pass" >
       </div>
       <div class="input__box">
         <span class="details">Telefon No</span>
@@ -46,7 +57,7 @@
       </div>
       <div class="select__box">
         <span class="details">choose a room:</span>
-        <select name="room">
+        <select name="room" id="room">
             <option value="1">Süit oda</option>
             <option value="2">Aile Oda</option>
             <option value="3">Lüx Oda</option>

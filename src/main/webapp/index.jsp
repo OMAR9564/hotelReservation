@@ -120,7 +120,7 @@ hotelData.setRoomTotalCount(roomInfo.size());
                 <div class="form-group align-self-stretch d-flex align-items-end">
                   <div class="flex-wrap bg-white align-self-stretch py-3 px-4">
                     <label for="#">Giriş Tarihi</label>
-                    <input type="text" class="form-control checkin_date" placeholder="Check-in date">
+                    <input type="text" class="form-control checkin_date" placeholder="Check-in date" id="indexGTarihi">
                   </div>
                 </div>
               </div>
@@ -128,7 +128,7 @@ hotelData.setRoomTotalCount(roomInfo.size());
                 <div class="form-group align-self-stretch d-flex align-items-end">
                   <div class="flex-wrap bg-white align-self-stretch py-3 px-4">
                     <label for="#">Çıkış Tarihi</label>
-                    <input type="text" class="form-control checkout_date" placeholder="Check-out date">
+                    <input type="text" class="form-control checkout_date" placeholder="Check-out date" id="indexCTarihi">
                   </div>
                 </div>
               </div>
@@ -141,7 +141,7 @@ hotelData.setRoomTotalCount(roomInfo.size());
                         <div class="icon">
                           <iconify-icon icon="bi:chevron-compact-down" width="20" height="20"></iconify-icon>
                         </div>
-                        <select name="" id="" class="form-control">
+                        <select name="" id="indexOdaNameRev" class="form-control" >
                           <option value="">Süit</option>
                           <option value="">Aile Odası</option>
                           <option value="">Lüx Oda</option>
@@ -163,13 +163,13 @@ hotelData.setRoomTotalCount(roomInfo.size());
                         <div class="icon">
                           <iconify-icon icon="bi:chevron-compact-down" width="20" height="20"></iconify-icon>
                         </div>
-                        <select name="" id="" class="form-control">
-                          <option value="">1 Kişi</option>
-                          <option value="">2 Kişi</option>
-                          <option value="">3 Kişi</option>
-                          <option value="">4 Kişi</option>
-                          <option value="">5 Kişi</option>
-                          <option value="">6 Kişi</option>
+                        <select name="" id="indexPersonCountRev" class="form-control">
+                          <option value="k1">1 Kişi</option>
+                          <option value="k2">2 Kişi</option>
+                          <option value="k3">3 Kişi</option>
+                          <option value="k4">4 Kişi</option>
+                          <option value="k5">5 Kişi</option>
+                          <option value="k6">6 Kişi</option>
                         </select>
                       </div>
                     </div>
@@ -178,7 +178,8 @@ hotelData.setRoomTotalCount(roomInfo.size());
               </div>
               <div class="col-md d-flex">
                 <div class="form-group d-flex align-self-stretch">
-                  <a href="rezervasyonPage.jsp" class="btn btn-black py-5 py-md-3 px-4 align-self-stretch d-block"><span>
+
+                  <a onclick = "revIndexData()" href="rezervasyonPage.jsp" class="btn btn-black py-5 py-md-3 px-4 align-self-stretch d-block"><span>
                           Kontrol Et<small>En İyi Fiyat Garantisi!</small></span></a>
                 </div>
               </div>
