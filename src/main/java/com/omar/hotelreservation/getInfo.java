@@ -34,6 +34,7 @@ public class getInfo {
     int roomSoldCount = 0;
     int roomCount = 0;
     int roomAvablive = 0;
+    int roomMaxCustCount = 0;
     
     int custID = 0;
     String custName = "";
@@ -169,6 +170,12 @@ public class getInfo {
     }
     public int getRoomCount(){
         return roomCount;
+    }
+    public void setRoomMaxCustCount(int roomMaxCustCount){
+        this.roomMaxCustCount = roomMaxCustCount;
+    }
+    public int getRoomMaxCustCount(){
+        return roomMaxCustCount;
     }
     public void setCustId(int custID){
         this.custID = custID;

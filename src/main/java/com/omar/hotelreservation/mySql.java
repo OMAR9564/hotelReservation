@@ -130,6 +130,7 @@ public class mySql {
                 temp.setRoomSoldCount(rls.getInt("soldCount"));
                 temp.setRoomCount(rls.getInt("maxRoomCount"));
                 temp.setRoomAvabilve(rls.getInt("avabilve"));
+                temp.setRoomMaxCustCount(rls.getInt("maxCust"));
                 sqlInfo.add(temp);
 
             }
