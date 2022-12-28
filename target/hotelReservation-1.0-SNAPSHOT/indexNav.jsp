@@ -14,7 +14,6 @@
 <html>
     <%
                         System.out.println((String)session.getAttribute("readDefaultSessions")+"omeroemroemr4");
-
         if((String)session.getAttribute("readDefaultSessions") == null){
     session.setAttribute("loginTag", "Login");
     session.setAttribute("lgnUserName", "");
@@ -28,12 +27,8 @@
     session.setAttribute("adminMail", "");
     session.setAttribute("whosePage", "");
     session.setAttribute("readDefaultSessions", "1");
-    session.setAttribute("revEmoji", "hidden");
-
-
         }
                 System.out.println((String)session.getAttribute("readDefaultSessions")+"omeroemroemr3");
-
         String loginTag = "";
         loginTag = (String)session.getAttribute("loginTag");
         
@@ -49,14 +44,11 @@
             session.setAttribute("lgnUserNameCss", "disable-link");
         }
         
-
 ArrayList<getInfo> info;
 mySql mysql = new mySql();
 String sqlQuery = "SELECT * FROM `hotelSettings`";
 info = mysql.readHotelSettings(sqlQuery);
 hotelData.setHotelName(info.get(0).getHotelName());
-
-
     %>
     <!--For Cookie-->
     <%--<jsp:include page="checkPage.jsp" />--%> 

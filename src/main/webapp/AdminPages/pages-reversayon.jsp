@@ -81,6 +81,11 @@
 
     <section class="section dashboard">
         <div class="row">
+                         <div class="alert alert-<%out.println((String)session.getAttribute("adminAlertOk"));%> alert-dismissible fade <%out.println((String)session.getAttribute("adminShowAlert"));%>" role="alert">
+                <i class="bi bi-check-circle me-1"></i>
+                <%out.println((String)session.getAttribute("adminAlertLog"));%>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
             <div class="card-body">
                   <h5 class="card-title">Oda Reverasyonlari <span>| Today</span></h5>
                         <div class='col-md-2 ms-auto mt-3 d-grid gap-3 me-5 mb-3' >
@@ -118,7 +123,7 @@
 
                         %>
                       <tr>
-                        <th scope="row"><a href="#">#<%out.println(hotelData.getReverasyonId());%></a></th>
+                        <th scope="row"><a href="#">#<%out.println(i + 1);%></a></th>
                         <td><%out.println(hotelData.getCustomerName());%></td>
                         <td><a href="#" class="text-primary"><%out.println(hotelData.getRoomName());%></a></td>
                         <td><a href="#" class="text-primary"><%out.println(hotelData.getGirisTarihi());%></a></td>
@@ -294,8 +299,8 @@
   modalBodyInputName.value = custName;
   modalBodyInputId.value = id;
   modalBodyInputcCount.value = parseInt(custCount);
-  modalBodyInputgTarihi.valueAsDate = Date.parce(gTarihi.toString());
-  modalBodyInputgcTarih.valueAsDate = Date.parce(cTarihi.toString());;
+  modalBodyInputgTarihi.value = gTarihi;
+  modalBodyInputgcTarih.value = cTarihi;
   modalBodyInputmail.value = custMail;
   modalBodyInputphone.value = custPhone;
   modalBodyInputroomName.value = roomId;

@@ -3,7 +3,11 @@
 <%@page import="com.omar.hotelreservation.mySql"%>
 <%--<%@page import="com.omar.hotelreservation.hotelData"%>--%>
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
-<%if((((String)session.getAttribute("adminName")).length() > 1)){ 
+<%if(((String)session.getAttribute("adminName")) == null){
+        response.sendRedirect("index.jsp");
+}else{
+        
+if((((String)session.getAttribute("adminName")).length() > 1)){ 
     
 //    reversaion data
     ArrayList<getInfo> infoRev;
@@ -357,5 +361,6 @@ else{
 
     response.sendRedirect("index.jsp");
 
+}
 }
 %>

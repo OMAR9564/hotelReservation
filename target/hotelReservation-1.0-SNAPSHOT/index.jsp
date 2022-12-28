@@ -17,14 +17,14 @@ ArrayList<getInfo> roomInfo;
 mySql mysql = new mySql();
 String sqlQuery = "SELECT * FROM `hotelSettings`";
 info = mysql.readHotelSettings(sqlQuery);
-hotelData.setHotelName(info.get(0).getHotelName());
+session.setAttribute("indexHotelName", info.get(0).getHotelName());
 
 String sqlQueryRoom = "SELECT * FROM `room`";
 roomInfo = mysql.readRoomsData(sqlQueryRoom);
-hotelData.setRoomTotalCount(roomInfo.size());
+session.setAttribute("indexRoomTotalCount", Integer.toString(roomInfo.size()));
 %>
 <head>
-  <title>Rihana</title>
+  <title><%out.println((String)session.getAttribute("indexHotelName"));%></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
@@ -121,7 +121,7 @@ hotelData.setRoomTotalCount(roomInfo.size());
           <div class="row no-gutters slider-text align-items-center">
             <div class="col-md-8 ftco-animate">
               <div class="text mb-5 pb-5">
-                <h1 class="mb-3"><%out.println(hotelData.getHotelName());%></h1>
+                  <h1 class="mb-3"><%out.println((String)session.getAttribute("indexHotelName"));%></h1>
                 <h2>Bir Otelden Daha Fazlası</h2>
               </div>
             </div>
@@ -135,7 +135,7 @@ hotelData.setRoomTotalCount(roomInfo.size());
             <div class="col-md-8 ftco-animate">
               <div class="text mb-5 pb-5">
                 <h1 class="mb-3">Mükemmel Bir Deneyim</h1>
-                <h2><%out.println(hotelData.getHotelName());%> Otel &amp; Tatil Yeri</h2>
+                <h2><%out.println((String)session.getAttribute("indexHotelName"));%> Otel &amp; Tatil Yeri</h2>
               </div>
             </div>
           </div>
@@ -297,7 +297,7 @@ hotelData.setRoomTotalCount(roomInfo.size());
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
-          <span class="subheading"><%out.println(hotelData.getHotelName());%> Otel'e Hoş Geldiniz</span>
+          <span class="subheading"><%out.println((String)session.getAttribute("indexHotelName"));%> Otel'e Hoş Geldiniz</span>
           <h2 class="mb-4">Yeni Bir Lüks Otel Vizyonu</h2>
         </div>
       </div>
@@ -371,7 +371,7 @@ hotelData.setRoomTotalCount(roomInfo.size());
     <div class="container-fluid px-0" >
       <div class="row no-gutters justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
-          <span class="subheading"><%out.println(hotelData.getHotelName());%> Odaları</span>
+          <span class="subheading"><%out.println((String)session.getAttribute("indexHotelName"));%> Odaları</span>
           <h2 class="mb-4">Size Uygun Oda Çeşitleri</h2>
         </div>
       </div>
@@ -381,7 +381,7 @@ hotelData.setRoomTotalCount(roomInfo.size());
             <div class="img d-flex align-items-center"
               style="background-image:url(img/xbg_3.jpg.pagespeed.ic.JAfb0DsHvt.webp)">
               <div class="text text-center px-4 py-4">
-                <h2>Hoş Geldiniz <a href="index.jsp"><%out.println(hotelData.getHotelName());%></a> Otel</h2>
+                <h2>Hoş Geldiniz <a href="index.jsp"><%out.println((String)session.getAttribute("indexHotelName"));%></a> Otel</h2>
                 <p>5 Yıldızlı Otel Deneyimini Yaşayın.</p>
               </div>
             </div>
@@ -393,21 +393,22 @@ hotelData.setRoomTotalCount(roomInfo.size());
             int setQue= 0;
             String strSale = "";
             String strSaleArrow = "";
-            for(int i = 0; i < hotelData.getRoomTotalCount(); i++){
-            hotelData.setRoomAvabilve(roomInfo.get(i).getRoomAvabilve());
-            hotelData.setRoomName(roomInfo.get(i).getRoomName());
-            hotelData.setRoomImg(roomInfo.get(i).getRoomImg());
-            hotelData.setRoomPrice(roomInfo.get(i).getRoomPrice());
-            hotelData.setRoomSaleActive(roomInfo.get(i).getRoomSaleActive());
-            hotelData.setRoomSalePrice(roomInfo.get(i).getRoomSalePrice());
+            for(int i = 0; i < Integer.parseInt((String)session.getAttribute("indexRoomTotalCount")); i++){
+            session.setAttribute("indexRoomAvabilve", Integer.toString(roomInfo.get(i).getRoomAvabilve()));
+            session.setAttribute("indexRoomName", roomInfo.get(i).getRoomName());
+            session.setAttribute("indexRoomImg", roomInfo.get(i).getRoomImg());
+            session.setAttribute("indexRoomPrice", Integer.toString(roomInfo.get(i).getRoomPrice()));
+            session.setAttribute("indexRoomSaleActive", Integer.toString(roomInfo.get(i).getRoomSaleActive()));
+            session.setAttribute("indexRoomSalePrice", Integer.toString(roomInfo.get(i).getRoomSalePrice()));
+            
             String location = "";
             String arrowDirection = "";
             
-            if(hotelData.getRoomAvabilve() == 1){
+            if(Integer.parseInt((String)session.getAttribute("indexRoomAvabilve")) == 1){
                 if(hotelData.isWeekend()){
                     strSale = "!! Hafta Sonu İndirimi !!";
                     strSaleArrow = "↓↓";
-                    hotelData.setRoomPrice(hotelData.getRoomSalePrice());
+                    session.setAttribute("indexRoomPrice", (String)session.getAttribute("indexRoomSalePrice"));
                 }
                 
                 if(queue > 5){
@@ -449,7 +450,7 @@ hotelData.setRoomTotalCount(roomInfo.size());
         <div class="col-lg-6">
           <div class="room-wrap d-md-flex">
             <a href="#" class="<%out.println(location);%>" 
-               style="background-image: url(<%out.println(hotelData.getRoomImg().substring(3));%>);"></a>
+               style="background-image: url(<%out.println(((String)session.getAttribute("indexRoomImg")).substring(3));%>)"></a>
             <div class="half <%out.println(arrowDirection);%> d-flex align-items-center">
               <div class="text p-4 p-xl-5 text-center">
                 <p class="star mb-0">
@@ -457,8 +458,8 @@ hotelData.setRoomTotalCount(roomInfo.size());
                   <span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                     class="ion-ios-star"></span><span class="ion-ios-star"></span>
                 </p>
-                <p class="mb-0"><span class="price mr-1">₺<%out.println(hotelData.getRoomPrice());%><span style="color:red;"><%out.println(strSaleArrow);%></span></span> <span class="per">Tek Gecelik</span></p>
-                <h3 class="mb-3"><a href="rooms.jsp"><%out.println(hotelData.getRoomName());%></a></h3>
+                <p class="mb-0"><span class="price mr-1">₺<%out.println((String)session.getAttribute("indexRoomPrice"));%><span style="color:red;"><%out.println(strSaleArrow);%></span></span> <span class="per">Tek Gecelik</span></p>
+                <h3 class="mb-3"><a href="rooms.jsp"><%out.println((String)session.getAttribute("indexRoomName"));%></a></h3>
                 <p class="pt-1"><a href="room-single.html" class="btn-custom px-3 py-2">Oda Detaylarını Görüntüle
                     <span class="icon-long-arrow-right"></span>
                   </a></p>
@@ -907,7 +908,7 @@ hotelData.setRoomTotalCount(roomInfo.size());
       <div class="row mb-5">
         <div class="col-md">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2"><%out.println(hotelData.getHotelName());%></h2>
+              <h2 class="ftco-heading-2"><%out.println((String)session.getAttribute("indexHotelName"));%></h2>
             <p>Otelcilikte Yılların Tecrübesiyle Mutlu ve Sağlıklı Bir yaşam</p>
             <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
               <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>

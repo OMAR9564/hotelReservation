@@ -113,8 +113,6 @@ if((String)session.getAttribute("revCustMail") != null){
 else{
     session.invalidate();
     
-
     response.sendRedirect("index.jsp");
-
 }
 %>

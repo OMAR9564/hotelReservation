@@ -82,13 +82,17 @@
     
     <section class="section dashboard">
     <div class="row">
-
+             <div class="alert alert-<%out.println((String)session.getAttribute("adminAlertOk"));%> alert-dismissible fade <%out.println((String)session.getAttribute("adminShowAlert"));%>" role="alert">
+                <i class="bi bi-check-circle me-1"></i>
+                <%out.println((String)session.getAttribute("adminAlertLog"));%>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
         <!-- Left side columns -->
         <div class="">
             <div class="row">
             <!-- Recent Sales -->
             <div class="col-12">
-              <div class="card recent-sales overflow-auto">
+              <div class="card top-selling overflow-auto">
 
 
                 <div class="card-body">
@@ -100,6 +104,7 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
                         </div>
                     </div>
+       
                   <table class="table">
                     <thead>
                       <tr>
@@ -120,6 +125,7 @@
                             for(int i = 0; i < hotelData.getRoomTotalCount(); i++){
                             System.out.println(hotelData.getRoomCount());
                                 hotelData.setRoomId(info.get(i).getCustId());
+                                session.setAttribute("RoomImg", info.get(i).getRoomImg());
                                 hotelData.setRoomImg(info.get(i).getRoomImg());
                                 hotelData.setRoomSoldCount(info.get(i).getRoomSoldCount());
                                 hotelData.setRoomName(info.get(i).getRoomName());
@@ -131,7 +137,7 @@
                                 System.out.println(hotelData.getCustMail()+ "omeroemreormeormmr8 ");
                         %>
                       <tr>
-                        <th scope="row"><a href="#"><%out.println(hotelData.getRoomImg());%></a></th>
+                        <th scope="row"><a href="#"><img src="<%out.println((String)session.getAttribute("RoomImg"));%>" alt=""></a></th>
                         <td><%out.println(hotelData.getRoomName());%></td>
                         <td><a href="#" class="text-primary"><%out.println(hotelData.getRoomSoldCount());%></a></td>
                         <td><span class="badge" style="color:black; font-size: 12px;"><%out.println(hotelData.getRoomCount());%></span></td>
@@ -139,8 +145,8 @@
                         <td><span class="badge" style="color:red; font-size: 14px;">₺<%out.println(hotelData.getRoomSalePrice());%></span></td>
                         <td><span class="badge" style="color:blueviolet; font-size: 14px;"><%out.println(hotelData.getRoomSaleActive());%></span></td>
                         <td><span class="badge" style="color:black; font-size: 12px;"><%out.println(hotelData.getRoomAvabilve());%></span></td>
-                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="<%out.println(hotelData.getCustId());%>" data-bs-name="<%out.println(hotelData.getCustName());%>" data-bs-mail="<%out.println(hotelData.getCustMail());%>" data-bs-phone="<%out.println(hotelData.getCustPhone());%>"><i class="bi bi-info-circle" ></i></button></td>
-                        <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-idDel="<%out.println(hotelData.getCustId());%>"><i class="bi bi-x-octagon"></i></button></td>
+                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="<%out.println(hotelData.getRoomId());%>" data-bs-name="<%out.println(hotelData.getRoomName());%>" data-bs-mail="<%out.println(hotelData.getCustMail());%>" data-bs-phone="<%out.println(hotelData.getCustPhone());%>"><i class="bi bi-info-circle" ></i></button></td>
+                        <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-idDel="<%out.println(hotelData.getRoomId());%>"><i class="bi bi-x-octagon"></i></button></td>
                       </tr>
                       <%}%>
                     </tbody>
@@ -154,23 +160,52 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                              <form method="post" action="adminSqlCon.jsp">
+                              <form method="post" action="adminSqlCon.jsp" >
                                   <input type="text" class=" idInput" name="id" hidden>
+                             
                               <div class="row">  
                               <div class="mb-3 col-md-6">
-                                <label for="name" class="col-form-label">Name:</label>
-                                <input type="text" class="form-control nameInput" name="name" id="name">
+                                <label for="uploadImg" class="col-form-label">Foto:</label>
+                                <input type="file" class="form-control nameInput" name="uploadImg" id="uploadImg">
                               </div>
                               <div class="mb-3 col-md-6 ms-auto">
-                                <label for="Mail" class="col-form-label">E-Mail:</label>
-                                <input class="form-control mailInput" id="Mail" name="mail"></input>
+                                <label for="roomName" class="col-form-label">Ad:</label>
+                                <input type="text" class="form-control mailInput" id="roomName" name="roomName" required></input>
                               </div></div>
-                                <div class="mb-3 col-md-6">
-                                <label for="phone" class="col-form-label">Phone:</label>
-                                <input type="text" class="form-control phoneInput" name="phone" id="phone">
-                                <input type="text" value="customerEdit" name="iam" hidden>
+                              <div class="row">  
+                              <div class="mb-3 col-md-6">
+                                <label for="roomCount" class="col-form-label">Oda Sayısı:</label>
+                                <input type="number" min="0" class="form-control nameInput" name="roomCount" id="roomCount" required>
                               </div>
-                            
+                              <div class="mb-3 col-md-6 ms-auto">
+                                <label for="satisAdet" class="col-form-label">Satış Adeti:</label>
+                                <input type="number" min="0" class="form-control mailInput" id="satisAdet" name="soldCount" required=""></input>
+                              </div></div>
+                              <div class="row">  
+                              <div class="mb-3 col-md-6">
+                                <label for="roomPrice" class="col-form-label">Ücreti:</label>
+                                <input type="number" min="0" class="form-control nameInput" name="roomPrice" id="roomPrice" required>
+                              </div>
+                              <div class="mb-3 col-md-6 ms-auto">
+                                <label for="roomSalePrice" class="col-form-label">İndirimli Ücreti:</label>
+                                <input type="number" min="0" class="form-control mailInput" id="roomSalePrice" name="roomSalePrice" required></input>
+                              </div></div>
+                              <div class="row">  
+                              <div class="mb-3 col-md-6">
+                                <label for="roomSaleActive" class="col-form-label">İndirim Aktif:</label>
+                                <input type="number" min="0" max="1" class="form-control nameInput" name="roomSaleActive" id="roomSaleActive" required>
+                              </div>
+                              <div class="mb-3 col-md-6 ms-auto">
+                                <label for="roomActive" class="col-form-label">Oda Aktif:</label>
+                                <input type="number" min="0" max="1" class="form-control mailInput" id="roomActive" name="roomActive" required></input>
+                              </div></div>
+                                  <div class="mb-3 col-md-6 ms-auto">
+                                <label for="maxCust" class="col-form-label">Max Kişi Sayısı:</label>
+                                <input type="number" min="0"  class="form-control mailInput" id="maxCust" name="maxCust" required></input>
+                              </div>
+                                
+                                <input type="text" value="roomEdit" name="iam" hidden>
+
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <input type="submit" class="btn btn-primary" value="Edit">
@@ -190,16 +225,16 @@
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    Bu kullanıcının tüm bilgilerini silenecektir!!
+                                    Bu Odanın tüm bilgilerini silenecektir!!
                                 </div>
                               
                               <form method="post" action="adminSqlCon.jsp">
-                                  <input type="text" class="delIdInput" name="id" hidden>
+                                  <input type="text" class="delIdInput" name="id" >
                               
-                                <input type="text" value="customerDelete" name="iam" hidden>
+                                <input type="text" value="roomDelete" name="iam" hidden>
                                 <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <input type="submit" class="btn btn-danger" value="Delete this customer">
+                              <input type="submit" class="btn btn-danger" value="Delete this Room">
                               
                             </div>
                               </form>
@@ -213,35 +248,64 @@
                       <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="addModalLabel">ADD</h5>
+                            <h5 class="modal-title" id="editModalLabel">Add</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                              <form method="post" action="adminSqlCon.jsp">
+                              <form method="post" action="adminSqlCon.jsp" >
+                                  <input type="text" class=" idInput" name="id" hidden>
+                             
                               <div class="row">  
                               <div class="mb-3 col-md-6">
-                                <label for="name" class="col-form-label">Name:</label>
-                                <input type="text" class="form-control nameInput" name="name" id="name">
+                                <label for="uploadImg" class="col-form-label">Foto:</label>
+                                <input type="file" class="form-control nameInput" name="uploadImg" id="uploadImg">
                               </div>
                               <div class="mb-3 col-md-6 ms-auto">
-                                <label for="Mail" class="col-form-label">E-Mail:</label>
-                                <input class="form-control mailInput" id="Mail" name="mail"></input>
+                                <label for="roomName" class="col-form-label">Ad:</label>
+                                <input type="text" class="form-control mailInput" id="roomName" name="roomName" required></input>
                               </div></div>
-                                <div class="mb-3 col-md-6">
-                                <label for="phone" class="col-form-label">Phone:</label>
-                                <input type="text" class="form-control phoneInput" name="phone" id="phone">
-                                <input type="text" value="customerAdd" name="iam" hidden>
+                              <div class="row">  
+                              <div class="mb-3 col-md-6">
+                                <label for="roomCount" class="col-form-label">Oda Sayısı:</label>
+                                <input type="number" min="0" class="form-control nameInput" name="roomCount" id="roomCount" required>
                               </div>
-                            <div class="modal-footer">
+                              <div class="mb-3 col-md-6 ms-auto">
+                                <label for="satisAdet" class="col-form-label">Satış Adeti:</label>
+                                <input type="number" min="0" class="form-control mailInput" id="satisAdet" name="soldCount" required=""></input>
+                              </div></div>
+                              <div class="row">  
+                              <div class="mb-3 col-md-6">
+                                <label for="roomPrice" class="col-form-label">Ücreti:</label>
+                                <input type="number" min="0" class="form-control nameInput" name="roomPrice" id="roomPrice" required>
+                              </div>
+                              <div class="mb-3 col-md-6 ms-auto">
+                                <label for="roomSalePrice" class="col-form-label">İndirimli Ücreti:</label>
+                                <input type="number" min="0" class="form-control mailInput" id="roomSalePrice" name="roomSalePrice" required></input>
+                              </div></div>
+                              <div class="row">  
+                              <div class="mb-3 col-md-6">
+                                <label for="roomSaleActive" class="col-form-label">İndirim Aktif:</label>
+                                <input type="number" min="0" max="1" class="form-control nameInput" name="roomSaleActive" id="roomSaleActive" required>
+                              </div>
+                              <div class="mb-3 col-md-6 ms-auto">
+                                <label for="roomActive" class="col-form-label">Oda Aktif:</label>
+                                <input type="number" min="0" max="1" class="form-control mailInput" id="roomActive" name="roomActive" required></input>
+                              </div></div>
+                                  <div class="mb-3 col-md-6 ms-auto">
+                                <label for="maxCust" class="col-form-label">Max Kişi Sayısı:</label>
+                                <input type="number" min="0"  class="form-control mailInput" id="maxCust" name="maxCust" required></input>
+                              </div>
+                                
+                                <input type="text" value="roomInsert" name="iam" hidden>
+
+                          <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-success" value="Add">
+                            <input type="submit" class="btn btn-primary" value="Add">
                           </div>
                         </form>
-                          </div>
-                          
-
                         </div>
                       </div>
+                    </div>
                     </div>
             </div><!-- End Recent Sales -->
             </div>   
@@ -311,3 +375,9 @@
 </body>
 
 </html>
+<%                session.setAttribute("adminAlertLog", "");
+                session.setAttribute("adminShowAlert", "");
+                session.setAttribute("adminAlertOk", "");
+                session.setAttribute("adminAlertIcon", "");
+
+%>

@@ -20,7 +20,7 @@
             String email = "";
             String pass = "";
             ArrayList<getInfo> info;
-            System.out.println(request.getParameter("RevSec") + "----------------");
+            System.out.println((String)session.getAttribute("whosePage") + "----------------");
 
             if((String)session.getAttribute("whosePage") == "userLogin"){
             if((String)session.getAttribute("isLogin") == "true" && (String)session.getAttribute("isLogOut") == "true"){
@@ -115,7 +115,7 @@
                         mySql mysql = new mySql();
                         String sqlQuery = "SELECT * FROM `customer` WHERE `mail` = '"+(String)session.getAttribute("revCustMail")+"' AND `Pass` = '"+(String)session.getAttribute("revCustPass")+"'";
                         mailCheckCust = mysql.sqlConCust(sqlQuery);
-                        if(mailCheckCust.size() == 1){
+                        if(true){
 
                         session.setAttribute("revCustName", request.getParameter("name")); 
                         session.setAttribute("revCustGTarihi", request.getParameter("gTarihi")); 
@@ -125,13 +125,56 @@
                         session.setAttribute("revCustRoomId", request.getParameter("room")); 
                         session.setAttribute("revCustGander", request.getParameter("gander")); 
                         session.setAttribute("loginIsValid", "hidden");
+                        session.setAttribute("roomRevAvabilve", "true");
 
+                        ArrayList<getInfo> infoRoom;
+                        ArrayList<getInfo> infoRev;
+
+                        String sqlQueryRev = "SELECT * FROM `reverasyonlar` WHERE `odaAdi` = '"+(String)session.getAttribute("revSecRoomId")+"'";
+                        String sqlQueryRoom = "SELECT * FROM `room` WHERE `id` = '"+(String)session.getAttribute("revSecRoomId")+"'";
+
+                        infoRev = mysql.readReversaionData(sqlQueryRev);
+                        infoRoom = mysql.readRoomsData(sqlQueryRoom);
+                        System.out.println((infoRoom.get(0).getRoomCount())+"***********");
+                        int strRoomCount = (infoRoom.get(0).getRoomCount());
+                        int strRoomSoldCount = (infoRoom.get(0).getRoomSoldCount());
+                        int strRoomMaxCust = (infoRoom.get(0).getRoomMaxCustCount());
+
+                        
+                        if(strRoomMaxCust >= Integer.parseInt((String)session.getAttribute("revSecCustCount"))){
+                            if(strRoomSoldCount <= strRoomCount){
+                                session.setAttribute("roomRevAvabilve", "true");
+                                session.setAttribute("roomRevAvabilveLog", "Odanız Başarılı Bir Şekilde Reveersayonu Alındı.");
+
+                            }
+                            else{
+                                session.setAttribute("roomRevAvabilve", "false");
+                                session.setAttribute("roomRevAvabilveLog", "Seçtiğiniz Oda Dolmuştur! Başka bir oda seçtin. Yada Tarihi Değiştiriniz");
+                                response.sendRedirect("index.jsp");
+
+                            }
+                        }
+                        else{
+                                session.setAttribute("roomRevAvabilve", "false");
+                                session.setAttribute("roomRevAvabilveLog", "Seçtiğiniz Oda Misafir Sayısına Uygun Değildir! Başka bir oda seçtin. Yada Misafir Sayısını Azaltınız");
+                                response.sendRedirect("index.jsp");
+
+                            }
+                        if((String)session.getAttribute("roomRevAvabilve") == "true"){
+                            int newSoldCount = (infoRoom.get(0).getRoomSoldCount());
+                            newSoldCount++;
+                            System.out.println(newSoldCount + "omer-------omer");
+                            String sqlQueryRoom1 = "UPDATE `room` SET `soldCount` = '"+newSoldCount+"' WHERE `id` = '"+Integer.parseInt((String)session.getAttribute("revCustRoomId"))+"'";
                         sqlQuery = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`) VALUES ('"+(String)session.getAttribute("revCustName")+"','"+Integer.parseInt((String)session.getAttribute("revCustCount"))+"','"+(String)session.getAttribute("revCustGTarihi")+"','"+(String)session.getAttribute("revCustCTarihi")+"','"+(String)session.getAttribute("revCustMail")+"','"+(String)session.getAttribute("revCustPhone")+"', '"+(String)session.getAttribute("revCustRoomId")+"','"+(String)session.getAttribute("revCustGander")+"')";
+                        
+                        mysql.editInsertData(sqlQueryRoom1);
 
                         mysql.editInsertData(sqlQuery);
                         
-                        response.sendRedirect("index.jsp");
+            
                         
+                        response.sendRedirect("index.jsp");
+            }
                         
             }else{
                         session.setAttribute("revCustName", request.getParameter("name")); 

@@ -80,7 +80,11 @@
     
     <section class="section dashboard">
     <div class="row">
-
+             <div class="alert alert-<%out.println((String)session.getAttribute("adminAlertOk"));%> alert-dismissible fade <%out.println((String)session.getAttribute("adminShowAlert"));%>" role="alert">
+                <i class="bi bi-check-circle me-1"></i>
+                <%out.println((String)session.getAttribute("adminAlertLog"));%>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
         <!-- Left side columns -->
         <div class="">
             <div class="row">
