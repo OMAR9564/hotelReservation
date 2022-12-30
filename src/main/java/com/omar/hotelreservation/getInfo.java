@@ -4,8 +4,6 @@
  */
 package com.omar.hotelreservation;
 
-import javax.persistence.Convert;
-
 /**
  *
  */

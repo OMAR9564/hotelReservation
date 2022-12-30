@@ -33,7 +33,7 @@ session.setAttribute("indexRoomTotalCount", Integer.toString(roomInfo.size()));
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/flaticon.css">
-  <link href='https://css.gg/user.css' rel='stylesheet'>
+  <link href="https://css.gg/user.css" rel='stylesheet'>
   
   <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -58,6 +58,57 @@ session.setAttribute("indexRoomTotalCount", Integer.toString(roomInfo.size()));
 
 <body>
   <jsp:include page="indexNav.jsp" flush="true"/>
+  <style>
+    #noel-baba {
+      height: 100px;
+      width: 100px;
+      position: absolute;
+      transition: 2s ease-out;
+
+      z-index: 1000000000;
+    }
+    #noel-baba img {
+      width: 70px;
+      filter: drop-shadow(0 0 15px rgb(1, 1, 42, 0.2));
+    }
+  </style>
+  <div id="noel-baba">
+    <img src="img/kar-img.png" />
+  </div>
+<script>
+  let myDiv = document.getElementById("noel-baba");
+  //Detect touch device
+  function isTouchDevice() {
+    //We try to ccreate TouchEvent (it would fail for desktops and throw error)
+    try {
+      document.createEvent("TouchEvent");
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  const move = (e) => {
+    //try to aboidany errors for touch screens
+    try {
+      var x = !isTouchDevice() ? e.pageX : e.touches[0].pageX;
+      var y = !isTouchDevice() ? e.pageY : e.touches[0].pageY;
+    } catch (e) {}
+    //Set left and top of div based on mouse position
+    myDiv.style.left = x - 160 + "px";
+    myDiv.style.top = y - 160 + "px";
+  };
+
+  //For mouse
+  document.addEventListener("mousemove", (e) => {
+    move(e);
+  });
+  //For touch
+  document.addEventListener("touchmove", (e) => {
+    move(e);
+  });
+
+</script>
 
   <div class="hero">
     <div class="container-wrap d-flex justify-content-end align-items-end modal-body">
@@ -110,7 +161,6 @@ session.setAttribute("indexRoomTotalCount", Integer.toString(roomInfo.size()));
     </div>
   </div>
 </div><!-- comment -->
-
 
 
 
@@ -172,7 +222,7 @@ session.setAttribute("indexRoomTotalCount", Integer.toString(roomInfo.size()));
               <div class="col-md d-flex py-md-4">
                 <div class="form-group align-self-stretch d-flex align-items-end">
                   <div class="flex-wrap bg-white align-self-stretch py-3 px-4">
-                    <label for="#">Giriş Tarihi</label>
+                    <label >Giriş Tarihi</label>
                     <input type="text"  class="form-control checkin_date check_date" placeholder="Check-in date" id="indexGTarihi" name="indexGTarihi" required>
                         <%session.setAttribute("whosePage", "indexRevSec");%>
                   </div>
@@ -181,7 +231,7 @@ session.setAttribute("indexRoomTotalCount", Integer.toString(roomInfo.size()));
               <div class="col-md d-flex py-md-4">
                 <div class="form-group align-self-stretch d-flex align-items-end">
                   <div class="flex-wrap bg-white align-self-stretch py-3 px-4">
-                    <label for="#">Çıkış Tarihi</label>
+                    <label >Çıkış Tarihi</label>
                     <input type="text" class="form-control checkout_date check_date" placeholder="Check-out date" id="indexCTarihi" name="indexCTarihi" required>
                   </div>
                 </div>
@@ -189,7 +239,7 @@ session.setAttribute("indexRoomTotalCount", Integer.toString(roomInfo.size()));
               <div class="col-md d-flex py-md-4">
                 <div class="form-group align-self-stretch d-flex align-items-end">
                   <div class="wrap bg-white align-self-stretch py-3 px-4">
-                    <label for="#">Oda</label>
+                    <label >Oda</label>
                     <div class="form-field">
                       <div class="select-wrap">
                         <div class="icon">
@@ -211,7 +261,7 @@ session.setAttribute("indexRoomTotalCount", Integer.toString(roomInfo.size()));
               <div class="col-md d-flex py-md-4">
                 <div class="form-group align-self-stretch d-flex align-items-end">
                   <div class="wrap bg-white align-self-stretch py-3 px-4">
-                    <label for="#">Misafir</label>
+                    <label >Misafir</label>
                     <div class="form-field">
                       <div class="select-wrap">
                         <div class="icon">
@@ -993,7 +1043,7 @@ session.setAttribute("indexRoomTotalCount", Integer.toString(roomInfo.size()));
   <script>eval(mod_pagespeed_5RCOc4uC1D);</script>
   
   <script>eval(mod_pagespeed_IK4QGLcbLS);</script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<%--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>--%>
   <script>eval(mod_pagespeed_2UQNrhl3o6);</script>
 <script>eval(mod_pagespeed_R227twyO_u);</script>
   

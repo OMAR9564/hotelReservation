@@ -249,9 +249,10 @@
                     } 
                     out.println((String)session.getAttribute("roomRevAvabilveLog"));
                 }
-            
 
-        
+
+            session.setAttribute("whosePage", "");
+
 
 
         %>

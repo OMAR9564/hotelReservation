@@ -6,6 +6,7 @@
 
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%session.setAttribute("whosePage", "");%>
 <jsp:include page="checkPage.jsp" flush="false"/>
 <%if((String)session.getAttribute("loginTag") != "Log Out"){ 
 //if((String)session.getAttribute("loginIsValid") == null) session.setAttribute("loginIsValid", "hidden");
@@ -15,6 +16,9 @@ if((String)session.getAttribute("revCustMail") != null){
     
     }
     System.out.println((String)session.getAttribute("loginTag"));
+
+session.setAttribute("whosePage", "userLogin");
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +40,7 @@ if((String)session.getAttribute("revCustMail") != null){
       <div class="row full-height justify-content-center">
         <div class="col-12 text-center align-self-center py-5">
           <div class="section pb-5 pt-5 pt-sm-2 text-center">
-            <h6 class="mb-0 pb-3"><span>Log In</span><span>Sign Up</span></h6>
+            <h6 class="mb-0 pb-3"><span>Giriş Yap</span><span>Mutlu Ol</span></h6>
             <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
             <label for="reg-log"></label>
             <div class="card-3d-wrap mx-auto">
@@ -45,16 +49,16 @@ if((String)session.getAttribute("revCustMail") != null){
                   <div class="center-wrap">
                     <div class="section text-center">
                       <h4 class="mb-4 pb-3">Log In</h4>
-                      <p class="wrong-pass" <%out.println((String)session.getAttribute("loginIsValid"));%>>‼️ ️Giriş başarısız ‼️</p>
+                      <p class="wrong-pass" <%out.println((String)session.getAttribute("loginIsValid"));%>>‼️Giriş başarısız ‼️</p>
                       <form action="checkPage.jsp" method="POST" id="loginform">
                         <div class="form-group">
-                          <input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail"
+                          <input type="email" name="logemail" class="form-style" placeholder="Your Email"
                                  autocomplete="off" required value = <%out.println(revCustMail);%>>
                           <i class="input-icon uil uil-at"></i>
                         </div>
                         <div class="form-group mt-2">
                           <input type="password" name="logpass" class="form-style" placeholder="Your Password"
-                            id="logpass" autocomplete="off" required>
+                             autocomplete="off" required>
                           <i class="input-icon uil uil-lock-alt"></i>
                         </div>
                         <a href="#" class="btn mt-4" onclick="document.getElementById('loginform').submit();">Login</a>
@@ -67,35 +71,12 @@ if((String)session.getAttribute("revCustMail") != null){
                 <div class="card-back">
                   <div class="center-wrap">
                     <div class="section text-center">
-                      <h4 class="mb-4 pb-3">Sign Up</h4>
                       <div class="form-group">
-                        <input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname"
-                          autocomplete="off">
-                        <i class="input-icon uil uil-user"></i>
-                      </div>
-                      <div class="form-group mt-2">
-                        <input type="date" name="logpass" class="form-style" placeholder="Check-In Date" id="logpass"
-                          autocomplete="off">
-                        <i class="input-icon uil uil-calender"></i>
-                      </div>
-                      <div class="form-group mt-2">
-                        <input type="date" name="logpass" class="form-style" placeholder="Check-Out Date" id="logpass"
-                          autocomplete="off">
-                        <i class="input-icon uil uil-calendar-slash"></i>
-                      </div>
-                      <div class="form-group mt-2">
-                        <input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail"
-                          autocomplete="off">
-                        <i class="input-icon uil uil-at"></i>
-                      </div>
+
 
                       <div class="form-group mt-2">
-                        <input type="password" name="logpass" class="form-style" placeholder="Your Password"
-                          id="logpass" autocomplete="off">
-                        <i class="input-icon uil uil-lock-alt"></i>
+                        <span style='font-size:250px;'>&#128518;</span>
                       </div>
-                      <%session.setAttribute("whosePage", "userLogin");%>
-                      <a href="#" class="btn mt-4">submit</a>
                     </div>
                   </div>
                 </div>
