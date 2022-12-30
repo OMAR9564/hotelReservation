@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : pages-customers
     Created on : Dec 21, 2022, 10:32:33 PM
     Author     : omerfaruk
@@ -8,16 +8,24 @@
 <%@page import="com.omar.hotelreservation.mySql"%>
 <%@page import="com.omar.hotelreservation.getInfo"%>
 <%@page import="com.omar.hotelreservation.hotelData"%>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
 //    customers data
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+
     ArrayList<getInfo> info;
     mySql mysql = new mySql();
 
     String sqlQuery = "SELECT * FROM `customer`";
+    PreparedStatement ps = con.prepareStatement(sqlQuery);
+    ResultSet rls = ps.executeQuery();
+    info = mysql.readCustomersData(rls);
 
-    info = mysql.readCustomersData(sqlQuery);
-    
     session.setAttribute("custCountPagesCust", Integer.toString(info.size()));
 
 
@@ -302,7 +310,7 @@
 
       deleteModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
-
+console.log("omeroemroemreomreormeormeorm");
   var delId = button.getAttribute('data-bs-idDel'); 
   var modalBodyInputDelId = deleteModal.querySelector('.modal-body .delIdInput');
     modalBodyInputDelId.value = delId;

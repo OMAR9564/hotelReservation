@@ -8,19 +8,35 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.omar.hotelreservation.getInfo"%>
 <%@page import="com.omar.hotelreservation.mySql"%>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <%
+
+  Class.forName("com.mysql.jdbc.Driver");
+  Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+
 ArrayList<getInfo> info;
 ArrayList<getInfo> roomInfo;
 mySql mysql = new mySql();
 String sqlQuery = "SELECT * FROM `hotelSettings`";
-info = mysql.readHotelSettings(sqlQuery);
+PreparedStatement ps = con.prepareStatement(sqlQuery);
+ResultSet rls = ps.executeQuery();
+
+
+info = mysql.readHotelSettings(rls);
 session.setAttribute("indexHotelName", info.get(0).getHotelName());
 
 String sqlQueryRoom = "SELECT * FROM `room`";
-roomInfo = mysql.readRoomsData(sqlQueryRoom);
+PreparedStatement ps1 = con.prepareStatement(sqlQueryRoom);
+ResultSet rls1 = ps1.executeQuery();
+
+roomInfo = mysql.readRoomsData(rls1);
+
 session.setAttribute("indexRoomTotalCount", Integer.toString(roomInfo.size()));
 %>
 <head>

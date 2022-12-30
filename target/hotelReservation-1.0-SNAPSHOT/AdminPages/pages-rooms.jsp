@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : pages-rooms
     Created on : Dec 23, 2022, 8:18:33 PM
     Author     : omerfaruk
@@ -8,15 +8,23 @@
 <%@page import="com.omar.hotelreservation.mySql"%>
 <%@page import="com.omar.hotelreservation.getInfo"%>
 <%@page import="com.omar.hotelreservation.hotelData"%>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
 //    customers data
+
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+
     ArrayList<getInfo> info;
     mySql mysql = new mySql();
-
     String sqlQuery = "SELECT * FROM `room`";
-
-    info = mysql.readRoomsData (sqlQuery);
+    PreparedStatement ps = con.prepareStatement(sqlQuery);
+    ResultSet rls = ps.executeQuery();
+    info = mysql.readRoomsData (rls);
     
     hotelData.setRoomTotalCount(info.size());
 
@@ -166,7 +174,7 @@
                               <div class="row">  
                               <div class="mb-3 col-md-6">
                                 <label for="uploadImg" class="col-form-label">Foto:</label>
-                                <input type="file" class="form-control nameInput" name="uploadImg" id="uploadImg">
+                                <input type="file" class="form-control nameInput" name="uploadImg" >
                               </div>
                               <div class="mb-3 col-md-6 ms-auto">
                                 <label for="roomName" class="col-form-label">Ad:</label>

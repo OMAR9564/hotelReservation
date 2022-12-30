@@ -16,16 +16,16 @@ import java.util.ArrayList;
 public class mySql {
 
 
-    public ArrayList<getInfo> sqlCon(String sqlQuery) {
+    public ArrayList<getInfo> sqlCon(ResultSet rls) {
 
         ArrayList<getInfo> sqlInfo = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
-            Statement stmt = con.createStatement();
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+//            Statement stmt = con.createStatement();
 
-            ResultSet rls = stmt.executeQuery(sqlQuery);
+//            ResultSet rls = stmt.executeQuery(sqlQuery);
 
             while (rls.next()) {
                 getInfo temp = new getInfo();
@@ -36,7 +36,7 @@ public class mySql {
                 sqlInfo.add(temp);
 
             }
-            con.close();
+//            con.close();
 
         } catch (Exception e) {
 
@@ -44,16 +44,11 @@ public class mySql {
         }
         return sqlInfo;
     }
-    public ArrayList<getInfo> sqlConCust(String sqlQuery) {
+    public ArrayList<getInfo> sqlConCust(ResultSet rls) {
 
         ArrayList<getInfo> sqlInfo = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
-            Statement stmt = con.createStatement();
-
-            ResultSet rls = stmt.executeQuery(sqlQuery);
 
             while (rls.next()) {
                 getInfo temp = new getInfo();
@@ -64,7 +59,6 @@ public class mySql {
                 sqlInfo.add(temp);
 
             }
-            con.close();
 
         } catch (Exception e) {
 
@@ -72,16 +66,11 @@ public class mySql {
         }
         return sqlInfo;
     }
-    public ArrayList<getInfo> readReversaionData(String sqlQuery) {
+    public ArrayList<getInfo> readReversaionData(ResultSet rls) {
 
         ArrayList<getInfo> sqlInfo = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
-            Statement stmt = con.createStatement();
-
-            ResultSet rls = stmt.executeQuery(sqlQuery);
 
             while (rls.next()) {
                 getInfo temp = new getInfo();
@@ -100,7 +89,6 @@ public class mySql {
                 sqlInfo.add(temp);
 
             }
-            con.close();
 
         } catch (Exception e) {
 
@@ -108,16 +96,11 @@ public class mySql {
         }
         return sqlInfo;
     }
-    public ArrayList<getInfo> readRoomsData(String sqlQuery) {
+    public ArrayList<getInfo> readRoomsData(ResultSet rls) {
 
         ArrayList<getInfo> sqlInfo = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
-            Statement stmt = con.createStatement();
-
-            ResultSet rls = stmt.executeQuery(sqlQuery);
 
             while (rls.next()) {
                 getInfo temp = new getInfo();
@@ -134,7 +117,6 @@ public class mySql {
                 sqlInfo.add(temp);
 
             }
-            con.close();
 
         } catch (Exception e) {
 
@@ -142,27 +124,21 @@ public class mySql {
         }
         return sqlInfo;
     }
-    public ArrayList<getInfo> readCustomersData(String sqlQuery) {
+    public ArrayList<getInfo> readCustomersData(ResultSet rls) {
 
         ArrayList<getInfo> sqlInfo = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
-            Statement stmt = con.createStatement();
-
-            ResultSet rls = stmt.executeQuery(sqlQuery);
 
             while (rls.next()) {
                 getInfo temp = new getInfo();
                 temp.setCustId(rls.getInt("id"));
                 temp.setCustName(rls.getString("name"));
-                temp.setCustMail(rls.getString("mail"));
+                temp.setCustMail(rls.getString("email"));
                 temp.setCustPhone(rls.getString("phone"));
                 sqlInfo.add(temp);
 
             }
-            con.close();
 
         } catch (Exception e) {
 
@@ -171,31 +147,27 @@ public class mySql {
         return sqlInfo;
     }
     
-    public void editInsertData(String sqlQuery) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
-            Statement stmt = con.createStatement();
-
-            stmt.execute(sqlQuery);
-            con.close();
-
-        } catch (Exception e) {
-
-            System.out.println(e);
-        }
-
-    }
-    public ArrayList<getInfo> readHotelSettings(String sqlQuery) {
+//    public void editInsertData(String sqlQuery) {
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+//            Statement stmt = con.createStatement();
+//
+//            stmt.execute(sqlQuery);
+//            con.close();
+//
+//        } catch (Exception e) {
+//
+//            System.out.println(e);
+//        }
+//
+//    }
+    public ArrayList<getInfo> readHotelSettings(ResultSet rls) {
 
         ArrayList<getInfo> sqlInfo = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
-            Statement stmt = con.createStatement();
 
-            ResultSet rls = stmt.executeQuery(sqlQuery);
 
             while (rls.next()) {
                 getInfo temp = new getInfo();
@@ -205,7 +177,6 @@ public class mySql {
                 sqlInfo.add(temp);
 
             }
-            con.close();
 
         } catch (Exception e) {
 

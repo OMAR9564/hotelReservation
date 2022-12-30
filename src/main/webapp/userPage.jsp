@@ -2,22 +2,69 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.omar.hotelreservation.mySql"%>
 <%@page import="com.omar.hotelreservation.hotelData"%>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="com.mysql.fabric.jdbc.FabricMySQLConnectionProxy" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.ResultSet" %>
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 
-<%if((((String)session.getAttribute("lgnUserName")).length() > 1)){ String loginTag = "Log Out";
+<% try {
+
+
+  if((((String)session.getAttribute("lgnUserName")).length() > 1)){
+  String custName = "";
+  int infoRevCount = 0;
+
+  ArrayList<getInfo> infoRev;
+
+  mySql mysql = new mySql();
+  Class.forName("com.mysql.jdbc.Driver");
+  Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+
+
+    String loginTag = "Log Out";
     ArrayList<getInfo> info;
-    mySql mysql = new mySql();
-    String sqlQuery = "SELECT * FROM `customer`";
-    info = mysql.readCustomersData(sqlQuery);
+
+
+    String sqlQuery = "SELECT * FROM `customer` WHERE `id` = ?";
+    String id = (String) session.getAttribute("lgnUserId");
+
+    PreparedStatement ps2 = con.prepareStatement(sqlQuery);
+    ps2.setString(1, id);
+    ResultSet rls2 = ps2.executeQuery();
+
+
+    info = mysql.readCustomersData(rls2);
     session.setAttribute("CustName", info.get(0).getCustName());
     session.setAttribute("CustMail", info.get(0).getCustMail());
     session.setAttribute("CustPhone", info.get(0).getCustPhone());
-    
-    String custName = "";
-    custName = (String)session.getAttribute("CustName");
-%>
 
+
+    custName = (String) session.getAttribute("CustName");
+
+    String custMail = (String)session.getAttribute("CustMail");
+
+    String sqlQueryq = "SELECT * FROM `reverasyonlar` WHERE `email` = ?";
+
+    PreparedStatement ps3 = con.prepareStatement(sqlQueryq);
+    ps3.setString(1, custMail);
+
+    mySql mysql1 = new mySql();
+    ResultSet rls3 = ps3.executeQuery();
+
+    info = mysql1.readReversaionData(rls3);
+    session.setAttribute("infRevCount", Integer.toString(info.size()));
+
+
+
+
+
+%>
+<html lang="tr">
 <head>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+  <META HTTP-EQUIV="Content-language" CONTENT="tr">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link rel="stylesheet" href="css/userPage.css"/>  
@@ -52,9 +99,9 @@
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-              <h1 class="display-2 text-white">Hello <%out.println(custName);%></h1>
+              <h1 class="display-2 text-white">Hello <%out.println(custName.substring(0, custName.indexOf(' ')));%></h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-            <a href="#!" class="btn btn-success">Reverasyonlarim</a>
+            <a href="#!" class="btn btn-success">Reverasyonlar?m</a>
             <a href="#!" class="btn btn-info">Profilimi Düzenle</a>
             <a href="index.jsp" class="btn btn-danger">Log Out</a>
           </div>
@@ -108,37 +155,61 @@
                 </div>
                 <hr class="my-4">
                 <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-city">City</label>
-                        <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-country">Country</label>
-                        <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <h6 class="heading-small text-muted mb-4">Reversayonlar?m</h6>
+                <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th scope="col">Ad Soyad</th>
+                  <th scope="col">Ki?i Say?s?</th>
+                  <th scope="col">Giri? Tarihi</th>
+                  <th scope="col">Ç?k?? Tarihi</th>
+                  <th scope="col">Oda</th>
+                  <th scope="col">Durum</th>
+
+                </tr>
+                </thead>
+                  <tbody>
+                  <%
+                  try {
+                    for(int i = 0; i < Integer.parseInt((String)session.getAttribute("infRevCount")); i++){
+                      session.setAttribute("userPage-CustName", info.get(i).getCustName());
+                      session.setAttribute("userPage-CustCount", info.get(i).getCustCount());
+                      session.setAttribute("userPage-gTarihi", info.get(i).getGirisTarihi());
+                      session.setAttribute("userPage-cTarihi", info.get(i).getCikisTarihi());
+                      session.setAttribute("userPage-roomId", info.get(i).getRoomName());
+                      String userPageRoomId = (String)session.getAttribute("userPage-roomId");
+                      session.setAttribute("userPage-revStatus", info.get(i).getDurum());
+
+                      String sqlQuery3 = "SELECT * FROM `room` WHERE `id` = ?";
+                      PreparedStatement ps4 = con.prepareStatement(sqlQuery3);
+                      ps4.setString(1, userPageRoomId);
+                      ResultSet rls4 = ps4.executeQuery();
+
+                      infoRev = mysql.readReversaionData(rls4);
+                      session.setAttribute("userPage-RoomName", infoRev.get(i).getRoomName());
+
+
+
+                  %>
+                  <tr>
+                    <th scope="row"><%out.println(i + 1);%></th>
+                    <td><%out.println(session.getAttribute("userPage-CustName"));%></td>
+                    <td><%out.println(session.getAttribute("userPage-CustCount"));%></td>
+                    <td><%out.println(session.getAttribute("userPage-gTarihi"));%></td>
+                    <td><%out.println(session.getAttribute("userPage-cTarihi"));%></td>
+                    <td><%out.println(session.getAttribute("userPage-RoomName"));%></td>
+                    <td><%out.println(session.getAttribute("userPage-revStatus"));%></td>
+
+                  </tr>
+                <%
+                  }
+                  }catch (Exception e){
+                    out.println(e);
+                  }
+                %>
+                </tbody>
+
+              </table>
                 <hr class="my-4">
                 <!-- Description -->
                 
@@ -159,8 +230,13 @@
     </div>
   </footer>
 </body>
+</html>
 <%}
 else{
     response.sendRedirect("index.jsp");
+}
+}catch (Exception e){
+  response.sendRedirect("index.jsp");
+
 }
 %>

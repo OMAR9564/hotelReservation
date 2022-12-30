@@ -11,21 +11,35 @@
 <%@page import="java.io.FileInputStream"%>
 <%@page import="java.io.File"%>
 <%@page import="com.omar.hotelreservation.mySql"%>
+<%@ page import="java.sql.ResultSet" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+
     String _page = request.getParameter("iam");
     System.out.println(request.getParameter("iam") + "---------------------111");
-    if(_page.equals("customerEdit")){
+
+    if(_page.equals("customerEdit")) {
+        try{
         String id = request.getParameter("id");
         String name = request.getParameter("name");
         String mail = request.getParameter("mail");
-        String phone= request.getParameter("phone");
-        
-        String sqlQuery = "UPDATE `customer` SET `name`='"+name+"',`mail`='"+mail+"',`phone`='"+phone+"' WHERE `id` = '"+id+"'";
-        mySql mysql = new mySql();
-        mysql.editInsertData(sqlQuery);
-        
+        String phone = request.getParameter("phone");
+
+        String sqlQuery = "UPDATE `customer` SET `name`=?,`mail`=?,`phone`=? WHERE `id` = ?";
+        PreparedStatement ps = con.prepareStatement(sqlQuery);
+        ps.setString(1, name);
+        ps.setString(2, mail);
+        ps.setString(3, phone);
+        ps.setString(4, id);
+        ps.execute();
+
+    }catch(Exception e){
+        out.println("Müşteri bilgileri düzllerken bir hata oluştur");
+        }
+
         
         
         response.sendRedirect("pages-customers.jsp");
@@ -35,9 +49,12 @@
     try{
         String id = request.getParameter("id");
         
-        String sqlQuery = "DELETE FROM `customer` WHERE `id` = '"+id+"'";
+        String sqlQuery = "DELETE FROM `customer` WHERE `id` = ?";
         mySql mysql = new mySql();
-        mysql.editInsertData(sqlQuery);
+        PreparedStatement ps = con.prepareStatement(sqlQuery);
+        ps.setString(1, id);
+        ps.execute();
+
             session.setAttribute("adminAlertLog", "Müşteri başarılı bir şekilde Silindi.");
                 session.setAttribute("adminShowAlert", "show");
                 session.setAttribute("adminAlertOk", "success");
@@ -61,9 +78,15 @@
         String phone= request.getParameter("phone");
         String pass = request.getParameter("pass");
         
-        String sqlQuery = "INSERT INTO `customer`(`name`, `mail`, `phone`, `Pass`) VALUES ('"+name+"','"+mail+"','"+phone+"', '"+pass+"')";
+        String sqlQuery = "INSERT INTO `customer`(`name`, `mail`, `phone`, `Pass`) VALUES (?,?,?,?)";
         mySql mysql = new mySql();
-        mysql.editInsertData(sqlQuery);
+        PreparedStatement ps = con.prepareStatement(sqlQuery);
+        ps.setString(1, name);
+        ps.setString(2, mail);
+        ps.setString(3, phone);
+        ps.setString(4, pass);
+        ps.execute();
+
             session.setAttribute("adminAlertLog", "Müşteri başarılı bir şekilde Eklendi.");
                 session.setAttribute("adminShowAlert", "show");
                 session.setAttribute("adminAlertOk", "success");
@@ -84,10 +107,12 @@
     try{
         String id = request.getParameter("id");
         
-        String sqlQuery = "DELETE FROM `reverasyonlar` WHERE `id` = '"+id+"'";
+        String sqlQuery = "DELETE FROM `reverasyonlar` WHERE `id` = ?";
         mySql mysql = new mySql();
-        mysql.editInsertData(sqlQuery);
-        
+        PreparedStatement ps = con.prepareStatement(sqlQuery);
+        ps.setString(1, id);
+        ps.execute();
+
          session.setAttribute("adminAlertLog", "Reversayon başarılı bir şekilde Silindi.");
                 session.setAttribute("adminShowAlert", "show");
                 session.setAttribute("adminAlertOk", "success");
@@ -119,9 +144,20 @@
         String status = request.getParameter("status");
         String gander = request.getParameter("gander");
         
-        String sqlQuery = "UPDATE `reverasyonlar` SET `musteriAdi`='"+name+"',`kisiSayisi`='"+count+"',`girisTarihi`='"+gTarihi+"',`cikisTarihi`='"+cTarihi+"',`email`='"+mail+"',`telefon`='"+phone+"',`odaAdi`='"+roomName+"',`durum`='"+status+"',`cinsiyet`='"+gander+"' WHERE 'id' = '"+id+"'";
+        String sqlQuery = "UPDATE `reverasyonlar` SET `musteriAdi`=?,`kisiSayisi`=?,`girisTarihi`=?,`cikisTarihi`=?,`email`=?,`telefon`=?,`odaAdi`=?,`durum`=?,`cinsiyet`=? WHERE 'id' =?";
         mySql mysql = new mySql();
-        mysql.editInsertData(sqlQuery);
+        PreparedStatement ps = con.prepareStatement(sqlQuery);
+        ps.setString(1, name);
+        ps.setString(2, count);
+        ps.setString(3, gTarihi);
+        ps.setString(4, cTarihi);
+        ps.setString(5, mail);
+        ps.setString(6, phone);
+        ps.setString(7, roomName);
+        ps.setString(8, status);
+        ps.setString(9, gander);
+        ps.setString(10, id);
+        ps.execute();
               session.setAttribute("adminAlertLog", "Reversayon başarılı bir şekilde düzeldi.");
                 session.setAttribute("adminShowAlert", "show");
                 session.setAttribute("adminAlertOk", "success");
@@ -140,9 +176,10 @@
     }
     if(_page.equals("roomInsert")){
     try{
-        
+
+//        FileInputStream fis=null;
+
         String id = request.getParameter("id");
-        String img = request.getParameter("uploadImg");
         String name = request.getParameter("roomName");
         String roomCount = request.getParameter("roomCount");
         String soldCount= request.getParameter("soldCount");
@@ -151,11 +188,26 @@
         String roomSaleActive= request.getParameter("roomSaleActive");
         String roomActive= request.getParameter("roomActive");
         String maxCustCount= request.getParameter("maxCust");
-        
-        String sqlQuery = "INSERT INTO `room`( `name`, `price`,`soldCount`, `maxRoomCount`, `salePrice`, `avabilve`, `saleActive`, `maxCust`) VALUES ('"+name+"','"+roomPrice+"','"+soldCount+"','"+roomCount+"','"+roomSalePrice+"','"+roomActive+"','"+roomSaleActive+"','"+maxCustCount+"')";
+//        String roomImg = request.getParameter("uploadImg");
+
+//        File image = new File();
+        InputStream in = new FileInputStream("/Users/omerfaruk/Desktop/omer.png");
+
+
+        String sqlQuery = "INSERT INTO `room`( `name`, `price`,`image`, `soldCount`, `maxRoomCount`, `salePrice`, `avabilve`, `saleActive`, `maxCust`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         mySql mysql = new mySql();
-        mysql.editInsertData(sqlQuery);
-        
+        PreparedStatement ps = con.prepareStatement(sqlQuery);
+        ps.setString(1, name);
+        ps.setString(2, roomPrice);
+        ps.setBinaryStream(3, in);
+        ps.setString(4, soldCount);
+        ps.setString(5, roomCount);
+        ps.setString(6, roomSalePrice);
+        ps.setString(7, roomActive);
+        ps.setString(8, roomSaleActive);
+        ps.setString(9, maxCustCount);
+        ps.execute();
+
 //PreparedStatement pstmt = null; 
 
 //        FileInputStream fis=null;
@@ -203,6 +255,7 @@
                 session.setAttribute("adminAlertOk", "danger");
                 session.setAttribute("adminAlertIcon", "bi bi-exclamation-octagon me-1");
                 response.sendRedirect("pages-rooms.jsp");
+                System.out.println(e);
 
     }
 
@@ -220,10 +273,21 @@
         String roomActive= request.getParameter("roomActive");
         String maxCustCount= request.getParameter("maxCust");
         
-        String sqlQuery = "UPDATE `room` SET `name`='"+name+"',`price`='"+roomPrice+"', `soldCount`='"+soldCount+"',`maxRoomCount`='"+roomCount+"',`salePrice`='"+roomSalePrice+"',`avabilve`='"+roomActive+"',`saleActive`='"+roomSaleActive+"',`maxCust`='"+maxCustCount+"' WHERE 'id' = '"+id+"'";
+        String sqlQuery = "UPDATE `room` SET `name`=?,`price`=?, `soldCount`=?,`maxRoomCount`=?,`salePrice`=?,`avabilve`=?,`saleActive`=?,`maxCust`=? WHERE 'id' = ?";
         mySql mysql = new mySql();
-        mysql.editInsertData(sqlQuery);
-        
+        PreparedStatement ps = con.prepareStatement(sqlQuery);
+        ps.setString(1, name);
+        ps.setString(2, roomPrice);
+        ps.setString(3, soldCount);
+        ps.setString(4, roomCount);
+        ps.setString(5, roomSalePrice);
+        ps.setString(6, roomActive);
+        ps.setString(7, roomSaleActive);
+        ps.setString(8, maxCustCount);
+        ps.setString(9, id);
+
+
+        ps.execute();
         
                 session.setAttribute("adminAlertLog", "Oda başarılı bir şekilde güncellendi.");
                 session.setAttribute("adminShowAlert", "true");
@@ -247,10 +311,12 @@
     if(_page.equals("roomDelete")){
     try{
     String id = request.getParameter("id");
-        String sqlQuery = "DELETE FROM `room` WHERE `id` = '"+id+"'";
+        String sqlQuery = "DELETE FROM `room` WHERE `id` = ?";
         mySql mysql = new mySql();
-        mysql.editInsertData(sqlQuery);
-        
+        PreparedStatement ps = con.prepareStatement(sqlQuery);
+        ps.setString(1, id);
+        ps.execute();
+
          session.setAttribute("adminAlertLog", "Oda başarılı bir şekilde silindi.");
                 session.setAttribute("adminShowAlert", "true");
                 session.setAttribute("adminAlertOk", "true");

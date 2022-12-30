@@ -1,35 +1,55 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.omar.hotelreservation.getInfo"%>
 <%@page import="com.omar.hotelreservation.mySql"%>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%--<%@page import="com.omar.hotelreservation.hotelData"%>--%>
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 <%if(((String)session.getAttribute("adminName")) == null){
         response.sendRedirect("index.jsp");
 }else{
-        
-if((((String)session.getAttribute("adminName")).length() > 1)){ 
+  Class.forName("com.mysql.jdbc.Driver");
+  Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+
+
+
+
+  if((((String)session.getAttribute("adminName")).length() > 1)){
     
 //    reversaion data
     ArrayList<getInfo> infoRev;
     mySql mysql = new mySql();
     String sqlQuery = "SELECT * FROM `reverasyonlar`";
+    PreparedStatement ps = con.prepareStatement(sqlQuery);
+    ResultSet rls = ps.executeQuery();
+    infoRev = mysql.readReversaionData(rls);
 
-    infoRev = mysql.readReversaionData(sqlQuery);
     session.setAttribute("ReverasionCount", Integer.toString(infoRev.size()));
 
     
 //    rooms data
     sqlQuery = "SELECT * FROM `room`";
 
-    ArrayList<getInfo> infoRoom = mysql.readRoomsData(sqlQuery);
-    
+    PreparedStatement ps1 = con.prepareStatement(sqlQuery);
+    ResultSet rls1 = ps1.executeQuery();
+    ArrayList<getInfo> infoRoom = mysql.readRoomsData(rls1);
+
+
+
+
+
     session.setAttribute("RoomCount", Integer.toString(infoRoom.size()));
 
     
 //    customers data
     sqlQuery = "SELECT * FROM `customer`";
 
-    ArrayList<getInfo> infoCust = mysql.readCustomersData(sqlQuery);
+    PreparedStatement ps2 = con.prepareStatement(sqlQuery);
+    ResultSet rls2 = ps2.executeQuery();
+
+    ArrayList<getInfo> infoCust = mysql.readCustomersData(rls2);
     session.setAttribute("CustCount", Integer.toString(infoCust.size()));
     
 
@@ -106,14 +126,14 @@ if((((String)session.getAttribute("adminName")).length() > 1)){
                       <h6>Filter</h6>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Bugün</a></li>
+                    <li><a class="dropdown-item" href="#">Bug?n</a></li>
                     <li><a class="dropdown-item" href="#">Bu Ay</a></li>
                     <li><a class="dropdown-item" href="#">Bu Yil</a></li>
                   </ul>
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Revarasyonlar <span>| Bugün</span></h5>
+                  <h5 class="card-title">Revarasyonlar <span>| Bug?n</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -182,7 +202,7 @@ if((((String)session.getAttribute("adminName")).length() > 1)){
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Müsteriler <span>| This Year</span></h5>
+                  <h5 class="card-title">M?steriler <span>| This Year</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -290,7 +310,7 @@ if((((String)session.getAttribute("adminName")).length() > 1)){
                 </div>
 
                 <div class="card-body pb-0">
-                  <h5 class="card-title">En Çok Seçilen Odalar <span>| Today</span></h5>
+                  <h5 class="card-title">En ?ok Se?ilen Odalar <span>| Today</span></h5>
 
                   <table class="table table-borderless">
                     <thead>
@@ -324,14 +344,15 @@ if((((String)session.getAttribute("adminName")).length() > 1)){
 
                 </div>
 
-              </div>
-            </div><!-- End Top Selling -->
-
-          </div>
-        </div><!-- End Left side columns -->
+            </div>
+          </div><!-- End Top Selling -->
 
       </div>
-    </section>
+    </div><!-- End Left side columns -->
+          </div>
+
+
+  </section>
 
   </main><!-- End #main -->
 

@@ -1,4 +1,6 @@
-<%-- 
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.PreparedStatement" %><%--
     Document   : rezervasyonPage
     Created on : 17 Ara 2022, 15:42:25
     Author     : hakkimertpeyk
@@ -8,11 +10,13 @@
 <%
 String passInputs = "";
 if((String)session.getAttribute("isLogOut") == "true"){
+
     passInputs = "hidden";
     }
     
                   session.setAttribute("revEmoji", "hidden");
                   session.setAttribute("roomRevAvabilve", null);
+
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,7 +25,7 @@ if((String)session.getAttribute("isLogOut") == "true"){
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/rezervasyonPageCss.css"/>
     <title>JSP Page</title>
-    <<script src="js/main.js"></script>
+<%--    <<script src="js/main.js"></script>--%>
 </head>
 <body>
     <div class="container">
@@ -48,7 +52,7 @@ if((String)session.getAttribute("isLogOut") == "true"){
       </div>
       <div class="input__box" <%out.println(passInputs);%>>
         <span class="details">Email</span>
-        <input type="email" placeholder="mert@hotmail.com" required name="mail">
+        <input type="email" placeholder="mert@hotmail.com" required name="mail" value="">
       </div>
 
       <div class="input__box" <%out.println(passInputs);%>>

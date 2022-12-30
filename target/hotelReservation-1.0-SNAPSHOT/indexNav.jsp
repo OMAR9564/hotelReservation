@@ -8,12 +8,20 @@
 <%@page import="com.omar.hotelreservation.mySql"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.omar.hotelreservation.getInfo"%>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <%
-                        System.out.println((String)session.getAttribute("readDefaultSessions")+"omeroemroemr4");
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+
+
+        System.out.println((String)session.getAttribute("readDefaultSessions")+"omeroemroemr4");
         if((String)session.getAttribute("readDefaultSessions") == null){
     session.setAttribute("loginTag", "Login");
     session.setAttribute("lgnUserName", "");
@@ -27,7 +35,37 @@
     session.setAttribute("adminMail", "");
     session.setAttribute("whosePage", "");
     session.setAttribute("readDefaultSessions", "1");
+
+
+
+
         }
+//        try {
+//            Cookie[] cookies= request.getCookies();
+//
+//
+//            for (int i = 0; i < cookies.length; i++) {
+//                if (cookies[i].getName().equals("isimSoyisim")) {
+//                    session.setAttribute("loginTag", "Log Out");
+//                    session.setAttribute("lgnUserName", cookies[i].getValue());
+//                    session.setAttribute("lgnUserNameCss", "login-user-name");
+//
+//                    response.sendRedirect("index.jsp");
+//                    session.setAttribute("loginIsValid", "hidden");
+//
+//                    session.setAttribute("isLogin", "false");
+//                    session.setAttribute("isLogOut", "true");
+//
+//
+//                    break;
+//                } else continue;
+//
+//
+//
+//            }
+//        }catch (Exception e){
+//            response.sendRedirect("indexNav.jsp");
+//        }
                 System.out.println((String)session.getAttribute("readDefaultSessions")+"omeroemroemr3");
         String loginTag = "";
         loginTag = (String)session.getAttribute("loginTag");
@@ -47,8 +85,39 @@
 ArrayList<getInfo> info;
 mySql mysql = new mySql();
 String sqlQuery = "SELECT * FROM `hotelSettings`";
-info = mysql.readHotelSettings(sqlQuery);
+
+        PreparedStatement ps = con.prepareStatement(sqlQuery);
+
+        ResultSet rls = ps.executeQuery();
+
+
+info = mysql.readHotelSettings(rls);
 hotelData.setHotelName(info.get(0).getHotelName());
+
+
+        Cookie[] cookies= request.getCookies();
+
+
+//        for (int i = 0; i < cookies.length; i++) {
+//            if (cookies[i].getName().equals("isimSoyisim")) {
+//                session.setAttribute("loginTag", "Log Out");
+//                session.setAttribute("lgnUserName", cookies[i].getValue());
+//                session.setAttribute("lgnUserNameCss", "login-user-name");
+//
+//                response.sendRedirect("index.jsp");
+//                session.setAttribute("loginIsValid", "hidden");
+//
+//                session.setAttribute("isLogin", "false");
+//                session.setAttribute("isLogOut", "true");
+//
+//
+//                break;
+//            } else continue;
+//
+//
+//
+//        }
+
     %>
     <!--For Cookie-->
     <%--<jsp:include page="checkPage.jsp" />--%> 
@@ -65,7 +134,7 @@ hotelData.setHotelName(info.get(0).getHotelName());
             <li class="nav-item"><a href="#rooms-section" class="nav-link">Rooms</a></li>
             <li class="nav-item"><a href="#restaurant-section" class="nav-link">Restaurant</a></li>
             <li class="nav-item"><a href="#about-section" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="#blog-section"" class="nav-link">Blog</a></li>
+            <li class="nav-item"><a href="#blog-section" class="nav-link">Blog</a></li>
             <li class="nav-item"><a href="#contact-section" class="nav-link">Contact</a></li>
             <li class="nav-item <%out.println(lgnUserNameCss);%>"><a href="userPage.jsp" class="nav-link " >
                     <i class="gg-user <%out.println(lgnUserNameCss);%>">
