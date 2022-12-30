@@ -1,4 +1,9 @@
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
+
+<%
+  if((((String)session.getAttribute("adminName")).length() > 1)){
+
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -194,3 +199,10 @@
 </body>
 
 </html>
+
+<%
+  }else {
+    response.sendRedirect("../index.jsp");
+
+  }
+%>

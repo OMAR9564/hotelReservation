@@ -8,7 +8,7 @@
 <%--<%@page import="com.omar.hotelreservation.hotelData"%>--%>
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 <%if(((String)session.getAttribute("adminName")) == null){
-        response.sendRedirect("index.jsp");
+  response.sendRedirect("../index.jsp");
 }else{
   Class.forName("com.mysql.jdbc.Driver");
   Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
@@ -380,7 +380,7 @@
 <%}
 else{
 
-    response.sendRedirect("index.jsp");
+  response.sendRedirect("../index.jsp");
 
 }
 }

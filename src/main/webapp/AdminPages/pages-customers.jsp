@@ -12,8 +12,10 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.lang.module.FindException" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    if((((String)session.getAttribute("adminName")).length() > 1)){
 //    customers data
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
@@ -324,3 +326,8 @@ console.log("omeroemroemreomreormeormeorm");
 </body>
 
 </html>
+<%
+    }else {
+        response.sendRedirect("../index.jsp");
+    }
+%>

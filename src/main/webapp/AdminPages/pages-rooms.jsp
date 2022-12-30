@@ -14,6 +14,8 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    if((((String)session.getAttribute("adminName")).length() > 1)){
+
 //    customers data
 
     Class.forName("com.mysql.jdbc.Driver");
@@ -388,4 +390,7 @@
                 session.setAttribute("adminAlertOk", "");
                 session.setAttribute("adminAlertIcon", "");
 
+}else{
+        response.sendRedirect("../index.jsp");
+}
 %>
