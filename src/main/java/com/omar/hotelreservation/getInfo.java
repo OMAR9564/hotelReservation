@@ -205,7 +205,7 @@ public class getInfo {
     public int getCustCount(){
         return custCount;
     }
-    public void setGander(String custCount){
+    public void setGander(String gander){
         this.gander = gander;
     }
     public String getGander(){

@@ -195,7 +195,7 @@ try {
 //
 //
 //                        mailCheckCust = mysql.sqlConCust(rls1);
-                if (true) {
+                if (false) {
 
                     session.setAttribute("revCustName", request.getParameter("name"));
                     session.setAttribute("revCustGTarihi", request.getParameter("gTarihi"));
@@ -279,7 +279,8 @@ try {
                     }
 
                 } else {
-                    session.setAttribute("revCustName", request.getParameter("name"));
+                    String revCustName = new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8");
+                    session.setAttribute("revCustName", revCustName);
                     session.setAttribute("revCustGTarihi", request.getParameter("gTarihi"));
                     session.setAttribute("revCustCTarihi", request.getParameter("cTarihi"));
                     session.setAttribute("revCustCount", request.getParameter("custCount"));
@@ -300,7 +301,7 @@ try {
                     ps5.setString(8, ((String) session.getAttribute("revCustGander")));
                     ps5.execute();
 
-                    String newCust = "INSERT INTO `customer`(`name`, `mail`, `phone`, `Pass`) VALUES (?,?,?,?)";
+                    String newCust = "INSERT INTO `customer`(`name`, `email`, `phone`, `Pass`) VALUES (?,?,?,?)";
 
                     PreparedStatement ps6 = con.prepareStatement(newCust);
                     ps6.setString(1, (String) session.getAttribute("revCustName"));

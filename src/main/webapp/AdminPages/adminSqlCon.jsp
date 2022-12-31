@@ -24,20 +24,25 @@
     if(_page.equals("customerEdit")) {
         try{
         String id = request.getParameter("id");
-        String name = request.getParameter("name");
+        String name = new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8");
         String mail = request.getParameter("mail");
         String phone = request.getParameter("phone");
 
-        String sqlQuery = "UPDATE `customer` SET `name`=?,`mail`=?,`phone`=? WHERE `id` = ?";
+        String sqlQuery = "UPDATE `customer` SET `name`=?,`email`=?,`phone`=? WHERE `id` = ?";
         PreparedStatement ps = con.prepareStatement(sqlQuery);
         ps.setString(1, name);
         ps.setString(2, mail);
         ps.setString(3, phone);
         ps.setString(4, id);
         ps.execute();
+                session.setAttribute("adminAlertLog", "Müşteri başarılı bir şekilde düzenlendi.");
+                session.setAttribute("adminShowAlert", "show");
+                session.setAttribute("adminAlertOk", "success");
+                session.setAttribute("adminAlertIcon", "bi bi-check-circle me-1");
 
     }catch(Exception e){
-        out.println("Müşteri bilgileri düzllerken bir hata oluştur");
+        System.out.println("Müşteri bilgileri düzllerken bir hata oluştur");
+        System.out.println(e);
         }
 
         
@@ -73,12 +78,12 @@
     }
     if(_page.equals("customerAdd")){
     try{
-        String name = request.getParameter("name");
+        String name = new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8");
         String mail = request.getParameter("mail");
         String phone= request.getParameter("phone");
         String pass = request.getParameter("pass");
         
-        String sqlQuery = "INSERT INTO `customer`(`name`, `mail`, `phone`, `Pass`) VALUES (?,?,?,?)";
+        String sqlQuery = "INSERT INTO `customer`(`name`, `email`, `phone`, `Pass`) VALUES (?,?,?,?)";
         mySql mysql = new mySql();
         PreparedStatement ps = con.prepareStatement(sqlQuery);
         ps.setString(1, name);
@@ -134,15 +139,15 @@
     if(_page.equals("reverasionEdit")){
     try{
         String id = request.getParameter("id");
-        String name = request.getParameter("name");
+        String name = new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8");
         String mail = request.getParameter("mail");
         String phone= request.getParameter("phone");
         String count= request.getParameter("count");
         String gTarihi= request.getParameter("gTarihi");
         String cTarihi= request.getParameter("cTarihi");
-        String roomName = request.getParameter("room");
+        String roomName = request.getParameter("roomName").trim();
         String status = request.getParameter("status");
-        String gander = request.getParameter("gander");
+        String gander = request.getParameter("statusGander");
         
         String sqlQuery = "UPDATE `reverasyonlar` SET `musteriAdi`=?,`kisiSayisi`=?,`girisTarihi`=?,`cikisTarihi`=?,`email`=?,`telefon`=?,`odaAdi`=?,`durum`=?,`cinsiyet`=? WHERE 'id' =?";
         mySql mysql = new mySql();
@@ -170,6 +175,7 @@
                 session.setAttribute("adminAlertOk", "danger");
                 session.setAttribute("adminAlertIcon", "bi bi-exclamation-octagon me-1");
                 response.sendRedirect("pages-reversayon.jsp");
+                out.println(e);
     }
         
 
@@ -180,7 +186,7 @@
 //        FileInputStream fis=null;
 
         String id = request.getParameter("id");
-        String name = request.getParameter("roomName");
+        String name = new String(request.getParameter("roomName").getBytes("ISO-8859-9"), "UTF-8");
         String roomCount = request.getParameter("roomCount");
         String soldCount= request.getParameter("soldCount");
         String roomPrice= request.getParameter("roomPrice");

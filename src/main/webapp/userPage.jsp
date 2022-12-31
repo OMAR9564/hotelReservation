@@ -7,6 +7,8 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 
 <% try {
@@ -63,7 +65,7 @@
 %>
 <html lang="tr">
 <head>
-  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+  <meta charset="utf-8">
   <META HTTP-EQUIV="Content-language" CONTENT="tr">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -101,8 +103,7 @@
           <div class="col-lg-7 col-md-10">
               <h1 class="display-2 text-white">Hello <%out.println(custName.substring(0, custName.indexOf(' ')));%></h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-            <a href="#!" class="btn btn-success">Reverasyonlar?m</a>
-            <a href="#!" class="btn btn-info">Profilimi D�zenle</a>
+            <a href="index.jsp" class="btn btn-success">Ana Sayfa</a>
             <a href="index.jsp" class="btn btn-danger">Log Out</a>
           </div>
         </div>
@@ -120,13 +121,13 @@
                   <h3 class="mb-0">Profilim</h3>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">D�zenle</a>
+                  <a href="#!" class="btn btn-sm btn-primary">Düzenle</a>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <form>
-                <h6 class="heading-small text-muted mb-4">Kullanici Bilgileri</h6>
+                <h6 class="heading-small text-muted mb-4">Kullanıcı Bilgileri</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     
@@ -155,14 +156,14 @@
                 </div>
                 <hr class="my-4">
                 <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">Reversayonlar?m</h6>
+                <h6 class="heading-small text-muted mb-4">Reversayonlarım</h6>
                 <table class="table table-hover">
                 <thead>
                 <tr>
                   <th scope="col">Ad Soyad</th>
-                  <th scope="col">Ki?i Say?s?</th>
-                  <th scope="col">Giri? Tarihi</th>
-                  <th scope="col">�?k?? Tarihi</th>
+                  <th scope="col">Kişi Sayısı</th>
+                  <th scope="col">Giriş Tarihi</th>
+                  <th scope="col">Çıkış Tarihi</th>
                   <th scope="col">Oda</th>
                   <th scope="col">Durum</th>
 
@@ -177,22 +178,23 @@
                       session.setAttribute("userPage-gTarihi", info.get(i).getGirisTarihi());
                       session.setAttribute("userPage-cTarihi", info.get(i).getCikisTarihi());
                       session.setAttribute("userPage-roomId", info.get(i).getRoomName());
-                      String userPageRoomId = (String)session.getAttribute("userPage-roomId");
+                      int userPageRoomId = Integer.parseInt((String)session.getAttribute("userPage-roomId"));
                       session.setAttribute("userPage-revStatus", info.get(i).getDurum());
 
                       String sqlQuery3 = "SELECT * FROM `room` WHERE `id` = ?";
                       PreparedStatement ps4 = con.prepareStatement(sqlQuery3);
-                      ps4.setString(1, userPageRoomId);
+                      ps4.setInt(1, (userPageRoomId));
                       ResultSet rls4 = ps4.executeQuery();
 
                       infoRev = mysql.readReversaionData(rls4);
-                      session.setAttribute("userPage-RoomName", infoRev.get(i).getRoomName());
+                      session.setAttribute("userPage-RoomName", infoRev.get(0).getRoomName());
 
 
-
+                      String tableColor = "table-secondary";
+                      String roomName = (String)session.getAttribute("userPage-RoomName");
                   %>
-                  <tr>
-                    <th scope="row"><%out.println(i + 1);%></th>
+                  <tr class=<%out.println(tableColor);%>>
+<%--                    <th scope="row"><%out.println(i + 1);%></th>--%>
                     <td><%out.println(session.getAttribute("userPage-CustName"));%></td>
                     <td><%out.println(session.getAttribute("userPage-CustCount"));%></td>
                     <td><%out.println(session.getAttribute("userPage-gTarihi"));%></td>
@@ -201,7 +203,9 @@
                     <td><%out.println(session.getAttribute("userPage-revStatus"));%></td>
 
                   </tr>
+
                 <%
+                    tableColor = "table-light";
                   }
                   }catch (Exception e){
                     out.println(e);

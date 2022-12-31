@@ -66,24 +66,24 @@ public class mySql {
         }
         return sqlInfo;
     }
-    public ArrayList<getInfo> readReversaionData(ResultSet rls) {
+    public ArrayList<getInfo> readReversaionData(ResultSet rls1) {
 
         ArrayList<getInfo> sqlInfo = new ArrayList<>();
 
         try {
 
-            while (rls.next()) {
+            while (rls1.next()) {
                 getInfo temp = new getInfo();
-                temp.setReverasyonId(rls.getInt("id"));
-                temp.setCustName(rls.getString("musteriAdi"));
-                temp.setCustCount(rls.getInt("kisiSayisi"));
-                temp.setGirisTarihi(rls.getString("girisTarihi"));
-                temp.setCikisTarihi(rls.getString("cikisTarihi"));
-                temp.setCustMail(rls.getString("email"));
-                temp.setCustPhone(rls.getString("telefon"));
-                temp.setRoomName(rls.getString("odaAdi"));
-                temp.setDurum(rls.getString("durum"));
-                temp.setGander(rls.getString("cinsiyet"));
+                temp.setReverasyonId(rls1.getInt(1));
+                temp.setCustName(rls1.getString(2));
+                temp.setCustCount(rls1.getInt(3));
+                temp.setGirisTarihi(rls1.getString(4));
+                temp.setCikisTarihi(rls1.getString(5));
+                temp.setCustMail(rls1.getString(6));
+                temp.setCustPhone(rls1.getString(7));
+                temp.setRoomName(rls1.getString(8));
+                temp.setDurum(rls1.getString(9));
+                temp.setGander(rls1.getString(10));
                             System.out.println(temp.getGander()+ "123123123");
 
                 sqlInfo.add(temp);

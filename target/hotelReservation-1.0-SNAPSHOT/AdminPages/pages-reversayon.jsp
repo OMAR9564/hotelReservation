@@ -14,12 +14,15 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    if((((String)session.getAttribute("adminName")).length() > 1)){
+    try {
+
+
+    if((((String)session.getAttribute("adminName")).length() > 1) || (String)session.getAttribute("adminName") == null ){
 
 //    customers data
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
-    String sqlQuery = "SELECT * FROM `reverasyonlar`";
+    String sqlQuery = "SELECT * FROM `reverasyonlar` ORDER BY `reverasyonlar`.`id` DESC";
     PreparedStatement ps = con.prepareStatement(sqlQuery);
 
     ArrayList<getInfo> info;
@@ -141,7 +144,7 @@
                         <td><a href="#" class="text-primary"><%out.println(hotelData.getGirisTarihi());%></a></td>
                         <td><a href="#" class="text-primary"><%out.println(hotelData.getCikisTarihi());%></a></td>
                         <td><span class="badge bg-success"><%out.println(hotelData.getReversayonStatus());%></span></td>
-                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="<%out.println(hotelData.getReverasyonId());%>" data-bs-gander="<%out.println(hotelData.getGander());%>" data-bs-custName="<%out.println(hotelData.getCustomerName());%>" data-bs-roomId="<%out.println(hotelData.getRoomId());%>" data-bs-gTarihi="<%out.println(hotelData.getGirisTarihi());%>" data-bs-cTarihi="<%out.println(hotelData.getCikisTarihi());%>" data-bs-custCount="<%out.println(hotelData.getCustCount());%>" data-bs-custMail="<%out.println(hotelData.getCustMail());%>" data-bs-custPhone="<%out.println(hotelData.getCustPhone());%> "data-bs-reverasyonStatus="<%out.println(hotelData.getReversayonStatus());%>" ><i class="bi bi-info-circle" ></i></button></td>
+                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="<%out.println(hotelData.getReverasyonId());%>" data-bs-gander="<%out.println(hotelData.getGander());%>" data-bs-custName="<%out.println(hotelData.getCustomerName());%>" data-bs-roomId="<%out.println(hotelData.getRoomName());%>" data-bs-gTarihi="<%out.println(hotelData.getGirisTarihi());%>" data-bs-cTarihi="<%out.println(hotelData.getCikisTarihi());%>" data-bs-custCount="<%out.println(hotelData.getCustCount());%>" data-bs-custMail="<%out.println(hotelData.getCustMail());%>" data-bs-custPhone="<%out.println(hotelData.getCustPhone());%> "data-bs-reverasyonStatus="<%out.println(hotelData.getReversayonStatus());%>" ><i class="bi bi-info-circle" ></i></button></td>
                         <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-idDel="<%out.println(hotelData.getReverasyonId());%>"><i class="bi bi-x-octagon"></i></button></td>
                       </tr>
                       <%}%>
@@ -173,11 +176,11 @@
                               <div class="row">                                    
                                 <div class="mb-3 col-md-6">
                                 <label for="gTarihi" class="col-form-label">Giriş Tarihi:</label>
-                                <input type="date" class="form-control gTarihiInput" name="gTarihi" id="gTarihi">
+                                <input type="date" class="form-control gTarihiInput" name="gTarihi" id="gTarihi" >
                               </div>
                                 <div class="mb-3 col-md-6 ms-auto">
                                 <label for="cTarihi" class="col-form-label">Çıkuş Tarihi:</label>
-                                <input type="date" class="form-control cTarihiInput" name="cTarihi" id="cTarihi">
+                                <input type="date" class="form-control cTarihiInput" name="cTarihi" id="cTarihi" >
                               </div>
                               </div>                                  
                               <div class="row">                                    
@@ -195,11 +198,13 @@
                                 <label for="roomName" class="col-form-label">Oda Adı:</label>
                                 <select class="form-control roomNameSelect" name="roomName" id="roomName" >
                                     <%
-                                        for(int i = 0; i < hotelData.getRoomCount(); i++){
-                                        hotelData.setRoomId(infoRoom.get(i).getRoomId());
-                                        hotelData.setRoomName(infoRoom.get(i).getRoomName());
+                                        for(int i = 0; i < Integer.parseInt((String)session.getAttribute("roomCountPages-Rev")); i++){
+                                            String roomID = Integer.toString(infoRoom.get(i).getRoomId());
+                                            String roomName = infoRoom.get(i).getRoomName();
+                                        hotelData.setRoomId(Integer.parseInt(roomID));
+                                        hotelData.setRoomName(roomName);
                                     %>
-                                       <option value="<%out.println(hotelData.getRoomId());%>"><%out.println(hotelData.getRoomName());%></option>
+                                       <option value="<%out.println(((roomID).trim()));%>"><%out.println(roomName);%></option>
                                        <%}%>
                                 </select>
                               </div>
@@ -207,18 +212,17 @@
                                 <label for="status" class="col-form-label">Durum:</label>
                                 <select class="form-control statusSelect" name="status" id="status">
                                        <option value="incilenyor">İnceleniyor</option>
-                                       <option value="Onaylandı">Onaylandı</option>
+                                       <option value="onaylandi">Onaylandı</option>
                                 </select>
-                                <div class="form-check form-check-inline ">
-                                <input class="form-check-input radioGander" type="radio" name="gander" id="inlineRadio1" value="erkek" >
-                                <label class="form-check-label" for="inlineRadio1">Erkek</label>
+                                </div>
+                                  <div class="mb-3 col-md-6">
+                                    <label for="status" class="col-form-label">Cinsiyet:</label>
+                                    <select class="form-control selectGander" name="statusGander" id="statusGander">
+                                        <option value="erkek">Erkek</option>
+                                        <option value="kadin">Kadın</option>
+                                    </select>
                               </div>
-                              <div class="form-check form-check-inline ">
-                                <input class="form-check-input radioGander" type="radio" name="gander" id="inlineRadio2" value="kadin">
-                                <label class="form-check-label" for="inlineRadio2">Kadın</label>
-                              </div>
-                              </div>
-                              </div>                                  
+
                                 <input type="text" value="reverasionEdit" name="iam" hidden>
                             
                           <div class="modal-footer">
@@ -306,19 +310,21 @@
   var modalBodyInputroomName = exampleModal.querySelector('.modal-body .roomNameSelect');
 
   var modalBodyInputstatus = exampleModal.querySelector('.modal-body .statusSelect');
-  var modalBodyInputGander = exampleModal.querySelector('.modal-body .radioGander');
+  var modalBodyInputGander = exampleModal.querySelector('.modal-body .selectGander');
 
-  modalBodyInputName.value = custName;
-  modalBodyInputId.value = id;
+
+
+
+        modalBodyInputName.value = custName;
+  modalBodyInputId.value = id.trim();
   modalBodyInputcCount.value = parseInt(custCount);
-  modalBodyInputgTarihi.value = gTarihi;
-  modalBodyInputgcTarih.value = cTarihi;
+  modalBodyInputgTarihi.value = gTarihi.trim();
+  modalBodyInputgcTarih.value = cTarihi.trim();
   modalBodyInputmail.value = custMail;
   modalBodyInputphone.value = custPhone;
   modalBodyInputroomName.value = roomId;
-  modalBodyInputstatus.value = reverasyonStatus;
-  modalBodyInputGander.value = gander;
-
+  modalBodyInputstatus.value = reverasyonStatus.trim();
+  modalBodyInputGander.value = gander.trim();
 });
    var deleteModal = document.getElementById('deleteModal');
 
@@ -327,7 +333,7 @@
 
   var delId = button.getAttribute('data-bs-idDel'); 
   var modalBodyInputDelId = deleteModal.querySelector('.modal-body .delIdInput');
-    modalBodyInputDelId.value = delId;
+    modalBodyInputDelId.value = delId.trim();
 
 });
 
@@ -336,5 +342,9 @@
 <%
     }else{
         response.sendRedirect("../index.jsp");
+    }
+    }catch (Exception e){
+        response.sendRedirect("../index.jsp");
+
     }
 %>

@@ -171,6 +171,8 @@
                                 <label for="name" class="col-form-label">Name:</label>
                                 <input type="text" class="form-control nameInput" name="name" id="name">
                               </div>
+                                <input type="text" value="customerEdit" name="iam" hidden>
+
                               <div class="mb-3 col-md-6 ms-auto">
                                 <label for="Mail" class="col-form-label">E-Mail:</label>
                                 <input class="form-control mailInput" id="Mail" name="mail"></input>
@@ -178,7 +180,6 @@
                                 <div class="mb-3 col-md-6">
                                 <label for="phone" class="col-form-label">Phone:</label>
                                 <input type="text" class="form-control phoneInput" name="phone" id="phone">
-                                <input type="text" value="customerEdit" name="iam" hidden>
                               </div>
                             
                           <div class="modal-footer">
