@@ -183,21 +183,34 @@ try {
                 mySql mysql = new mySql();
                         String custMail = (String)session.getAttribute("revCustMail");
                         String custPass = (String)session.getAttribute("revCustPass");
-                        String sqlQuery = "SELECT * FROM `customer` WHERE `mail` = ? AND `Pass` = ?";
+                        String sqlQuery = "SELECT * FROM `customer` WHERE `email` = ?";
                         PreparedStatement ps9 = con.prepareStatement(sqlQuery);
                     ps9.setString(1, custMail);
-                    ps9.setString(2, custPass);
-
-                        ResultSet rls1 = ps9.executeQuery();
+                ResultSet rls1 = ps9.executeQuery();
 
 
 
 
+                Boolean passDogru = false;
+                mailCheckCust = mysql.sqlConCust(rls1);
 
-                        mailCheckCust = mysql.sqlConCust(rls1);
-                if (mailCheckCust.size() > 0) {
+                session.setAttribute("emailForRevCust", mailCheckCust.get(0).getEmail());
+                session.setAttribute("passForRevCust", mailCheckCust.get(0).getSifre());
+                String passForRevCust =(String) session.getAttribute("passForRevCust");
 
-                    session.setAttribute("revCustName", request.getParameter("name"));
+                if(!(custPass.equals(passForRevCust)) ){
+
+                    session.setAttribute("roomRevAvabilve", "false");
+                    passDogru  = false;
+                    session.setAttribute("roomRevAvabilveLog", "Giriğiniz Mail İçin Şifre Hatalıdır");
+                    response.sendRedirect("index.jsp");
+                    return;
+                }
+                else passDogru = true;
+
+                if (passDogru) {
+
+                    session.setAttribute("revCustName",  new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8"));
                     session.setAttribute("revCustGTarihi", request.getParameter("gTarihi"));
                     session.setAttribute("revCustCTarihi", request.getParameter("cTarihi"));
                     session.setAttribute("revCustCount", request.getParameter("custCount"));
@@ -213,12 +226,12 @@ try {
                     String sqlQueryRev = "SELECT * FROM `reverasyonlar` WHERE `odaAdi` = ?";
 
                     PreparedStatement ps2 = con.prepareStatement(sqlQueryRev);
-                    ps2.setInt(1, Integer.parseInt((String) session.getAttribute("revCustRoomId")));
+                    ps2.setString(1, ((String) session.getAttribute("revCustRoomId")));
 
                     String sqlQueryRoom = "SELECT * FROM `room` WHERE `id` = ?";
 
                     PreparedStatement ps3 = con.prepareStatement(sqlQueryRoom);
-                    ps3.setInt(1, Integer.parseInt((String) session.getAttribute("revCustRoomId")));
+                    ps3.setString(1, ((String) session.getAttribute("revCustRoomId")));
 
                     ResultSet rls2 = ps2.executeQuery();
                     ResultSet rls3 = ps3.executeQuery();
@@ -279,6 +292,7 @@ try {
                     }
 
                 } else {
+                    //bırda
                     String revCustName = new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8");
                     session.setAttribute("revCustName", revCustName);
                     session.setAttribute("revCustGTarihi", request.getParameter("gTarihi"));
@@ -364,8 +378,8 @@ try {
             if (true) {
                 if (strRoomMaxCust >= Integer.parseInt((String) session.getAttribute("revSecCustCount"))) {
                     if (strRoomSoldCount < strRoomCount) {
-                        session.setAttribute("roomRevAvabilve", "true");
-                        session.setAttribute("roomRevAvabilveLog", "Odanız Başarılı Bir Şekilde Reveersayonu Alındı.");
+//                        session.setAttribute("roomRevAvabilve", "true");
+//                        session.setAttribute("roomRevAvabilveLog", "Odanız Başarılı Bir Şekilde Reveersayonu Alındı.");
                         response.sendRedirect("rezervasyonPage.jsp");
 
                     } else {
@@ -387,7 +401,8 @@ try {
 
 //    session.setAttribute("whosePage", "");
     }catch(Exception e ){
-        response.sendRedirect("index.jsp");
+    System.out.println(e);
+    response.sendRedirect("index.jsp");
     }
 System.out.println(session.getAttribute("lgnUserName")+"-------11111------");
 

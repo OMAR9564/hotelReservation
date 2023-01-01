@@ -54,8 +54,9 @@ public class mySql {
                 getInfo temp = new getInfo();
                 temp.setId(rls.getInt("id"));
                 temp.setIsim_Soyisim(rls.getString("name"));
-                temp.setEmail(rls.getString("mail"));
+                temp.setEmail(rls.getString("email"));
                 temp.setIsAdmin(rls.getString("is_admin"));
+                temp.setSifre(rls.getString("Pass"));
                 sqlInfo.add(temp);
 
             }
