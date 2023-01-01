@@ -7,6 +7,8 @@
 <%@ page import="java.sql.ResultSet" %>
 <%--<%@page import="com.omar.hotelreservation.hotelData"%>--%>
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%if(((String)session.getAttribute("adminName")) == null){
   response.sendRedirect("../index.jsp");
 }else{
@@ -56,7 +58,7 @@
        
  %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
   <meta charset="utf-8">
@@ -126,14 +128,14 @@
                       <h6>Filter</h6>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Bug?n</a></li>
+                    <li><a class="dropdown-item" href="#">Bugün</a></li>
                     <li><a class="dropdown-item" href="#">Bu Ay</a></li>
                     <li><a class="dropdown-item" href="#">Bu Yil</a></li>
                   </ul>
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Revarasyonlar <span>| Bug?n</span></h5>
+                  <h5 class="card-title">Revarasyonlar <span>| Bugün</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -202,7 +204,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">M?steriler <span>| This Year</span></h5>
+                  <h5 class="card-title">Müşteriler <span>| This Year</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -310,7 +312,7 @@
                 </div>
 
                 <div class="card-body pb-0">
-                  <h5 class="card-title">En ?ok Se?ilen Odalar <span>| Today</span></h5>
+                  <h5 class="card-title">En çok satılan odalar <span>| Today</span></h5>
 
                   <table class="table table-borderless">
                     <thead>

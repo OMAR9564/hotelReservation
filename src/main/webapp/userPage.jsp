@@ -60,6 +60,10 @@
 
 
 
+session.setAttribute("whosePage", "userLogin");
+session.setAttribute("isLogin", "false");
+session.setAttribute("isLogOut", "true");
+
 
 
 %>
