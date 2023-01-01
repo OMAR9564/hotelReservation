@@ -181,21 +181,21 @@ try {
                 session.setAttribute("revCustPass", request.getParameter("pass"));
                 ArrayList<getInfo> mailCheckCust;
                 mySql mysql = new mySql();
-//                        String custMail = (String)session.getAttribute("revCustMail");
-//                        String custPass = (String)session.getAttribute("revCustPass");
-//                        String sqlQuery = "SELECT * FROM `customer` WHERE `mail` = ? AND `Pass` = ?";
-//                        PreparedStatement ps9 = con.prepareStatement(sqlQuery);
-//                    ps9.setString(1, custMail);
-//                    ps9.setString(2, custPass);
-//
-//                        ResultSet rls1 = ps9.executeQuery();
-//
-//
-//
-//
-//
-//                        mailCheckCust = mysql.sqlConCust(rls1);
-                if (false) {
+                        String custMail = (String)session.getAttribute("revCustMail");
+                        String custPass = (String)session.getAttribute("revCustPass");
+                        String sqlQuery = "SELECT * FROM `customer` WHERE `mail` = ? AND `Pass` = ?";
+                        PreparedStatement ps9 = con.prepareStatement(sqlQuery);
+                    ps9.setString(1, custMail);
+                    ps9.setString(2, custPass);
+
+                        ResultSet rls1 = ps9.executeQuery();
+
+
+
+
+
+                        mailCheckCust = mysql.sqlConCust(rls1);
+                if (mailCheckCust.size() > 0) {
 
                     session.setAttribute("revCustName", request.getParameter("name"));
                     session.setAttribute("revCustGTarihi", request.getParameter("gTarihi"));
@@ -260,9 +260,9 @@ try {
                         ps4.setString(2, ((String) session.getAttribute("revCustRoomId")));
                         ps4.execute();
 
-                        String sqlQuery = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`) VALUES (?, ? , ?, ?, ?, ?, ?, ?)";
+                        String sqlQuery1 = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`) VALUES (?, ? , ?, ?, ?, ?, ?, ?)";
 
-                        PreparedStatement ps5 = con.prepareStatement(sqlQuery);
+                        PreparedStatement ps5 = con.prepareStatement(sqlQuery1);
                         ps5.setString(1, (String) session.getAttribute("revCustName"));
                         ps5.setString(2, ((String) session.getAttribute("revCustCount")));
                         ps5.setString(3, (String) session.getAttribute("revCustGTarihi"));
@@ -289,8 +289,8 @@ try {
                     session.setAttribute("revCustGander", request.getParameter("gander"));
 
 
-                    String sqlQuery = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`) VALUES (?,?,?,?,?,?,?,?)";
-                    PreparedStatement ps5 = con.prepareStatement(sqlQuery);
+                    String sqlQuery2 = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`) VALUES (?,?,?,?,?,?,?,?)";
+                    PreparedStatement ps5 = con.prepareStatement(sqlQuery2);
                     ps5.setString(1, (String) session.getAttribute("revCustName"));
                     ps5.setString(2, (String) session.getAttribute("revCustCount"));
                     ps5.setString(3, (String) session.getAttribute("revCustGTarihi"));

@@ -104,7 +104,7 @@
               <h1 class="display-2 text-white">Hello <%out.println(custName.substring(0, custName.indexOf(' ')));%></h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
             <a href="index.jsp" class="btn btn-success">Ana Sayfa</a>
-            <a href="index.jsp" class="btn btn-danger">Log Out</a>
+            <a href="checkPage.jsp" class="btn btn-danger">Log Out</a>
           </div>
         </div>
       </div>
@@ -186,7 +186,7 @@
                       ps4.setInt(1, (userPageRoomId));
                       ResultSet rls4 = ps4.executeQuery();
 
-                      infoRev = mysql.readReversaionData(rls4);
+                      infoRev = mysql.readRoomsData(rls4);
                       session.setAttribute("userPage-RoomName", infoRev.get(0).getRoomName());
 
 
