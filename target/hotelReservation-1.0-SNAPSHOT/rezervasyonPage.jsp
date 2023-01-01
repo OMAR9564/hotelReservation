@@ -57,7 +57,7 @@ if((String)session.getAttribute("isLogOut") == "true"){
 
       <div class="input__box" <%out.println(passInputs);%>>
         <span class="details">Password</span>
-        <input type="password" placeholder="**********" required name="pass" >
+        <input type="password" placeholder="**********" required name="pass" min="7">
       </div>
       <div class="input__box">
         <span class="details">Telefon No</span>
@@ -100,3 +100,26 @@ if((String)session.getAttribute("isLogOut") == "true"){
 </div>
 </body>
 </html>
+<script>
+
+    var today = new Date();
+    var tomorrow = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+// burda kaldım 13.18;
+    today = yyyy + '-' + mm + '-' + dd;
+    
+    document.getElementById("gTarihi").setAttribute("min", today);
+    document.getElementById("gTarihi").value= today;
+    document.getElementById("cTarihi").value = today;
+    document.getElementById("cTarihi").setAttribute("min", today);
+</script>

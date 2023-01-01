@@ -378,8 +378,6 @@ try {
             if (true) {
                 if (strRoomMaxCust >= Integer.parseInt((String) session.getAttribute("revSecCustCount"))) {
                     if (strRoomSoldCount < strRoomCount) {
-//                        session.setAttribute("roomRevAvabilve", "true");
-//                        session.setAttribute("roomRevAvabilveLog", "Odanız Başarılı Bir Şekilde Reveersayonu Alındı.");
                         response.sendRedirect("rezervasyonPage.jsp");
 
                     } else {

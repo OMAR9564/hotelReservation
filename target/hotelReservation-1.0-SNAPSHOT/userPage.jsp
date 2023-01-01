@@ -108,7 +108,7 @@ session.setAttribute("isLogOut", "true");
               <h1 class="display-2 text-white">Hello <%out.println(custName.substring(0, custName.indexOf(' ')));%></h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
             <a href="index.jsp" class="btn btn-success">Ana Sayfa</a>
-            <a href="checkPage.jsp" class="btn btn-danger">Log Out</a>
+            <a href="login.jsp" class="btn btn-danger">Log Out</a>
           </div>
         </div>
       </div>
@@ -161,7 +161,7 @@ session.setAttribute("isLogOut", "true");
                 <hr class="my-4">
                 <!-- Address -->
                 <h6 class="heading-small text-muted mb-4">Reversayonlarım</h6>
-                <table class="table table-hover">
+                <table class="table ">
                 <thead>
                 <tr>
                   <th scope="col">Ad Soyad</th>
@@ -194,22 +194,22 @@ session.setAttribute("isLogOut", "true");
                       session.setAttribute("userPage-RoomName", infoRev.get(0).getRoomName());
 
 
-                      String tableColor = "table-secondary";
+//                      String tableColor = "table-secondary";
                       String roomName = (String)session.getAttribute("userPage-RoomName");
                   %>
-                  <tr class=<%out.println(tableColor);%>>
+                  <tr >
 <%--                    <th scope="row"><%out.println(i + 1);%></th>--%>
                     <td><%out.println(session.getAttribute("userPage-CustName"));%></td>
                     <td><%out.println(session.getAttribute("userPage-CustCount"));%></td>
-                    <td><%out.println(session.getAttribute("userPage-gTarihi"));%></td>
-                    <td><%out.println(session.getAttribute("userPage-cTarihi"));%></td>
-                    <td><%out.println(session.getAttribute("userPage-RoomName"));%></td>
-                    <td><%out.println(session.getAttribute("userPage-revStatus"));%></td>
+                    <td class="text-danger"><%out.println(session.getAttribute("userPage-gTarihi"));%></td>
+                    <td class="text-danger"><%out.println(session.getAttribute("userPage-cTarihi"));%></td>
+                    <td class="text-primary"><%out.println(session.getAttribute("userPage-RoomName"));%></td>
+                    <td class="badge bg-success"><%out.println(session.getAttribute("userPage-revStatus"));%></td>
 
                   </tr>
 
                 <%
-                    tableColor = "table-light";
+//                    tableColor = "table-light";
                   }
                   }catch (Exception e){
                     out.println(e);
