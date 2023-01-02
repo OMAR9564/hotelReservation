@@ -52,7 +52,8 @@ if((String)session.getAttribute("isLogOut") == "true"){
       </div>
       <div class="input__box" <%out.println(passInputs);%>>
         <span class="details">Email</span>
-        <input type="email" placeholder="mert@hotmail.com" required name="mail" value="">
+          <input type="email" placeholder="mert@hotmail.com" required name="mail">
+
       </div>
 
       <div class="input__box" <%out.println(passInputs);%>>
@@ -117,7 +118,7 @@ if((String)session.getAttribute("isLogOut") == "true"){
     }
 // burda kaldım 13.18;
     today = yyyy + '-' + mm + '-' + dd;
-    
+
     document.getElementById("gTarihi").setAttribute("min", today);
     document.getElementById("gTarihi").value= today;
     document.getElementById("cTarihi").value = today;

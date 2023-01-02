@@ -30,7 +30,9 @@ public class hotelData {
     private static int roomCount = 0;
     private static int roomAvabilve = 0;
     private static int roomTotalCount = 0;
-    
+    private static int roomMaxCust = 0;
+
+
     private static int custID = 0;
     private static String custName = "";
     private static String custMail = "";
@@ -193,6 +195,12 @@ public class hotelData {
         return roomSaleActive;
     }
 
+    public static void setRoomMaxCust(int _roomMaxCust){
+        roomMaxCust = _roomMaxCust;
+    }
+    public static int getRoomMaxCust(){
+        return roomMaxCust;
+    }
 
 
     public static boolean isWeekend()

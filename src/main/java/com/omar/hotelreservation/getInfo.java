@@ -44,7 +44,15 @@ public class getInfo {
     int settingId = 0;
     String hotelName = "";
     
+    String CcTaihi;
+    int Cid;
+    int CsoldCount;
+    int CroomId;
 
+    String checkGTarihi;
+    String checkCTarihi;
+
+    String isDatePast;
     
     public void setId(int id){
         this.id = id;
@@ -240,5 +248,53 @@ public class getInfo {
     }
     public int getRoomSaleActive(){
         return roomSaleActive;
+    }
+    
+    
+        public void setCDate(String CcTaihi){
+        this.CcTaihi = CcTaihi;
+    }
+    public String getCDate(){
+        return CcTaihi;
+    }
+    public void setCId(int Cid){
+        this.Cid = Cid;
+    }
+    public int getCId(){
+        return Cid;
+    }
+    public void setCRoomId(int CroomId){
+        this.CroomId = CroomId;
+    }
+    public int getCRoomId(){
+        return CroomId;
+    }
+    
+    public void setCSoldCount(int CsoldCount){
+        this.CsoldCount = CsoldCount;
+    }
+    public int getCSoldCount(){
+        return CsoldCount;
+    }
+
+
+    public void setCheckGTarih(String checkGTarihi){
+        this.checkGTarihi = checkGTarihi;
+    }
+    public String getCheckGTarihi(){
+        return checkGTarihi;
+    }
+    public void setCheckCTarih(String checkCTarihi){
+        this.checkCTarihi = checkCTarihi;
+    }
+    public String getCheckCTarihi(){
+        return checkCTarihi;
+    }
+    
+    public void setIsDatePast(String isDatePast){
+        this.isDatePast = (isDatePast);
+    }
+    public String getIsDatePast(){
+        return isDatePast;
     }
 }

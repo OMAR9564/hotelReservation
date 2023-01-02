@@ -136,7 +136,7 @@
 
 
         }
-        if (_page.equals("reverasionEdit")) {
+         if (_page.equals("reverasionEdit")) {
             try {
                 String id = request.getParameter("id");
                 String name = new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8");
@@ -197,21 +197,21 @@
 //        String roomImg = request.getParameter("uploadImg");
 
 //        File image = new File();
-                InputStream in = new FileInputStream("/Users/omerfaruk/Desktop/omer.png");
+//                InputStream in = new FileInputStream("/Users/omerfaruk/Desktop/omer.png");
 
 
-                String sqlQuery = "INSERT INTO `room`( `name`, `price`,`image`, `soldCount`, `maxRoomCount`, `salePrice`, `avabilve`, `saleActive`, `maxCust`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String sqlQuery = "INSERT INTO `room`( `name`, `price`, `soldCount`, `maxRoomCount`, `salePrice`, `avabilve`, `saleActive`, `maxCust`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 mySql mysql = new mySql();
                 PreparedStatement ps = con.prepareStatement(sqlQuery);
                 ps.setString(1, name);
                 ps.setString(2, roomPrice);
-                ps.setBinaryStream(3, in);
-                ps.setString(4, soldCount);
-                ps.setString(5, roomCount);
-                ps.setString(6, roomSalePrice);
-                ps.setString(7, roomActive);
-                ps.setString(8, roomSaleActive);
-                ps.setString(9, maxCustCount);
+//                ps.setBinaryStream(3, in);
+                ps.setString(3, soldCount);
+                ps.setString(4, roomCount);
+                ps.setString(5, roomSalePrice);
+                ps.setString(6, roomActive);
+                ps.setString(7, roomSaleActive);
+                ps.setString(8, maxCustCount);
                 ps.execute();
 
 //PreparedStatement pstmt = null; 
@@ -267,7 +267,7 @@
             try {
                 String id = request.getParameter("id");
                 String img = request.getParameter("uploadImg");
-                String name = request.getParameter("roomName");
+                String name =  new String(request.getParameter("roomName").getBytes("ISO-8859-9"), "UTF-8");
                 String roomCount = request.getParameter("roomCount");
                 String soldCount = request.getParameter("soldCount");
                 String roomPrice = request.getParameter("roomPrice");
@@ -276,7 +276,7 @@
                 String roomActive = request.getParameter("roomActive");
                 String maxCustCount = request.getParameter("maxCust");
 
-                String sqlQuery = "UPDATE `room` SET `name`=?,`price`=?, `soldCount`=?,`maxRoomCount`=?,`salePrice`=?,`avabilve`=?,`saleActive`=?,`maxCust`=? WHERE 'id' = ?";
+                String sqlQuery = "UPDATE `room` SET `name`=?,`price`=?, `soldCount`=?,`maxRoomCount`=?,`salePrice`=?,`avabilve`=?,`saleActive`=?,`maxCust`=? WHERE `id` = ?";
                 mySql mysql = new mySql();
                 PreparedStatement ps = con.prepareStatement(sqlQuery);
                 ps.setString(1, name);
@@ -330,7 +330,7 @@
                 session.setAttribute("adminAlertLog", "Üzügünüz bir hata oluştu.Odaya silme işlemi olmadı!!");
                 session.setAttribute("adminShowAlert", "true");
                 session.setAttribute("adminAlertIcon", "bi bi-exclamation-octagon me-1");
-
+                System.out.println(e);
                 session.setAttribute("adminAlertOk", "false");
                 response.sendRedirect("pages-rooms.jsp");
 

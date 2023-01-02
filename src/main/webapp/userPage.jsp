@@ -47,7 +47,7 @@
 
     String custMail = (String)session.getAttribute("CustMail");
 
-    String sqlQueryq = "SELECT * FROM `reverasyonlar` WHERE `email` = ?";
+    String sqlQueryq = "SELECT * FROM `reverasyonlar` WHERE `email` = ? ORDER BY `id` DESC";
 
     PreparedStatement ps3 = con.prepareStatement(sqlQueryq);
     ps3.setString(1, custMail);
@@ -184,6 +184,7 @@ session.setAttribute("isLogOut", "true");
                       session.setAttribute("userPage-roomId", info.get(i).getRoomName());
                       int userPageRoomId = Integer.parseInt((String)session.getAttribute("userPage-roomId"));
                       session.setAttribute("userPage-revStatus", info.get(i).getDurum());
+                      session.setAttribute("userPage-isDatePast", (info.get(i).getIsDatePast()));
 
                       String sqlQuery3 = "SELECT * FROM `room` WHERE `id` = ?";
                       PreparedStatement ps4 = con.prepareStatement(sqlQuery3);
@@ -204,8 +205,14 @@ session.setAttribute("isLogOut", "true");
                     <td class="text-danger"><%out.println(session.getAttribute("userPage-gTarihi"));%></td>
                     <td class="text-danger"><%out.println(session.getAttribute("userPage-cTarihi"));%></td>
                     <td class="text-primary"><%out.println(session.getAttribute("userPage-RoomName"));%></td>
+                    <%
+                      String strisDatePase = (String) session.getAttribute("userPage-isDatePast");
+                      if( strisDatePase.equals("0")){
+                    %>
                     <td class="badge bg-success"><%out.println(session.getAttribute("userPage-revStatus"));%></td>
-
+                    <%
+                      }else{ %><td class="badge bg-danger"><%out.println("Geçmiş");%></td>
+                    <%}%>
                   </tr>
 
                 <%
@@ -228,15 +235,7 @@ session.setAttribute("isLogOut", "true");
       </div>
     </div>
   </div>
-  <footer class="footer">
-    <div class="row align-items-center justify-content-xl-between">
-      <div class="col-xl-6 m-auto text-center">
-        <div class="copyright">
-          <p>Made with <a href="https://www.creative-tim.com/product/argon-dashboard" target="_blank">Argon Dashboard</a> by Creative Tim</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+
 </body>
 </html>
 <%}

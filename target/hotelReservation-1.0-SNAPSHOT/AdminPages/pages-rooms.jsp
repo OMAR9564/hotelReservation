@@ -27,7 +27,7 @@
     PreparedStatement ps = con.prepareStatement(sqlQuery);
     ResultSet rls = ps.executeQuery();
     info = mysql.readRoomsData (rls);
-    
+
     hotelData.setRoomTotalCount(info.size());
 
 
@@ -132,9 +132,12 @@
                     </thead>
                     <tbody>
                         <%
+                            try {
+
+
                             for(int i = 0; i < hotelData.getRoomTotalCount(); i++){
                             System.out.println(hotelData.getRoomCount());
-                                hotelData.setRoomId(info.get(i).getCustId());
+                                hotelData.setRoomId(info.get(i).getRoomId());
                                 session.setAttribute("RoomImg", info.get(i).getRoomImg());
                                 hotelData.setRoomImg(info.get(i).getRoomImg());
                                 hotelData.setRoomSoldCount(info.get(i).getRoomSoldCount());
@@ -144,7 +147,10 @@
                                 hotelData.setRoomSaleActive(info.get(i).getRoomSaleActive());
                                 hotelData.setRoomCount(info.get(i).getRoomCount());
                                 hotelData.setRoomAvabilve(info.get(i).getRoomAvabilve());
-                                System.out.println(hotelData.getCustMail()+ "omeroemreormeormmr8 ");
+                                hotelData.setRoomMaxCust(info.get(i).getRoomMaxCustCount());
+
+                                System.out.println(hotelData.getRoomMaxCust()+ "omeroemreormeormmr8 ");
+
                         %>
                       <tr>
                         <th scope="row"><a href="#"><img src="<%out.println((String)session.getAttribute("RoomImg"));%>" alt=""></a></th>
@@ -155,10 +161,12 @@
                         <td><span class="badge" style="color:red; font-size: 14px;">₺<%out.println(hotelData.getRoomSalePrice());%></span></td>
                         <td><span class="badge" style="color:blueviolet; font-size: 14px;"><%out.println(hotelData.getRoomSaleActive());%></span></td>
                         <td><span class="badge" style="color:black; font-size: 12px;"><%out.println(hotelData.getRoomAvabilve());%></span></td>
-                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="<%out.println(hotelData.getRoomId());%>" data-bs-name="<%out.println(hotelData.getRoomName());%>" data-bs-mail="<%out.println(hotelData.getCustMail());%>" data-bs-phone="<%out.println(hotelData.getCustPhone());%>"><i class="bi bi-info-circle" ></i></button></td>
+                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-id="<%out.println(hotelData.getRoomId());%>" data-bs-name="<%out.println(hotelData.getRoomName());%>" data-bs-soldCount="<%out.println(hotelData.getRoomSoldCount());%>" data-bs-roomCount="<%out.println(hotelData.getRoomCount());%>" data-bs-roomPrice="<%out.println(hotelData.getRoomPrice());%>" data-bs-roomSalePrice="<%out.println(hotelData.getRoomSalePrice());%>" data-bs-roomSaleAvtice="<%out.println(hotelData.getRoomSaleActive());%>" data-bs-roomAvabilve="<%out.println(hotelData.getRoomAvabilve());%>" data-bs-roomMaxCust="<%out.println(hotelData.getRoomMaxCust());%>" data-bs-roomImg="<%out.println((String)session.getAttribute("RoomImg"));%>"><i class="bi bi-info-circle" ></i></button></td>
                         <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-idDel="<%out.println(hotelData.getRoomId());%>"><i class="bi bi-x-octagon"></i></button></td>
                       </tr>
-                      <%}%>
+                      <%}}catch (Exception e) {
+                                System.out.println(e);
+                      }%>
                     </tbody>
                   </table>
                     <!--edit modal-->
@@ -176,42 +184,42 @@
                               <div class="row">  
                               <div class="mb-3 col-md-6">
                                 <label for="uploadImg" class="col-form-label">Foto:</label>
-                                <input type="file" class="form-control nameInput" name="uploadImg" >
+                                <input type="text" class="form-control uploadImg" name="uploadImg" >
                               </div>
                               <div class="mb-3 col-md-6 ms-auto">
                                 <label for="roomName" class="col-form-label">Ad:</label>
-                                <input type="text" class="form-control mailInput" id="roomName" name="roomName" required></input>
+                                <input type="text" class="form-control nameInput" id="roomName" name="roomName" required></input>
                               </div></div>
                               <div class="row">  
                               <div class="mb-3 col-md-6">
                                 <label for="roomCount" class="col-form-label">Oda Sayısı:</label>
-                                <input type="number" min="0" class="form-control nameInput" name="roomCount" id="roomCount" required>
+                                <input type="number" min="0" class="form-control roomCount" name="roomCount" id="roomCount" required>
                               </div>
                               <div class="mb-3 col-md-6 ms-auto">
                                 <label for="satisAdet" class="col-form-label">Satış Adeti:</label>
-                                <input type="number" min="0" class="form-control mailInput" id="satisAdet" name="soldCount" required=""></input>
+                                <input type="number" min="0" class="form-control satisAdet" id="satisAdet" name="soldCount" required=""></input>
                               </div></div>
                               <div class="row">  
                               <div class="mb-3 col-md-6">
                                 <label for="roomPrice" class="col-form-label">Ücreti:</label>
-                                <input type="number" min="0" class="form-control nameInput" name="roomPrice" id="roomPrice" required>
+                                <input type="number" min="0" class="form-control roomPrice" name="roomPrice" id="roomPrice" required>
                               </div>
                               <div class="mb-3 col-md-6 ms-auto">
                                 <label for="roomSalePrice" class="col-form-label">İndirimli Ücreti:</label>
-                                <input type="number" min="0" class="form-control mailInput" id="roomSalePrice" name="roomSalePrice" required></input>
+                                <input type="number" min="0" class="form-control roomSalePrice" id="roomSalePrice" name="roomSalePrice" required></input>
                               </div></div>
                               <div class="row">  
                               <div class="mb-3 col-md-6">
                                 <label for="roomSaleActive" class="col-form-label">İndirim Aktif:</label>
-                                <input type="number" min="0" max="1" class="form-control nameInput" name="roomSaleActive" id="roomSaleActive" required>
+                                <input type="number" min="0" max="1" class="form-control roomSaleActive" name="roomSaleActive" id="roomSaleActive" required>
                               </div>
                               <div class="mb-3 col-md-6 ms-auto">
                                 <label for="roomActive" class="col-form-label">Oda Aktif:</label>
-                                <input type="number" min="0" max="1" class="form-control mailInput" id="roomActive" name="roomActive" required></input>
+                                <input type="number" min="0" max="1" class="form-control roomActive" id="roomActive" name="roomActive" required></input>
                               </div></div>
                                   <div class="mb-3 col-md-6 ms-auto">
                                 <label for="maxCust" class="col-form-label">Max Kişi Sayısı:</label>
-                                <input type="number" min="0"  class="form-control mailInput" id="maxCust" name="maxCust" required></input>
+                                <input type="number" min="0"  class="form-control maxCust" id="maxCust" name="maxCust" required></input>
                               </div>
                                 
                                 <input type="text" value="roomEdit" name="iam" hidden>
@@ -239,7 +247,7 @@
                                 </div>
                               
                               <form method="post" action="adminSqlCon.jsp">
-                                  <input type="text" class="delIdInput" name="id" >
+                                  <input type="text" class="delIdInput" name="id" hidden>
                               
                                 <input type="text" value="roomDelete" name="iam" hidden>
                                 <div class="modal-footer">
@@ -351,29 +359,55 @@
   var button = event.relatedTarget;
   var name = button.getAttribute('data-bs-name');
   var id = button.getAttribute('data-bs-id');
-  var mail = button.getAttribute('data-bs-mail');
-  var phone = button.getAttribute('data-bs-phone');
+  var soldCount = button.getAttribute('data-bs-soldCount');
+  var roomCount = button.getAttribute('data-bs-roomCount');
+var roomPrice = button.getAttribute('data-bs-roomPrice');
+var roomSalePrice = button.getAttribute('data-bs-roomSalePrice');
+var roomSaleAvtice = button.getAttribute('data-bs-roomSaleAvtice');
+var roomAvabilve = button.getAttribute('data-bs-roomAvabilve');
+var roomMaxCust = button.getAttribute('data-bs-roomMaxCust');
+var roomImg =button.getAttribute('data-bs-roomImg');
+
+
 
   var modalBodyInputName = exampleModal.querySelector('.modal-body .nameInput');
   var modalBodyInputId = exampleModal.querySelector('.modal-body .idInput');
-  var modalBodyInputPhone = exampleModal.querySelector('.modal-body .phoneInput');
-  var modalBodyInputMail = exampleModal.querySelector('.modal-body .mailInput');
+  var modalBodyRoomCount = exampleModal.querySelector('.modal-body .roomCount');
+  var modalBodySatisAdet= exampleModal.querySelector('.modal-body .satisAdet');
+var modalBodyRoomPrice= exampleModal.querySelector('.modal-body .roomPrice');
+var modalBodyRoomSalePrice= exampleModal.querySelector('.modal-body .roomSalePrice');
+var modalBodyRoomSaleActive= exampleModal.querySelector('.modal-body .roomSaleActive');
+var modalBodyRoomActive= exampleModal.querySelector('.modal-body .roomActive');
+var modalBodyRoomMaxCust= exampleModal.querySelector('.modal-body .maxCust');
+var modalBodyRoomImg= exampleModal.querySelector('.modal-body .uploadImg');
+
+
+        console.log(id);
 
 
   modalBodyInputName.value = name;
   modalBodyInputId.value = id;
-  modalBodyInputPhone.value = phone;
-  modalBodyInputMail.value = mail;
+    modalBodyRoomCount.value = roomCount.trim();
+        modalBodySatisAdet.value = soldCount.trim();
+        modalBodyRoomPrice.value = roomPrice.trim();
+        modalBodyRoomSalePrice.value = roomSalePrice.trim();
+        modalBodyRoomSaleActive.value = roomSaleAvtice.trim();
+        modalBodyRoomActive.value = roomAvabilve.trim();
+        modalBodyRoomMaxCust.value = roomMaxCust.trim();
+        modalBodyRoomImg.value = roomImg;
 
 
-});
+
+
+    });
    var deleteModal = document.getElementById('deleteModal');
 
       deleteModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
+  var delId = button.getAttribute('data-bs-idDel');
+          console.log(delId);
 
-  var delId = button.getAttribute('data-bs-idDel'); 
-  var modalBodyInputDelId = deleteModal.querySelector('.modal-body .delIdInput');
+          var modalBodyInputDelId = deleteModal.querySelector('.modal-body .delIdInput');
     modalBodyInputDelId.value = delId;
 
 });

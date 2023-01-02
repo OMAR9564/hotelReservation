@@ -85,6 +85,7 @@ public class mySql {
                 temp.setRoomName(rls1.getString(8));
                 temp.setDurum(rls1.getString(9));
                 temp.setGander(rls1.getString(10));
+                temp.setIsDatePast(rls1.getString(11));
                             System.out.println(temp.getGander()+ "123123123");
 
                 sqlInfo.add(temp);
@@ -186,5 +187,179 @@ public class mySql {
         return sqlInfo;
     }
     
+    public ArrayList<getInfo> RevsqlCon(String sqlQuery) {
 
+        ArrayList<getInfo> sqlInfo = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            ResultSet rls = stmt.executeQuery(sqlQuery);
+
+            while (rls.next()) {
+                getInfo temp = new getInfo();
+                
+                temp.setCDate(rls.getString("cikisTarihi"));
+                temp.setId(rls.getInt("id"));
+                temp.setRoomId(rls.getInt("odaAdi"));
+
+                sqlInfo.add(temp);
+
+            }
+            con.close();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+        return sqlInfo;
+    }
+    public ArrayList<getInfo> RoomsqlCon(String sqlQuery) {
+
+        ArrayList<getInfo> sqlInfo = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            ResultSet rls = stmt.executeQuery(sqlQuery);
+
+            while (rls.next()) {
+                getInfo temp = new getInfo();
+                
+                temp.setCSoldCount(rls.getInt("soldCount"));
+
+                sqlInfo.add(temp);
+
+            }
+            con.close();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+        return sqlInfo;
+    }
+    
+    public void sqlInsert(String sqlQuery) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            stmt.execute(sqlQuery);
+            con.close();
+
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+    }
+    
+    
+    public ArrayList<getInfo> CRevsqlCon(String sqlQuery) {
+
+        ArrayList<getInfo> sqlInfo = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            ResultSet rls = stmt.executeQuery(sqlQuery);
+
+            while (rls.next()) {
+                getInfo temp = new getInfo();
+                
+                temp.setCDate(rls.getString("cikisTarihi"));
+                temp.setCId(rls.getInt("id"));
+                temp.setCRoomId(rls.getInt("odaAdi"));
+
+                sqlInfo.add(temp);
+
+            }
+            con.close();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+        return sqlInfo;
+    }
+    public ArrayList<getInfo> CRoomsqlCon(String sqlQuery) {
+
+        ArrayList<getInfo> sqlInfo = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            ResultSet rls = stmt.executeQuery(sqlQuery);
+
+            while (rls.next()) {
+                getInfo temp = new getInfo();
+                
+                temp.setCSoldCount(rls.getInt("soldCount"));
+
+                sqlInfo.add(temp);
+
+            }
+            con.close();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+        return sqlInfo;
+    }
+    
+    public void CsqlInsert(String sqlQuery) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            stmt.execute(sqlQuery);
+            con.close();
+
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+    }
+    public ArrayList<getInfo> CsqlRevDate(String sqlQuery){
+        ArrayList<getInfo> sqlInfo = new ArrayList<>();
+
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Statement stmt = con.createStatement();
+
+            ResultSet rls = stmt.executeQuery(sqlQuery);
+
+            while (rls.next()) {
+                getInfo temp = new getInfo();
+
+                temp.setCheckCTarih(rls.getString("cikisTarihi"));
+                temp.setCheckGTarih(rls.getString("girisTarihi"));
+
+
+                sqlInfo.add(temp);
+
+            }
+            con.close();
+
+
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return sqlInfo;
+    }
 }

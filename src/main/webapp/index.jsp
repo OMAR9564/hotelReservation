@@ -4,6 +4,7 @@
     Author     : omerfaruk
 --%>
 
+<%@page import="com.omar.hotelreservation.controlDateIsPast"%>
 <%@page import="com.omar.hotelreservation.hotelData"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.omar.hotelreservation.getInfo"%>
@@ -38,6 +39,15 @@ ResultSet rls1 = ps1.executeQuery();
 roomInfo = mysql.readRoomsData(rls1);
 
 session.setAttribute("indexRoomTotalCount", Integer.toString(roomInfo.size()));
+
+boolean dateProc;
+String dateType = "yyyy-MM-dd";
+String revSqlQery = "SELECT * FROM `reverasyonlar` WHERE `isDatePast` = '0'";
+String roomSqlQuery = "SELECT `soldCount` FROM `room`";
+dateProc = controlDateIsPast.isRevDateProces(dateType, revSqlQery);
+System.out.println("-------"+dateProc+"---------");
+
+
 %>
 <head>
   <title><%out.println((String)session.getAttribute("indexHotelName"));%></title>

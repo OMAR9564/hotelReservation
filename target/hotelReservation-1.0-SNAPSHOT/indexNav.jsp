@@ -33,13 +33,16 @@
     session.setAttribute("isAdmin", "0");
     session.setAttribute("adminName", "");
     session.setAttribute("adminMail", "");
-    session.setAttribute("whosePage", "");
     session.setAttribute("readDefaultSessions", "1");
 
 
 
 
         }
+        session.setAttribute("isLogin", "false");
+        session.setAttribute("isLogOut", "false");
+        session.setAttribute("whosePage", "");
+        session.setAttribute("whosePageLogOut" ,"");
 //        try {
 //            Cookie[] cookies= request.getCookies();
 //
