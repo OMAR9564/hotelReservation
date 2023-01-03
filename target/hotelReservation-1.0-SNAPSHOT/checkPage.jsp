@@ -3,6 +3,7 @@
     Created on : Nov 8, 2022, 11:19:35 AM
     Author     : omerfaruk
 --%>
+<%@page import="com.omar.hotelreservation.sendEmail"%>
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.omar.hotelreservation.getInfo"%>
@@ -429,6 +430,13 @@ try {
                             if (strRoomSoldCount < strRoomCount) {
                                 session.setAttribute("roomRevAvabilve", "true");
                                 session.setAttribute("roomRevAvabilveLog", "Odanız Başarılı Bir Şekilde Reveersayonu Alındı.");
+                                String msg = "Odanız Başarılı Bir Şekilde Reveersayonu Alındı.\n Randevunuz onaylandığında size geri dönüş sağlayacağız\n"
+                                + "Giriş Tarihi: " + request.getParameter("gTarihi") +"\n"
+                                +"Çıkış Tarihi: "+ request.getParameter("cTarihi") +"\n";
+                                String sub = "Rezerversayon bilgileri";
+                                sendEmail sendemail = new sendEmail();
+                                String to = (String) session.getAttribute("revCustMail");
+                                sendemail.mailInfo(msg, sub, to);
                                 response.sendRedirect("index.jsp");
 
                             }
@@ -446,15 +454,7 @@ try {
                         }
                         if ((String) session.getAttribute("roomRevAvabilve") == "true") {
                             int newSoldCount = (infoRoom.get(0).getRoomSoldCount());
-                            newSoldCount++;
-                            System.out.println(newSoldCount + "omer-------omer");
-                            String sqlQueryRoom1 = "UPDATE `room` SET `soldCount` = ? WHERE `id` = ?";
-
-                            PreparedStatement ps4 = con.prepareStatement(sqlQueryRoom1);
-                            ps4.setString(1, Integer.toString(newSoldCount));
-                            ps4.setString(2, ((String) session.getAttribute("revCustRoomId")));
-                            ps4.execute();
-
+                          
 
                             //bırda
                             String revCustName = new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8");
@@ -604,7 +604,7 @@ try {
                 if (strRoomMaxCust >= Integer.parseInt((String) session.getAttribute("revSecCustCount"))) {
                     if (strRoomSoldCount < strRoomCount) {
 
-
+//omer
 
                         response.sendRedirect("rezervasyonPage.jsp");
 
