@@ -606,7 +606,6 @@ try {
 
 
 
-
                         response.sendRedirect("rezervasyonPage.jsp");
 
 
