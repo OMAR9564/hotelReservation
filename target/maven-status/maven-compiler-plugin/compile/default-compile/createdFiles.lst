@@ -1,4 +1,5 @@
 com/omar/hotelreservation/getRezevasyonInfo.class
+com/omar/hotelreservation/controlDateIsPast.class
 com/omar/hotelreservation/checkRezervasyon.class
 com/omar/hotelreservation/hotelData.class
 com/omar/hotelreservation/getInfo.class
