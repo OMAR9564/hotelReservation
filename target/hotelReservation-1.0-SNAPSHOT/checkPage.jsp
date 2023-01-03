@@ -177,7 +177,7 @@ try {
             }
         }
 
-        if ((String) session.getAttribute("whosePage") == "revPage") {
+         if ((String) session.getAttribute("whosePage") == "revPage") {
             try {
                 session.setAttribute("revCustMail", request.getParameter("mail"));
                 session.setAttribute("revCustPass", request.getParameter("pass"));
@@ -195,32 +195,161 @@ try {
 
                 Boolean passDogru = false;
                 mailCheckCust = mysql.sqlConCust(rls1);
+                if (mailCheckCust.size() < 0) {
+                    session.setAttribute("emailForRevCust", mailCheckCust.get(0).getEmail());
+                    session.setAttribute("passForRevCust", mailCheckCust.get(0).getSifre());
+                    String passForRevCust = (String) session.getAttribute("passForRevCust");
 
-                session.setAttribute("emailForRevCust", mailCheckCust.get(0).getEmail());
-                session.setAttribute("passForRevCust", mailCheckCust.get(0).getSifre());
-                String passForRevCust =(String) session.getAttribute("passForRevCust");
+                    if (!(custPass.equals(passForRevCust))) {
 
-                if(!(custPass.equals(passForRevCust)) ){
+                        session.setAttribute("roomRevAvabilve", "false");
+                        passDogru = false;
+                        session.setAttribute("roomRevAvabilveLog", "Giriğiniz Mail İçin Şifre Hatalıdır");
+                        response.sendRedirect("index.jsp");
+                        return;
+                    } else passDogru = true;
 
-                    session.setAttribute("roomRevAvabilve", "false");
-                    passDogru  = false;
-                    session.setAttribute("roomRevAvabilveLog", "Giriğiniz Mail İçin Şifre Hatalıdır");
-                    response.sendRedirect("index.jsp");
-                    return;
+                    if (passDogru) {
+
+                        session.setAttribute("revCustName", new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8"));
+                        session.setAttribute("revCustGTarihi", request.getParameter("gTarihi"));
+                        session.setAttribute("revCustCTarihi", request.getParameter("cTarihi"));
+                        session.setAttribute("revCustCount", request.getParameter("custCount"));
+                        session.setAttribute("revCustPhone", request.getParameter("phone"));
+                        session.setAttribute("revCustRoomId", request.getParameter("room"));
+                        session.setAttribute("revCustGander", request.getParameter("gander"));
+                        session.setAttribute("loginIsValid", "hidden");
+                        session.setAttribute("roomRevAvabilve", "true");
+
+                        ArrayList<getInfo> infoRoom;
+                        ArrayList<getInfo> infoRev;
+
+                        String sqlQueryRev = "SELECT * FROM `reverasyonlar` WHERE `odaAdi` = ?";
+
+                        PreparedStatement ps2 = con.prepareStatement(sqlQueryRev);
+                        ps2.setString(1, ((String) session.getAttribute("revCustRoomId")));
+
+                        String sqlQueryRoom = "SELECT * FROM `room` WHERE `id` = ?";
+
+                        PreparedStatement ps3 = con.prepareStatement(sqlQueryRoom);
+                        ps3.setString(1, ((String) session.getAttribute("revCustRoomId")));
+
+                        ResultSet rls2 = ps2.executeQuery();
+                        ResultSet rls3 = ps3.executeQuery();
+
+
+                        infoRev = mysql.readReversaionData(rls2);
+                        infoRoom = mysql.readRoomsData(rls3);
+                        System.out.println((infoRoom.get(0).getRoomCount()) + "***********");
+                        int strRoomCount = (infoRoom.get(0).getRoomCount());
+                        int strRoomSoldCount = (infoRoom.get(0).getRoomSoldCount());
+                        int strRoomMaxCust = (infoRoom.get(0).getRoomMaxCustCount());
+                        int strRoomCustCount = Integer.parseInt((String) session.getAttribute("revCustCount"));
+
+
+                        ArrayList<getInfo> revDateCheck;
+                        String sqlQueryDate = "SELECT * FROM `reverasyonlar` WHERE `isDatePast` = '0'";
+                        revDateCheck = mysql.CsqlRevDate(sqlQueryDate);
+                        boolean dateIsbetwen = false;
+
+                        for (int i = 0; i < revDateCheck.size(); i++) {
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                            String getCheckGTarihi = revDateCheck.get(i).getCheckGTarihi();
+                            Date startDate = sdf.parse(getCheckGTarihi);
+                            String getCheckCTarihi = revDateCheck.get(i).getCheckCTarihi();
+                            Date endDate = sdf.parse(getCheckCTarihi);
+                            String strdateToValidate = request.getParameter("gTarihi");
+                            Date dateToValidate = sdf.parse(strdateToValidate);
+
+                            if (dateToValidate.after(startDate) && dateToValidate.before(endDate)) {
+                                dateIsbetwen = true;
+                                break;
+                            } else {
+                                dateIsbetwen = false;
+                            }
+                        }
+                        for (int i = 0; i < revDateCheck.size(); i++) {
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                            String getCheckGTarihi = revDateCheck.get(i).getCheckGTarihi();
+                            Date startDate = sdf.parse(getCheckGTarihi);
+                            String getCheckCTarihi = revDateCheck.get(i).getCheckCTarihi();
+                            Date endDate = sdf.parse(getCheckCTarihi);
+
+                            Date dateToValidate = sdf.parse(request.getParameter("cTarihi"));
+
+                            if (dateToValidate.after(startDate) && dateToValidate.before(endDate)) {
+                                dateIsbetwen = true;
+                                break;
+                            } else {
+                                dateIsbetwen = false;
+                            }
+                        }
+
+                        if (dateIsbetwen == true && !(strRoomSoldCount < strRoomCount)) {
+                            session.setAttribute("roomRevAvabilve", "false");
+                            session.setAttribute("roomRevAvabilveLog", "Seçtiğiniz Tarihler Müsait Değil!");
+                            response.sendRedirect("index.jsp");
+
+                        } else {
+
+
+                            if (strRoomMaxCust >= strRoomCustCount) {
+                                if (strRoomSoldCount < strRoomCount) {
+                                    session.setAttribute("roomRevAvabilve", "true");
+                                    session.setAttribute("roomRevAvabilveLog", "Odanız Başarılı Bir Şekilde Reveersayonu Alındı.");
+                                    response.sendRedirect("index.jsp");
+
+                                }
+                                if (dateIsbetwen == false && !(strRoomSoldCount < strRoomCount)) {
+                                    session.setAttribute("roomRevAvabilve", "false");
+                                    session.setAttribute("roomRevAvabilveLog", "Seçtiğiniz Oda Dolmuştur! Başka bir oda seçtin. Yada Tarihi Değiştiriniz");
+                                    response.sendRedirect("index.jsp");
+
+                                }
+                            } else {
+                                session.setAttribute("roomRevAvabilve", "false");
+                                session.setAttribute("roomRevAvabilveLog", "Seçtiğiniz Oda Misafir Sayısına Uygun Değildir! Başka bir oda seçtin. Yada Misafir Sayısını Azaltınız");
+                                response.sendRedirect("index.jsp");
+
+                            }
+                            if ((String) session.getAttribute("roomRevAvabilve") == "true") {
+                                int newSoldCount = (infoRoom.get(0).getRoomSoldCount());
+                                newSoldCount++;
+                                System.out.println(newSoldCount + "omer-------omer");
+                                String sqlQueryRoom1 = "UPDATE `room` SET `soldCount` = ? WHERE `id` = ?";
+
+                                PreparedStatement ps4 = con.prepareStatement(sqlQueryRoom1);
+                                ps4.setString(1, Integer.toString(newSoldCount));
+                                ps4.setString(2, ((String) session.getAttribute("revCustRoomId")));
+                                ps4.execute();
+
+                                String sqlQuery1 = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`, `isDatePast`) VALUES (?, ? , ?, ?, ?, ?, ?, ?, ?)";
+
+                                PreparedStatement ps5 = con.prepareStatement(sqlQuery1);
+                                ps5.setString(1, (String) session.getAttribute("revCustName"));
+                                ps5.setString(2, ((String) session.getAttribute("revCustCount")));
+                                ps5.setString(3, (String) session.getAttribute("revCustGTarihi"));
+                                ps5.setString(4, ((String) session.getAttribute("revCustCTarihi")));
+                                ps5.setString(5, (String) session.getAttribute("revCustMail"));
+                                ps5.setString(6, (String) session.getAttribute("revCustPhone"));
+                                ps5.setString(7, ((String) session.getAttribute("revCustRoomId")));
+                                ps5.setString(8, ((String) session.getAttribute("revCustGander")));
+                                ps5.setString(9, "0");
+
+                                ps5.execute();
+
+
+                                session.setAttribute("whosePage", "");
+                                response.sendRedirect("index.jsp");
+                            }
+                        }
+                    }
                 }
-                else passDogru = true;
-
-                if (passDogru) {
-
-                    session.setAttribute("revCustName", new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8"));
-                    session.setAttribute("revCustGTarihi", request.getParameter("gTarihi"));
-                    session.setAttribute("revCustCTarihi", request.getParameter("cTarihi"));
-                    session.setAttribute("revCustCount", request.getParameter("custCount"));
-                    session.setAttribute("revCustPhone", request.getParameter("phone"));
+                 else {
                     session.setAttribute("revCustRoomId", request.getParameter("room"));
-                    session.setAttribute("revCustGander", request.getParameter("gander"));
-                    session.setAttribute("loginIsValid", "hidden");
-                    session.setAttribute("roomRevAvabilve", "true");
+                    session.setAttribute("revCustCount", request.getParameter("custCount"));
 
                     ArrayList<getInfo> infoRoom;
                     ArrayList<getInfo> infoRev;
@@ -288,7 +417,7 @@ try {
                         }
                     }
 
-                    if (dateIsbetwen == true) {
+                    if (dateIsbetwen == true && !(strRoomSoldCount < strRoomCount)) {
                         session.setAttribute("roomRevAvabilve", "false");
                         session.setAttribute("roomRevAvabilveLog", "Seçtiğiniz Tarihler Müsait Değil!");
                         response.sendRedirect("index.jsp");
@@ -300,8 +429,10 @@ try {
                             if (strRoomSoldCount < strRoomCount) {
                                 session.setAttribute("roomRevAvabilve", "true");
                                 session.setAttribute("roomRevAvabilveLog", "Odanız Başarılı Bir Şekilde Reveersayonu Alındı.");
+                                response.sendRedirect("index.jsp");
 
-                            } else {
+                            }
+                            if (dateIsbetwen == false && !(strRoomSoldCount < strRoomCount)) {
                                 session.setAttribute("roomRevAvabilve", "false");
                                 session.setAttribute("roomRevAvabilveLog", "Seçtiğiniz Oda Dolmuştur! Başka bir oda seçtin. Yada Tarihi Değiştiriniz");
                                 response.sendRedirect("index.jsp");
@@ -324,63 +455,49 @@ try {
                             ps4.setString(2, ((String) session.getAttribute("revCustRoomId")));
                             ps4.execute();
 
-                            String sqlQuery1 = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`) VALUES (?, ? , ?, ?, ?, ?, ?, ?)";
 
-                            PreparedStatement ps5 = con.prepareStatement(sqlQuery1);
+                            //bırda
+                            String revCustName = new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8");
+                            session.setAttribute("revCustName", revCustName);
+                            session.setAttribute("revCustGTarihi", request.getParameter("gTarihi"));
+                            session.setAttribute("revCustCTarihi", request.getParameter("cTarihi"));
+                            session.setAttribute("revCustCount", request.getParameter("custCount"));
+                            session.setAttribute("revCustPhone", request.getParameter("phone"));
+                            session.setAttribute("revCustRoomId", request.getParameter("room"));
+                            session.setAttribute("revCustGander", request.getParameter("gander"));
+
+
+                            String sqlQuery2 = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`, `isDatePast`) VALUES (?,?,?,?,?,?,?,?,?)";
+                            PreparedStatement ps5 = con.prepareStatement(sqlQuery2);
                             ps5.setString(1, (String) session.getAttribute("revCustName"));
-                            ps5.setString(2, ((String) session.getAttribute("revCustCount")));
+                            ps5.setString(2, (String) session.getAttribute("revCustCount"));
                             ps5.setString(3, (String) session.getAttribute("revCustGTarihi"));
-                            ps5.setString(4, ((String) session.getAttribute("revCustCTarihi")));
+                            ps5.setString(4, (String) session.getAttribute("revCustCTarihi"));
                             ps5.setString(5, (String) session.getAttribute("revCustMail"));
                             ps5.setString(6, (String) session.getAttribute("revCustPhone"));
                             ps5.setString(7, ((String) session.getAttribute("revCustRoomId")));
                             ps5.setString(8, ((String) session.getAttribute("revCustGander")));
+                            ps5.setString(9, "0");
+
                             ps5.execute();
 
+                            String newCust = "INSERT INTO `customer`(`name`, `email`, `phone`, `Pass`) VALUES (?,?,?,?)";
 
-                            session.setAttribute("whosePage", "");
-                            response.sendRedirect("index.jsp");
+                            PreparedStatement ps6 = con.prepareStatement(newCust);
+                            ps6.setString(1, (String) session.getAttribute("revCustName"));
+                            ps6.setString(2, (String) session.getAttribute("revCustMail"));
+                            ps6.setString(3, ((String) session.getAttribute("revCustPhone")));
+                            ps6.setString(4, (String) session.getAttribute("revCustPass"));
+                            ps6.execute();
+
+                            session.setAttribute("roomRevAvabilve", "true");
+                            session.setAttribute("roomRevAvabilveLog", "Odanız Başarılı Bir Şekilde Reveersayonu Alındı.");
+
+        %>
+        <h:commandLink value="UserDetail" action="index.jsp" />
+        <%
                         }
                     }
-                }
-                 else {
-                    //bırda
-                    String revCustName = new String(request.getParameter("name").getBytes("ISO-8859-9"), "UTF-8");
-                    session.setAttribute("revCustName", revCustName);
-                    session.setAttribute("revCustGTarihi", request.getParameter("gTarihi"));
-                    session.setAttribute("revCustCTarihi", request.getParameter("cTarihi"));
-                    session.setAttribute("revCustCount", request.getParameter("custCount"));
-                    session.setAttribute("revCustPhone", request.getParameter("phone"));
-                    session.setAttribute("revCustRoomId", request.getParameter("room"));
-                    session.setAttribute("revCustGander", request.getParameter("gander"));
-
-
-                    String sqlQuery2 = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`) VALUES (?,?,?,?,?,?,?,?)";
-                    PreparedStatement ps5 = con.prepareStatement(sqlQuery2);
-                    ps5.setString(1, (String) session.getAttribute("revCustName"));
-                    ps5.setString(2, (String) session.getAttribute("revCustCount"));
-                    ps5.setString(3, (String) session.getAttribute("revCustGTarihi"));
-                    ps5.setString(4, (String) session.getAttribute("revCustCTarihi"));
-                    ps5.setString(5, (String) session.getAttribute("revCustMail"));
-                    ps5.setString(6, (String) session.getAttribute("revCustPhone"));
-                    ps5.setString(7, ((String) session.getAttribute("revCustRoomId")));
-                    ps5.setString(8, ((String) session.getAttribute("revCustGander")));
-                    ps5.execute();
-
-                    String newCust = "INSERT INTO `customer`(`name`, `email`, `phone`, `Pass`) VALUES (?,?,?,?)";
-
-                    PreparedStatement ps6 = con.prepareStatement(newCust);
-                    ps6.setString(1, (String) session.getAttribute("revCustName"));
-                    ps6.setString(2, (String) session.getAttribute("revCustMail"));
-                    ps6.setString(3, ((String) session.getAttribute("revCustPhone")));
-                    ps6.setString(4, (String) session.getAttribute("revCustPass"));
-                    ps6.execute();
-
-                    session.setAttribute("roomRevAvabilve", "true");
-                    session.setAttribute("roomRevAvabilveLog", "Odanız Başarılı Bir Şekilde Reveersayonu Alındı.");
-
-                    response.sendRedirect("index.jsp");
-
                 }
 
             } catch (Exception e) {
@@ -411,7 +528,7 @@ try {
             PreparedStatement ps2 = con.prepareStatement(sqlQueryRev);
             ps2.setString(1, ((String) session.getAttribute("revSecRoomId")));
             ResultSet rls2 = ps2.executeQuery();
-            rls2.close();
+//            rls2.close();
 
 
             String sqlQueryRoom = "SELECT * FROM `room` WHERE `id` = ?";
@@ -423,7 +540,7 @@ try {
 
             infoRev = mysql.readReversaionData(rls2);
             infoRoom = mysql.readRoomsData(rls3);
-            rls3.close();
+//            rls3.close();
             System.out.println((infoRoom.get(0).getRoomCount()) + "***********");
             int strRoomCount = (infoRoom.get(0).getRoomCount());
             int strRoomSoldCount = (infoRoom.get(0).getRoomSoldCount());
@@ -472,7 +589,7 @@ try {
                 }
             }
 
-            if(dateIsbetwen == true){
+            if(dateIsbetwen == true && !(strRoomSoldCount < strRoomCount)) {
                 session.setAttribute("roomRevAvabilve", "false");
                 session.setAttribute("roomRevAvabilveLog", "Seçtiğiniz Tarihler Müsait Değil!");
                 response.sendRedirect("index.jsp");
@@ -493,7 +610,7 @@ try {
                         response.sendRedirect("rezervasyonPage.jsp");
 
 
-                    } else {
+                    } if (dateIsbetwen == false && !(strRoomSoldCount < strRoomCount)){
                         session.setAttribute("roomRevAvabilve", "false");
                         session.setAttribute("roomRevAvabilveLog", "Seçtiğiniz Oda Dolmuştur! Başka bir oda seçtin. Yada Tarihi Değiştiriniz");
                         response.sendRedirect("index.jsp");
