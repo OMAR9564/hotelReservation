@@ -19,7 +19,7 @@
 //    customers data
 
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
 
     ArrayList<getInfo> info;
     mySql mysql = new mySql();

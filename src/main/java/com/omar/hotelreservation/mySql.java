@@ -22,7 +22,7 @@ public class mySql {
 
         try {
 //            Class.forName("com.mysql.jdbc.Driver");
-//            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+ //           Connection con = DriverManager.getConnection("jdbc:mysql://localhost:8888/hotel", "root", "root");
 //            Statement stmt = con.createStatement();
 
 //            ResultSet rls = stmt.executeQuery(sqlQuery);
@@ -152,7 +152,7 @@ public class mySql {
 //    public void editInsertData(String sqlQuery) {
 //        try {
 //            Class.forName("com.mysql.jdbc.Driver");
-//            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+//            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
 //            Statement stmt = con.createStatement();
 //
 //            stmt.execute(sqlQuery);
@@ -193,7 +193,7 @@ public class mySql {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
             Statement stmt = con.createStatement();
 
             ResultSet rls = stmt.executeQuery(sqlQuery);
@@ -222,7 +222,7 @@ public class mySql {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
             Statement stmt = con.createStatement();
 
             ResultSet rls = stmt.executeQuery(sqlQuery);
@@ -247,7 +247,7 @@ public class mySql {
     public void sqlInsert(String sqlQuery) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
             Statement stmt = con.createStatement();
 
             stmt.execute(sqlQuery);
@@ -267,7 +267,7 @@ public class mySql {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
             Statement stmt = con.createStatement();
 
             ResultSet rls = stmt.executeQuery(sqlQuery);
@@ -296,7 +296,7 @@ public class mySql {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
             Statement stmt = con.createStatement();
 
             ResultSet rls = stmt.executeQuery(sqlQuery);
@@ -321,7 +321,7 @@ public class mySql {
     public void CsqlInsert(String sqlQuery) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
             Statement stmt = con.createStatement();
 
             stmt.execute(sqlQuery);
@@ -338,7 +338,7 @@ public class mySql {
 
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
             Statement stmt = con.createStatement();
 
             ResultSet rls = stmt.executeQuery(sqlQuery);

@@ -13,14 +13,16 @@
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.lang.*" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <%
 
   Class.forName("com.mysql.jdbc.Driver");
-  Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
-
+  Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
+out.println();
 ArrayList<getInfo> info;
 ArrayList<getInfo> roomInfo;
 mySql mysql = new mySql();
@@ -45,7 +47,7 @@ String dateType = "yyyy-MM-dd";
 String revSqlQery = "SELECT * FROM `reverasyonlar` WHERE `isDatePast` = '0'";
 String roomSqlQuery = "SELECT `soldCount` FROM `room`";
 dateProc = controlDateIsPast.isRevDateProces(dateType, revSqlQery);
-System.out.println("-------"+dateProc+"---------");
+//System.out.println("-------"+dateProc+"---------");
 
 
 %>
@@ -469,7 +471,9 @@ System.out.println("-------"+dateProc+"---------");
             int setQue= 0;
             String strSale = "";
             String strSaleArrow = "";
-            for(int i = 0; i < Integer.parseInt((String)session.getAttribute("indexRoomTotalCount")); i++){
+            int roomTotalCount = 0;
+            roomTotalCount = Integer.parseInt((String)session.getAttribute("indexRoomTotalCount"));
+            for(int i = 0; i < roomTotalCount; i++){
             session.setAttribute("indexRoomAvabilve", Integer.toString(roomInfo.get(i).getRoomAvabilve()));
             session.setAttribute("indexRoomName", roomInfo.get(i).getRoomName());
             session.setAttribute("indexRoomImg", roomInfo.get(i).getRoomImg());
@@ -520,13 +524,14 @@ System.out.println("-------"+dateProc+"---------");
                         
                     }
                     
-                System.out.println( i +"-"+ location + "-" + queue + "aaaaaa");
-            
+                System.out.println( i +"-oo "+ location + "-" + queue + "aaaaaa");
+              System.out.println(((String)session.getAttribute("indexRoomImg")));
+
         %>
         <div class="col-lg-6">
           <div class="room-wrap d-md-flex">
             <a href="#" class="<%out.println(location);%>" 
-               style="background-image: url(<%out.println(((String)session.getAttribute("indexRoomImg")).substring(3));%>)"></a>
+               style="background-image: url(<%out.println(((String)session.getAttribute("indexRoomImg")));%>)"></a>
             <div class="half <%out.println(arrowDirection);%> d-flex align-items-center">
               <div class="text p-4 p-xl-5 text-center">
                 <p class="star mb-0">
@@ -1096,7 +1101,7 @@ document.getElementById('indexCTarihi').value = todayPulsOne;
 </html>
 <%
                   session.setAttribute("revEmoji", "hidden");
-                  session.setAttribute("roomRevAvabilve", null);
+                 session.setAttribute("roomRevAvabilve", null);
 
-                
+
 %>

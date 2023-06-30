@@ -7,6 +7,9 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
@@ -22,7 +25,7 @@
 
   mySql mysql = new mySql();
   Class.forName("com.mysql.jdbc.Driver");
-  Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+  Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
 
 
     String loginTag = "Log Out";
@@ -182,8 +185,16 @@ session.setAttribute("isLogOut", "true");
                       session.setAttribute("userPage-gTarihi", info.get(i).getGirisTarihi());
                       session.setAttribute("userPage-cTarihi", info.get(i).getCikisTarihi());
                       session.setAttribute("userPage-roomId", info.get(i).getRoomName());
-                      int userPageRoomId = Integer.parseInt((String)session.getAttribute("userPage-roomId"));
-                      session.setAttribute("userPage-revStatus", info.get(i).getDurum());
+                      String userPageRoomIdString = (String) session.getAttribute("userPage-roomId");
+                      int userPageRoomId = 0; // Varsayılan değer
+                      if (userPageRoomIdString != null && !userPageRoomIdString.isEmpty()) {
+                        try {
+                          userPageRoomId = Integer.parseInt(userPageRoomIdString);
+                        } catch (NumberFormatException e) {
+                          // Dönüştürme hatası oluştu
+                          // Hatanın nasıl yönetileceğine dair bir kod bloğu ekleyebilirsiniz
+                        }
+                      }                      session.setAttribute("userPage-revStatus", info.get(i).getDurum());
                       session.setAttribute("userPage-isDatePast", (info.get(i).getIsDatePast()));
 
                       String sqlQuery3 = "SELECT * FROM `room` WHERE `id` = ?";

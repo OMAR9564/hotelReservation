@@ -25,7 +25,7 @@
         <%
 try {
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
 
 
     String email = "";
@@ -551,8 +551,10 @@ try {
             String sqlQueryDate = "SELECT * FROM `reverasyonlar` WHERE `isDatePast` = '0'";
             revDateCheck = mysql.CsqlRevDate(sqlQueryDate);
             boolean dateIsbetwen = false;
+            int revSize = revDateCheck.size();
+            System.out.println(revSize + "123omer");
 
-            for (int i = 0; i < revDateCheck.size(); i++) {
+            for (int i = 0; i < revSize; i++) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
 

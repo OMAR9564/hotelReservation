@@ -12,13 +12,17 @@
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.io.*" %>
+<%@ page import="java.lang.*" %>
+
+
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <%
         Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://app.sobiad.com:3306/grup9?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "grup9", "9564");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/hotel", "root", "");
 
 
         System.out.println((String)session.getAttribute("readDefaultSessions")+"omeroemroemr4");
@@ -69,7 +73,7 @@
 //        }catch (Exception e){
 //            response.sendRedirect("indexNav.jsp");
 //        }
-                System.out.println((String)session.getAttribute("readDefaultSessions")+"omeroemroemr3");
+//                System.out.println((String)session.getAttribute("readDefaultSessions")+"omeroemroemr3");
         String loginTag = "";
         loginTag = (String)session.getAttribute("loginTag");
         
