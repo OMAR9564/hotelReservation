@@ -9,7 +9,12 @@
 <%--<%@page import="com.omar.hotelreservation.tags"%>--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%if(((String)session.getAttribute("adminName")) == null){
+<%
+  String roomName = "";
+  String roomStatus = "";
+
+
+  if(((String)session.getAttribute("adminName")) == null){
   response.sendRedirect("../index.jsp");
 }else{
   Class.forName("com.mysql.jdbc.Driver");
@@ -274,8 +279,21 @@
                             for(int i = 0; i < Integer.parseInt(((String)session.getAttribute("ReverasionCount"))); i++){
                             session.setAttribute("ReverasyonId", Integer.toString(infoRev.get(i).getReverasyonId()));
                             session.setAttribute("CustomerName", infoRev.get(i).getCustName());
-                            session.setAttribute("RoomName", infoRev.get(i).getRoomName());
-                            session.setAttribute("ReversayonStatus", infoRev.get(i).getDurum());
+                            for (int j = 0; j < infoRoom.size(); j++){
+                              int roomId = 0;
+                              int roomNameId = Integer.parseInt(infoRev.get(i).getRoomName());
+
+                              roomId = (infoRoom.get(j).getRoomId());
+                              if (roomId == roomNameId){
+                                roomName = infoRoom.get(j).getRoomName();
+                                break;
+                              }
+                            }
+                            if (infoRev.get(i).getDurum().equals("0") ){
+                              roomStatus = "Devam Ediyor";
+                            }else {roomStatus = "Gecmis";}
+                            session.setAttribute("RoomName", roomName);
+                            session.setAttribute("ReversayonStatus", roomStatus);
                             session.setAttribute("RoomTotalCount", Integer.toString(infoRev.get(i).getTotalOdaSayisi()));
                             
                         %>
@@ -334,7 +352,7 @@
 
                         %>
                       <tr>
-                        <th scope="row"><a href="#"><img src="<%out.println((String)session.getAttribute("RoomImg"));%>" alt=""></a></th>
+                        <th scope="row"><a href="#"><img src="<%out.println("../"+(String)session.getAttribute("RoomImg"));%>" alt=""></a></th>
                         <td><a href="#" class="text-primary fw-bold"><%out.println((String)session.getAttribute("RoomName"));%></a></td>
                         <td><%out.println((String)session.getAttribute("RoomPrice"));%></td>
                         <td class="fw-bold"><%out.println((String)session.getAttribute("RoomSoldCount"));%></td>

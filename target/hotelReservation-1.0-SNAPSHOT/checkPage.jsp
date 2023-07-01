@@ -196,7 +196,9 @@ try {
 
                 Boolean passDogru = false;
                 mailCheckCust = mysql.sqlConCust(rls1);
-                if (mailCheckCust.size() < 0) {
+                int ImailCheckCust = 0;
+                ImailCheckCust = mailCheckCust.size();
+                if (ImailCheckCust > 0) {
                     session.setAttribute("emailForRevCust", mailCheckCust.get(0).getEmail());
                     session.setAttribute("passForRevCust", mailCheckCust.get(0).getSifre());
                     String passForRevCust = (String) session.getAttribute("passForRevCust");
@@ -466,6 +468,16 @@ try {
                             session.setAttribute("revCustRoomId", request.getParameter("room"));
                             session.setAttribute("revCustGander", request.getParameter("gander"));
 
+                            int newSoldCount1 = (infoRoom.get(0).getRoomSoldCount());
+                            newSoldCount1++;
+                            System.out.println(newSoldCount1 + "omer-------omer");
+                            String sqlQueryRoom1 = "UPDATE `room` SET `soldCount` = ? WHERE `id` = ?";
+
+                            PreparedStatement ps4 = con.prepareStatement(sqlQueryRoom1);
+                            ps4.setString(1, Integer.toString(newSoldCount1));
+                            ps4.setString(2, ((String) session.getAttribute("revCustRoomId")));
+                            ps4.execute();
+                            
 
                             String sqlQuery2 = "INSERT INTO `reverasyonlar`(`musteriAdi`, `kisiSayisi`, `girisTarihi`, `cikisTarihi`, `email`, `telefon`, `odaAdi`, `cinsiyet`, `isDatePast`) VALUES (?,?,?,?,?,?,?,?,?)";
                             PreparedStatement ps5 = con.prepareStatement(sqlQuery2);

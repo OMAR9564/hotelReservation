@@ -153,7 +153,7 @@
 
                         %>
                       <tr>
-                        <th scope="row"><a href="#"><img src="<%out.println((String)session.getAttribute("RoomImg"));%>" alt=""></a></th>
+                        <th scope="row"><a href="#"><img src="<%out.println("../"+(String)session.getAttribute("RoomImg"));%>" alt=""></a></th>
                         <td><%out.println(hotelData.getRoomName());%></td>
                         <td><a href="#" class="text-primary"><%out.println(hotelData.getRoomSoldCount());%></a></td>
                         <td><span class="badge" style="color:black; font-size: 12px;"><%out.println(hotelData.getRoomCount());%></span></td>

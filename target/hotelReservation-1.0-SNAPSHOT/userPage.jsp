@@ -186,7 +186,7 @@ session.setAttribute("isLogOut", "true");
                       session.setAttribute("userPage-cTarihi", info.get(i).getCikisTarihi());
                       session.setAttribute("userPage-roomId", info.get(i).getRoomName());
                       String userPageRoomIdString = (String) session.getAttribute("userPage-roomId");
-                      int userPageRoomId = 0; // Varsayılan değer
+                      int userPageRoomId = 0;
                       if (userPageRoomIdString != null && !userPageRoomIdString.isEmpty()) {
                         try {
                           userPageRoomId = Integer.parseInt(userPageRoomIdString);
@@ -218,11 +218,13 @@ session.setAttribute("isLogOut", "true");
                     <td class="text-primary"><%out.println(session.getAttribute("userPage-RoomName"));%></td>
                     <%
                       String strisDatePase = (String) session.getAttribute("userPage-isDatePast");
-                      if( strisDatePase.equals("0")){
+                      String revStatus = (String) session.getAttribute("userPage-revStatus");
+                      if( strisDatePase.equals("0") && revStatus.equals("0")){
                     %>
-                    <td class="badge bg-success"><%out.println(session.getAttribute("userPage-revStatus"));%></td>
+                    <td class="badge bg-success"><%out.println("Devam Ediyor");%></td>
                     <%
-                      }else{ %><td class="badge bg-danger"><%out.println("Geçmiş");%></td>
+                      }else{ %>
+                      <td class="badge bg-danger"><%out.println("Geçmiş");%></td>
                     <%}%>
                   </tr>
 

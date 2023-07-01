@@ -75,18 +75,18 @@ public class mySql {
 
             while (rls1.next()) {
                 getInfo temp = new getInfo();
-                temp.setReverasyonId(rls1.getInt(1));
-                temp.setCustName(rls1.getString(2));
-                temp.setCustCount(rls1.getInt(3));
-                temp.setGirisTarihi(rls1.getString(4));
-                temp.setCikisTarihi(rls1.getString(5));
-                temp.setCustMail(rls1.getString(6));
-                temp.setCustPhone(rls1.getString(7));
-                temp.setRoomName(rls1.getString(8));
-                temp.setDurum(rls1.getString(9));
-                temp.setGander(rls1.getString(10));
-                temp.setIsDatePast(rls1.getString(11));
-                            System.out.println(temp.getGander()+ "123123123");
+                temp.setReverasyonId(rls1.getInt("id"));
+                temp.setCustName(rls1.getString("musteriAdi"));
+                temp.setCustCount(rls1.getInt("kisiSayisi"));
+                temp.setCikisTarihi(rls1.getString("cikisTarihi"));
+                temp.setGirisTarihi(rls1.getString("girisTarihi"));
+                temp.setCustMail(rls1.getString("email"));
+                temp.setCustPhone(rls1.getString("telefon"));
+                temp.setRoomName(rls1.getString("odaAdi"));
+                temp.setDurum(rls1.getString("durum"));
+                temp.setGander(rls1.getString("cinsiyet"));
+                temp.setIsDatePast(rls1.getString("isDatePast"));
+                            System.out.println(temp.getRoomName()+ "123123123");
 
                 sqlInfo.add(temp);
 
