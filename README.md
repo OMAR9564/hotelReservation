@@ -14,8 +14,18 @@ Bu projede, bir otel rezervasyon uygulamasının temel özelliklerini içeren bi
 
 1. Projeyi yerel makinenize klonlayın:
 
-   ```shell
+   ```
    git clone https://github.com/OMAR9564/hotelReservation.git
+   ```
+2. İndirdiğiniz veya klonladığınız dizine gidin:
+   ```
+   cd hotelReservation
+   ```
+3. Daha sonra, MySQL sunucunuzda yeni bir veritabanı oluşturun ve hotel.sql dosyasını içe aktarın
+   ```
+   mysql -u kullanici_adi -p veritabani_adi < hotel.sql
+   ```
+- phpMyAdmin gibi bir araç kullanıyorsanız, veritabanı oluşturun ve "İçe Aktar" seçeneğini kullanarak hotel.sql dosyasını seçin.
 
 ## Kullanim
   1.  Kayıt olmak için bir kullanıcı hesabı oluşturun.
